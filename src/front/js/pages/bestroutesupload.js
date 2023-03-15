@@ -15,6 +15,7 @@ export const Bestroutesupload = () => {
   const [routeName, setRouteName] = useState([]);
   const [startName, setStartName] = useState([]);
   const [interest, setInterest] = useState([]);
+  const [description, setDescription] = useState([]);
   const [endName, setEndName] = useState([]);
   const [photos, setRoutePhoto] = useState([]);
   const [routeSend, setRouteSend] = useState(false);
@@ -44,14 +45,17 @@ export const Bestroutesupload = () => {
       "route_data",
       JSON.stringify({
         name: routeName,
-        interest_text: interest,
         start_location_name: startName,
         end_location_name: endName,
-        email: localStorage.getItem("email"),
+        description_text: description,
+        interest_text: interest,
       })
     );
     const response = await fetch(store.backendurl + "photos", {
       method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
       body: formData,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

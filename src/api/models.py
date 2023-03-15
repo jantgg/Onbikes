@@ -48,14 +48,11 @@ class Photographer(db.Model):
     user_name = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(105), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique=True)
-    active = db.Column(db.Boolean, default=True)
-    location_text = db.Column(db.String(50))
     instagram = db.Column(db.String(30), unique=True)
-    services_text = db.Column(db.String(100), unique=True)
-    find_me_text = db.Column(db.String(50))
+    active = db.Column(db.Boolean, default=True)
     location_name = db.Column(db.String(50))
-    latitude = db.Column(db.String(20))
-    longitude = db.Column(db.String(20))
+    find_me_text = db.Column(db.String(50))
+    services = db.Column(db.String(150), unique=True)
     photos = db.relationship('Photo')
 
     def __repr__(self):
@@ -66,13 +63,10 @@ class Photographer(db.Model):
             "id": self.id,
             "user_name": self.user_name,
             "email": self.email,
-            "location_text": self.location_text,
             "instagram": self.instagram,
-            "services_text": self.services_text,
-            "find_me_text": self.find_me_text,
             "location_name": self.location_name,
-            "latitude": self.latitude,
-            "longitude": self.longitude
+            "find_me_text": self.find_me_text,
+            "services": self.services,
         }
 
     @validates('user_name')
@@ -99,9 +93,10 @@ class Photographer(db.Model):
 class Route(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
-    interest_text = db.Column(db.String(250), nullable=False)
     start_location_name = db.Column(db.String(50), nullable=False)
     end_location_name = db.Column(db.String(50), nullable=False)
+    description_text = db.Column(db.String(250), nullable=False)
+    interest_text = db.Column(db.String(250), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     photos = db.relationship('Photo')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -116,6 +111,7 @@ class Route(db.Model):
             "name": self.name,
             "start_location_name": self.start_location_name,
             "end_location_name": self.end_location_name,
+            "description_text": self.description_text,
             "interest_text": self.interest_text,
         }
 
@@ -203,9 +199,9 @@ class Answer(db.Model):
         return {
             "id": self.id,
             "answer": self.answer,
+            "previous_question_id": self.previous_question_id,
             "next_question_id": self.next_question_id,
             "current_question_id": self.current_question_id,
-            "previous_question_id": self.previous_question_id,
         }
 
 

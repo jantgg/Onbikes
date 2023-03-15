@@ -57,10 +57,10 @@ def photographer_register():
     body_email = request.json.get("email")
     body_password = request.json.get("password")
     body_confirmpassword = request.json.get("confirmpassword")
-    body_location_text = request.json.get("location")
+    body_location_name = request.json.get("location")
     body_instagram = request.json.get("instagram")
-    body_sunday = request.json.get("sunday")
-    body_service = request.json.get("service")
+    body_find_me = request.json.get("findme")
+    body_services = request.json.get("services")
     user_already_exist = User.query.filter_by(email= body_email).first()
     user_name_already_exist = User.query.filter_by(user_name= body_user_name).first()
     photographer_already_exist = Photographer.query.filter_by(email= body_email).first()
@@ -80,7 +80,7 @@ def photographer_register():
             raise AssertionError('Password must contain between 8 and 50 characters')
         return generate_password_hash(password)
     hashed_password = generate_hashed_password(body_password)
-    new_photographer = Photographer(email=body_email, password=hashed_password, user_name=body_user_name, location_text=body_location_text, instagram=body_instagram, services_text=body_service, find_me_text=body_sunday, active=True)
+    new_photographer = Photographer(email=body_email, password=hashed_password, user_name=body_user_name, location_name=body_location_name, instagram=body_instagram, services=body_services, find_me_text=body_find_me, active=True)
     db.session.add(new_photographer)
     db.session.commit()
     return jsonify({"response": "Photographer registered successfully!",}), 200
@@ -100,7 +100,7 @@ def user_login():
     if not user and not photographer:
         return jsonify({"error": "This user or photographer does not exist"}), 401
     if user and check_password_hash(user.password, body_password):
-        token = create_access_token(identity=user.email)
+        token = create_access_token(identity=user.email)8
         user_name = user.user_name
     elif photographer and check_password_hash(photographer.password, body_password):
         token = create_access_token(identity=photographer.email)
@@ -144,6 +144,38 @@ def get_all_photographers():
     photographers = Photographer.query.all()
     photographers_serialized = [x.serialize() for x in photographers]
     return jsonify({"body": photographers_serialized}), 200
+
+# GET OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
+@api.route('/photographer', methods=['GET'])
+@jwt_required()
+def get_photographer():
+    current_user = get_jwt_identity()
+    photographer = Photographer.query.filter_by(email=current_user).first()
+    if not photographer:
+        return jsonify({"msg": "Photographer not found"}), 401
+    photos = Photo.query.filter_by(photo_type='photographer', photographer_id=photographer.id).all()
+    photos_serialized = [p.serialize() for p in photos]
+    photographer_serialized = photographer.serialize()
+    photographer_serialized['photos'] = photos_serialized
+    return jsonify({"body": photographer_serialized}), 200
+
+
+# PUT OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
+@api.route('/photographer', methods=['PUT'])
+@jwt_required()
+def update_photographer():
+    current_user = get_jwt_identity()
+    photographer = Photographer.query.filter_by(email=current_user).first()
+    if not photographer:
+        return jsonify({"msg": "Photographer not found"}), 401
+    data = request.get_json()
+    photographer.user_name = data.get('user_name', photographer.user_name)
+    photographer.location_name = data.get('location_name', photographer.location_name)
+    photographer.find_me_text = data.get('find_me_text', photographer.find_me_text)
+    photographer.instagram = data.get('instagram', photographer.instagram)
+    photographer.services = data.get('services', photographer.services)
+    db.session.commit()
+    return jsonify({"msg": "Photographer updated successfully"}), 200
 
 
 # GET OF BIKES ------------------------------------------------------------------------------------------------------------------->
@@ -213,9 +245,10 @@ def get_all_userroutes():
 @api.route('/favorites', methods=['GET'])
 @jwt_required()
 def get_favorites():
-    user_email = get_jwt_identity()
-    user = User.query.filter_by(email=user_email).first()
-    if not user:
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    photographer = Photographer.query.filter_by(email=email).first()
+    if not user and not photographer:
         return jsonify({'error': 'User not found'}), 404
     favorites = Favorite.query.filter(Favorite.user_id == user.id).all()
     favorites_data = []
@@ -328,8 +361,9 @@ def upload_photo():
     photo_file = request.files.getlist("files")
     photo_type = request.form['photo_type']
     upload_type = request.form['upload_type']
-    user_email = get_jwt_identity()
-    user = User.query.filter_by(email=user_email).first()
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    photographer = Photographer.query.filter_by(email=email).first()
     new_photos=[]
     if upload_type == 'single_photo':
         single_photo_route_id = request.form['route_id']
@@ -349,9 +383,10 @@ def upload_photo():
             route_data = json.loads(request.form['route_data'])
             new_route = Route(
                 name=route_data['name'],
-                interest_text=route_data['interest_text'],
                 start_location_name=route_data['start_location_name'],
                 end_location_name=route_data['end_location_name'],
+                interest_text=route_data['interest_text'],
+                description_text=route_data['description_text'],
                 user_id = user.id,)
             db.session.add(new_route)
             db.session.commit()  # Confirma los cambios en la base de datos para obtener la ID
@@ -369,7 +404,7 @@ def upload_photo():
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
                     path=upload_result['url'],
-                    photographer_id=type_id,
+                    photographer_id=photographer.id,
                     photo_type=photo_type,))
         elif photo_type == 'bike':
             for photo in photo_file:

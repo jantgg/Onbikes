@@ -17,8 +17,8 @@ export const PhotographerRegister = () => {
   const [errorusername, setErrorUsername] = useState(false);
   const [location, setLocation] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [sunday, setSunday] = useState("");
-  const [service, setService] = useState("");
+  const [findme, setFindMe] = useState("");
+  const [services, setServices] = useState("");
   const [credentialserror, setCredentialsError] = useState(false);
   const [erroruser, setErrorUser] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -47,8 +47,8 @@ export const PhotographerRegister = () => {
         confirmpassword: confirmpassword,
         location: location,
         instagram: instagram,
-        sunday: sunday,
-        service: service,
+        findme: findme,
+        services: services,
       }),
     });
     if (response.ok) {
@@ -82,6 +82,7 @@ export const PhotographerRegister = () => {
   };
 
   return (
+
     <div className="row">
       <div className=" col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white ">
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn sizehomeb spartan">
