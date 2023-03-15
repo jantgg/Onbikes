@@ -12,27 +12,27 @@ export const Userregister = () => {
   const [user_name, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
-  const [erroruser, setErrorUser] = useState("");
-  const [erroremail, setErrorEmail] = useState(false);
-  const [passworderror, setPasswordError] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorUser, setErrorUser] = useState("");
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [inputclickeduser, setInputClickedUser] = useState(false);
-  const [inputclickedemail, setInputClickedEmail] = useState(false);
-  const [inputclickedpassword, setInputClickedPassword] = useState(false);
+  const [inputClickedUser, setInputClickedUser] = useState(false);
+  const [inputClickedEmail, setInputClickedEmail] = useState(false);
+  const [inputClickedPassword, setInputClickedPassword] = useState(false);
 
   useEffect(() => {
     areEqual();
-  }, [confirmpassword]);
-
-  const areEqual = () => {
-    if (password == confirmpassword) {
-      setPasswordError(false);
-    } else setPasswordError(true);
-  };
+  }, [confirmPassword]);
 
   const handleCheckbox = (event) => {
     setTermsAccepted(event.target.checked);
+  };
+
+  const areEqual = () => {
+    if (password == confirmPassword) {
+      setPasswordError(false);
+    } else setPasswordError(true);
   };
 
   const sendUserRegister = async () => {
@@ -45,7 +45,7 @@ export const Userregister = () => {
         user_name: user_name,
         email: email,
         password: password,
-        confirmpassword: confirmpassword,
+        confirmpassword: confirmPassword,
       }),
     });
     if (response.ok) {
@@ -74,14 +74,14 @@ export const Userregister = () => {
 
   return (
     <div className="row">
-      <div className=" col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white ">
+      <div className="col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white">
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn spartan">
           ¿Eres fotógrafo? <br></br>
           <p className="sizehomeb spartan">
             <Link to={"/photographerregister"} className="link">
               Registrarte como fotógrafo
-            </Link>{" "}
-            para ofrecer tus servicios a la mejor comunidad motera
+            </Link>
+            &nbsp; para ofrecer tus servicios a la mejor comunidad motera
           </p>
         </div>
         <div className="login-box col-12 mx-auto mt-3 bordecitoall imagenn px-5">
@@ -89,7 +89,7 @@ export const Userregister = () => {
             Registro de Usuario
           </div>
           <div>
-            <div className="user-box sizehomes ">
+            <div className="user-box sizehomes">
               <input
                 type="name"
                 name="name"
@@ -109,15 +109,14 @@ export const Userregister = () => {
               />
               <label htmlFor="name" className="row">
                 <div className="col-2">Usuario &nbsp; </div>
-
-                {inputclickeduser ? (
+                {inputClickedUser ? (
                   <div className="text-secondary col-10">
                     *Longitud entre 5 y 20 caracteres
                   </div>
                 ) : null}
               </label>
               <div>
-                {erroruser ==
+                {errorUser ==
                 "The indicated username is already being used by another user or photographer" ? (
                   <p className="text-danger">*El nombre se encuentra en uso</p>
                 ) : null}
@@ -144,15 +143,14 @@ export const Userregister = () => {
               />
               <label htmlFor="name" className="row">
                 <div className="col-2">Email &nbsp; &nbsp;&nbsp; </div>
-
-                {inputclickedemail ? (
+                {inputClickedEmail ? (
                   <div className="text-secondary col-10">
                     *ejemplo@ejemplo.es
                   </div>
                 ) : null}
               </label>
               <div>
-                {erroremail ==
+                {errorEmail ==
                 "The indicated email is already being used by another user or photographer" ? (
                   <p className="text-danger">
                     *El email indicado ya está siendo utilizado por otro usuario
@@ -181,15 +179,14 @@ export const Userregister = () => {
               />
               <label htmlFor="password" className="row">
                 <div className="col-4">Contraseña </div>
-
-                {inputclickedpassword ? (
+                {inputClickedPassword ? (
                   <div className="text-secondary col-8">
                     *Ejemplo: Superhero@1
                   </div>
                 ) : null}
               </label>
               <div>
-                {passworderror ==
+                {passwordError ==
                 "The entered password is different, please check the password" ? (
                   <>
                     <p className="text-danger">*Las contraseñas no coinciden</p>
@@ -208,7 +205,7 @@ export const Userregister = () => {
                 autoFocus
                 className=""
                 type="password"
-                value={confirmpassword}
+                value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
@@ -217,15 +214,17 @@ export const Userregister = () => {
                 <div className="col-12">Confirmar Contraseña </div>
               </label>
               <div>
-                {passworderror == true ? (
-                  <p className="text-danger">*La contraseña debe coincidir</p>
+                {passwordError == true ? (
+                  <p className="text-danger">
+                    *Las contraseñas deben coincidir
+                  </p>
                 ) : null}
               </div>
             </div>
             <div className="sizehomes col-12 row mx-auto centrar mb-4">
-              <label class="checkbox-btn ">
-                <label className="" for="checkbox ">
-                  Acepto los términos y condiciones
+              <label className="checkbox-btn">
+                <label className="" htmlFor="checkbox">
+                  Acepto los términos y condiciones.
                 </label>
                 <input
                   id="checkbox"
@@ -234,18 +233,18 @@ export const Userregister = () => {
                   checked={termsAccepted}
                   onChange={handleCheckbox}
                 />
-                <span class="checkmark mt-1"></span>
+                <span className="checkmark"></span>
               </label>
             </div>
-            <div className=" center-align sizehomes">
+            <div className="center-align sizehomes">
               <button
                 className="botonaco px-4 py-1 text-white"
                 onClick={() => {
                   if (!termsAccepted) {
-                    alert("Por favor acepta los términos y condiciones.");
+                    alert("Por favor, acepta los términos y condiciones.");
                     return;
                   }
-                  if (passworderror == false) {
+                  if (passwordError == false) {
                     sendUserRegister();
                   }
                 }}
@@ -263,12 +262,12 @@ export const Userregister = () => {
                 <span style={{ "--i": 11 }}>e</span>
               </button>
             </div>
-            <div className=" my-2 center-align">
+            <div className="my-2 center-align">
               <Link className="link" to={"/login"}>
                 ¿Ya tienes una cuenta?
               </Link>
             </div>
-          </div>{" "}
+          </div>
         </div>
       </div>
     </div>

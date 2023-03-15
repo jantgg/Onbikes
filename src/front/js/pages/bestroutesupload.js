@@ -105,7 +105,7 @@ export const Bestroutesupload = () => {
           <div className="col-10 mx-auto bordecitoall pb-4 row imagenn">
             <div className="center-align col-12 col-xxl-5 col-xl-6 col-lg-7 sizehomet bordecitob mx-auto mb-4 text-white">
               Mis rutas subidas
-            </div>{" "}
+            </div>
             <SliderRoute data={userRoutes} groupSize={3} />
           </div>
         </>
@@ -114,7 +114,7 @@ export const Bestroutesupload = () => {
           <div className="col-12 bordecitot bordecitob pb-4 row mx-auto imagenn">
             <div className="center-align col-11 sizehomemb mx-auto mt-4 mb-4 text-white">
               Mis rutas subidas
-            </div>{" "}
+            </div>
             <SliderRouteM data={userRoutes} groupSize={1} />
           </div>
         </>
@@ -159,7 +159,18 @@ export const Bestroutesupload = () => {
                 ></input>
                 <label htmlFor="start">Sitio de salida</label>
               </div>
-
+              <div className="user-box">
+                <input
+                  type="interest"
+                  name="interest"
+                  required
+                  autoFocus
+                  onChange={(e) => {
+                    setInterest(e.target.value);
+                  }}
+                ></input>
+                <label htmlFor="interest">Lugares de interés</label>
+              </div>
               <div className="user-box">
                 <input
                   type="description"
@@ -167,12 +178,11 @@ export const Bestroutesupload = () => {
                   required
                   autoFocus
                   onChange={(e) => {
-                    setInterest(e.target.value);
+                    setDescription(e.target.value);
                   }}
                 ></input>
                 <label htmlFor="description">Descripción</label>
               </div>
-
               <div className="user-box">
                 <input
                   type="end"

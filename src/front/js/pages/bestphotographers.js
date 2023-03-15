@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { CardRoutes } from "../component/cardroutes";
 import { PhotographerSlider } from "../component/photographerslider";
+import Map from "../component/mapmarker";
 import "../../styles/forall.css";
 
 export const Bestphotographers = () => {
   const { store, actions } = useContext(Context);
   const [photographers, setPhotographers] = useState([]);
+  //const photographersLocation = photographers.map((obj) => obj.location_name);
   const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [singlePhotographer, setSinglePhotographer] = useState({});
@@ -52,9 +52,16 @@ export const Bestphotographers = () => {
     }
   };
 
+  const photographersData = photographers.map((obj) => ({
+    user_name: obj.user_name,
+    location: obj.location_name + ", Spain",
+    find_me_text: obj.find_me_text + ", Spain",
+  }));
+
   return (
     <div className="container">
       <h1 className="text-success">//Los mejores fotografos</h1>
+      <Map photographersData={photographersData} />
       {photographers.map((photographer) => {
         return (
           <div key={photographer.id}>
@@ -67,7 +74,6 @@ export const Bestphotographers = () => {
             >
               <span>Ver detalles</span>
             </button>
-
           </div>
         );
       })}

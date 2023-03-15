@@ -138,7 +138,7 @@ const SilderRouteM = ({ data, groupSize }) => {
                     onClick={() => deleteFavoriteRoute()}
                   >
                     <span className="mx-auto center-align" style={{ "--i": 1 }}>
-                      <i class="fa-solid fa-heart"></i>
+                      <i className="fa-solid fa-heart"></i>
                     </span>
                   </button>
                 </div>
