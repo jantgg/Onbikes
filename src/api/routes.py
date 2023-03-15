@@ -100,7 +100,7 @@ def user_login():
     if not user and not photographer:
         return jsonify({"error": "This user or photographer does not exist"}), 401
     if user and check_password_hash(user.password, body_password):
-        token = create_access_token(identity=user.email)8
+        token = create_access_token(identity=user.email)
         user_name = user.user_name
     elif photographer and check_password_hash(photographer.password, body_password):
         token = create_access_token(identity=photographer.email)

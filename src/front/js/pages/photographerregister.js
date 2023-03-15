@@ -17,7 +17,7 @@ export const PhotographerRegister = () => {
   const [errorusername, setErrorUsername] = useState(false);
   const [location, setLocation] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [findme, setFindMe] = useState("");
+  const [findMe, setFindMe] = useState("");
   const [services, setServices] = useState("");
   const [credentialserror, setCredentialsError] = useState(false);
   const [erroruser, setErrorUser] = useState("");
@@ -47,7 +47,7 @@ export const PhotographerRegister = () => {
         confirmpassword: confirmpassword,
         location: location,
         instagram: instagram,
-        findme: findme,
+        findme: findMe,
         services: services,
       }),
     });
@@ -82,7 +82,6 @@ export const PhotographerRegister = () => {
   };
 
   return (
-
     <div className="row">
       <div className=" col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white ">
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn sizehomeb spartan">
@@ -267,9 +266,9 @@ export const PhotographerRegister = () => {
                 autoFocus
                 className=""
                 type="text"
-                value={service}
+                value={services}
                 onChange={(e) => {
-                  setService(e.target.value);
+                  setServices(e.target.value);
                 }}
               />
               <label htmlFor="text" className="row">
@@ -282,9 +281,9 @@ export const PhotographerRegister = () => {
                 autoFocus
                 className=""
                 type="text"
-                value={sunday}
+                value={findMe}
                 onChange={(e) => {
-                  setSunday(e.target.value);
+                  setFindMe(e.target.value);
                 }}
               />
               <label htmlFor="text" className="row">
