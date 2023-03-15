@@ -11,7 +11,7 @@ export const Bestphotographers = () => {
   const [photographers, setPhotographers] = useState([]);
   const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
-  const [singlephotographer, setSinglePhotographer] = useState({});
+  const [singlePhotographer, setSinglePhotographer] = useState({});
 
   useEffect(() => {
     getPhotographers();
@@ -19,7 +19,7 @@ export const Bestphotographers = () => {
 
   useEffect(() => {
     getPhotos();
-  }, [singlephotographer]);
+  }, [singlePhotographer]);
 
   const getPhotographers = async () => {
     await actions.getPhotographers();
@@ -29,7 +29,7 @@ export const Bestphotographers = () => {
   const getPhotos = async () => {
     await actions.getPhotos();
     setPhotos(
-      store.photos.filter((obj) => obj.name == singlephotographer.email)
+      store.photos.filter((obj) => obj.name == singlePhotographer.email)
     );
   };
 
@@ -82,16 +82,16 @@ export const Bestphotographers = () => {
             <div>
               <h5>Detalles fotografo: </h5>
               <ul>
-                <li>Nombre de usuario {singlephotographer.user_name}</li>
-                <li>Localizacion: {singlephotographer.location_text}</li>
-                <li>Instagram {singlephotographer.instagram}</li>
+                <li>Nombre de usuario {singlePhotographer.user_name}</li>
+                <li>Localizacion: {singlePhotographer.location_name}</li>
+                <li>Instagram {singlePhotographer.instagram}</li>
               </ul>
             </div>
             <div>
               <ul>
-                <li>Servicios: {singlephotographer.services_text}</li>
+                <li>Servicios: {singlePhotographer.services}</li>
                 <li>
-                  Me puedes encontrar en: {singlephotographer.find_me_text}
+                  Me puedes encontrar en: {singlePhotographer.find_me_text}
                 </li>
               </ul>
               {store.userType == "User" || store.userType == "Photographer" ? (
