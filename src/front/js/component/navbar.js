@@ -41,7 +41,7 @@ export const Navbar = () => {
             }`}
             onClick={() => setSelected(3)}
           >
-            Home
+            Inicio
           </Link>
           <button
             className="navbar-toggler text-white"
@@ -138,7 +138,7 @@ export const Navbar = () => {
                       }`}
                       onClick={() => setSelected(5)}
                     >
-                      Log in
+                      Iniciar Sesión
                     </Link>
                   </div>
                 </>

@@ -1,0 +1,20 @@
+.hided {
+  height: 0;
+  overflow: hidden;
+}
+
+.showdown {
+  animation-name: expand;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes expand {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
