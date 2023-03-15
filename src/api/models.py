@@ -12,7 +12,6 @@ class User(db.Model):
     active = db.Column(db.Boolean, default=True)
     routes = db.relationship('Route', backref='user')
 
-
     def __repr__(self):
         return f'{self.user_name}'
 
@@ -100,6 +99,8 @@ class Route(db.Model):
     interest_text = db.Column(db.String(250), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     photos = db.relationship('Photo')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
 
     def __repr__(self):
         return f'{self.name}'

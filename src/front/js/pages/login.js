@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/loginform.css";
 import "../../styles/forall.css";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +26,9 @@ export const Login = () => {
     });
     if (response.ok) {
       const data = await response.json();
+      console.log(response);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user_name", data.user_name);
       localStorage.setItem("email", email);
       await actions.syncuser();
       navigate("/");
@@ -35,17 +36,18 @@ export const Login = () => {
       setCredentialsError(true);
     }
   };
+
   return (
     <div className="row ">
-      <div className="bordecitoall col-3 row mx-auto my-5">
+      <div className="bordecitoall col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto my-5 imagenn">
         <div className="login-box col-11 mx-auto mt-3">
-          <p className="bordecito col-4 mx-auto">OnBikes</p>
+          <p className="bordecito col-4 mx-auto sizehomet">OnBikes</p>
           <form
             onSubmit={() => {
               e.prevent.default();
             }}
           >
-            <div className="user-box">
+            <div className="user-box sizehomes">
               <input
                 type="email"
                 name="email"
@@ -57,9 +59,11 @@ export const Login = () => {
                   setEmail(e.target.value);
                 }}
               />
-              <label htmlFor="email">Email</label>
+              <label className="" htmlFor="email">
+                Email
+              </label>
             </div>
-            <div className="user-box">
+            <div className="user-box sizehomes">
               <input
                 type="password"
                 name="password"
@@ -77,9 +81,9 @@ export const Login = () => {
                 *El email y/o la contraseña son incorrectos.
               </p>
             ) : null}
-            <div className="row">
+            <div className="center-align">
               <button
-                className="botonlogin mx-auto mb-3 p-2"
+                className="botonaco mx-auto mb-3 p-2 sizehomes px-3"
                 onClick={() => sendLogin()}
               >
                 <span style={{ "--i": 1 }}>I</span>
@@ -99,7 +103,7 @@ export const Login = () => {
               </button>
             </div>
           </form>
-          <p>
+          <p className="center-align">
             ¿No tienes una cuenta aún?{" "}
             <Link to={"/userregister"} className="a2">
               ¡Registrate!

@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [selected, setSelected] = useState(null);
+  const isDesktop = window.innerWidth >= 1000;
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -28,12 +29,14 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="row">
+    <div className="row fixedup mx-auto">
       <nav className="col-11 navbar navbar-dark navbar-expand-lg bordecito mx-auto text-white sizehomet pt-2 spartan">
         <div className="container-fluid ">
           <Link
             to="/"
-            className={`ms-5 navbar-brand text-white sizehomet px-2 mx-5 me-5 ${
+            className={`${
+              isDesktop ? " ms-5" : " ms-2"
+            } navbar-brand text-white sizehomet px-2 mx-5 me-5 ${
               selected === 3 && "bordecitos"
             }`}
             onClick={() => setSelected(3)}
@@ -91,15 +94,27 @@ export const Navbar = () => {
               {store.userType == "User" || store.userType == "Photographer" ? (
                 <>
                   <div className="nav-item">
-                    <Link
-                      to="/user"
-                      className={`nav-link text-white mx-2 me-5 px-2 ${
-                        selected === 4 && "bordecitos"
-                      }`}
-                      onClick={() => setSelected(4)}
-                    >
-                      Mi Perfil
-                    </Link>
+                    {store.userType == "User" ? (
+                      <Link
+                        to="/user"
+                        className={`nav-link text-white mx-2 me-5 px-2 ${
+                          selected === 4 && "bordecitos"
+                        }`}
+                        onClick={() => setSelected(4)}
+                      >
+                        Mi Perfil
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/bestphotographerupload"
+                        className={`nav-link text-white mx-2 me-5 px-2 ${
+                          selected === 4 && "bordecitos"
+                        }`}
+                        onClick={() => setSelected(4)}
+                      >
+                        Mi Perfil
+                      </Link>
+                    )}
                   </div>
                   <div className="nav-item">
                     <Link
@@ -116,7 +131,6 @@ export const Navbar = () => {
               ) : store.userType == null ? (
                 <>
                   <div className="nav-item me-4">
-
                     <Link
                       to="/login"
                       className={`nav-link text-white mx-2 px-2 ${
@@ -125,7 +139,6 @@ export const Navbar = () => {
                       onClick={() => setSelected(5)}
                     >
                       Log in
-
                     </Link>
                   </div>
                 </>

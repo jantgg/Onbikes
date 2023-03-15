@@ -67,12 +67,7 @@ export const Bestphotographers = () => {
             >
               <span>Ver detalles</span>
             </button>
-            {store.userType != "User" && store.userType != "Photographer" ? (
-              <div className="col-4 mx-auto text-center mb-5  fs-3 text-wrap lh-sm border border-danger rounded pb-2">
-                No vas a poder guardar los resultados en favoritos ya que no te
-                has registrado
-              </div>
-            ) : null}
+
           </div>
         );
       })}
