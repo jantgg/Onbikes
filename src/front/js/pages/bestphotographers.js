@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { CardRoutes } from "../component/cardroutes";
 import { PhotographerSlider } from "../component/photographerslider";
 import Map from "../component/mapmarker.js";
 import "../../styles/forall.css";
@@ -10,7 +8,6 @@ import "../../styles/forall.css";
 export const Bestphotographers = () => {
   const { store, actions } = useContext(Context);
   const [photographers, setPhotographers] = useState([]);
-
   const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [singlePhotographer, setSinglePhotographer] = useState({});
@@ -53,6 +50,12 @@ export const Bestphotographers = () => {
       console.log("response not ok");
     }
   };
+
+  const photographersData = photographers.map((obj) => ({
+    user_name: obj.user_name,
+    location: obj.location_name + ", Spain",
+    find_me_text: obj.find_me_text + ", Spain",
+  }));
 
   return (
     <div className="container">

@@ -9,29 +9,35 @@ export const PhotographerRegister = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [erroremail, setErrorEmail] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
   const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState("");
-  const [passworderror, setPasswordError] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
   const [user_name, setUserName] = useState("");
-  const [errorusername, setErrorUsername] = useState(false);
+  const [errorUsername, setErrorUsername] = useState(false);
   const [location, setLocation] = useState("");
   const [instagram, setInstagram] = useState("");
   const [findMe, setFindMe] = useState("");
   const [services, setServices] = useState("");
-  const [credentialserror, setCredentialsError] = useState(false);
-  const [erroruser, setErrorUser] = useState("");
+  const [credentialsError, setCredentialsError] = useState(false);
+  const [errorUser, setErrorUser] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [inputclickeduser, setInputClickedUser] = useState(false);
-  const [inputclickedemail, setInputClickedEmail] = useState(false);
-  const [inputclickedpassword, setInputClickedPassword] = useState(false);
+  const [inputClickedUser, setInputClickedUser] = useState(false);
+  const [inputClickedEmail, setInputClickedEmail] = useState(false);
+  const [inputClickedPassword, setInputClickedPassword] = useState(false);
 
   useEffect(() => {
     areEqual();
-  }, [confirmpassword]);
+  }, [confirmPassword]);
 
   const handleCheckbox = (event) => {
     setTermsAccepted(event.target.checked);
+  };
+
+  const areEqual = () => {
+    if (password == confirmPassword) {
+      setPasswordError(false);
+    } else setPasswordError(true);
   };
 
   const sendPhotographerRegister = async () => {
@@ -44,7 +50,7 @@ export const PhotographerRegister = () => {
         user_name: user_name,
         email: email,
         password: password,
-        confirmpassword: confirmpassword,
+        confirmpassword: confirmPassword,
         location: location,
         instagram: instagram,
         findme: findMe,
@@ -75,27 +81,21 @@ export const PhotographerRegister = () => {
     }
   };
 
-  const areEqual = () => {
-    if (password == confirmpassword) {
-      setPasswordError(false);
-    } else setPasswordError(true);
-  };
-
   return (
     <div className="row">
-      <div className=" col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white ">
+      <div className="col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white">
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn sizehomeb spartan">
           <Link to={"/userregister"} className="link">
-            Registrate
+            Registrate como usuario
           </Link>
-          como usuario normal
+          &nbsp; para disfrutar de la mejor comunidad motera.
         </div>
         <div className="login-box col-12 mx-auto mt-3 bordecitoall imagenn px-5">
           <div className="bordecito mx-auto col-10 sizehomet center-align mb-5 mt-2 spartan">
             Registro de Fotógrafo
           </div>
           <div>
-            <div className="user-box sizehomes ">
+            <div className="user-box sizehomes">
               <input
                 type="name"
                 name="name"
@@ -116,15 +116,14 @@ export const PhotographerRegister = () => {
               />
               <label htmlFor="name" className="row">
                 <div className="col-2">Usuario &nbsp; </div>
-
-                {inputclickeduser ? (
+                {inputClickedUser ? (
                   <div className="text-secondary col-10">
                     *Longitud entre 5 y 20 caracteres
                   </div>
                 ) : null}
               </label>
               <div>
-                {erroruser ==
+                {errorUser ==
                 "The indicated username is already being used by another user or photographer" ? (
                   <p className="text-danger">*El nombre se encuentra en uso</p>
                 ) : null}
@@ -151,16 +150,15 @@ export const PhotographerRegister = () => {
                 }}
               />
               <label htmlFor="name" className="row">
-                <div className="col-2">Email &nbsp; &nbsp;&nbsp; </div>
-
-                {inputclickedemail ? (
+                <div className="col-2">Email &nbsp; &nbsp; &nbsp; </div>
+                {inputClickedEmail ? (
                   <div className="text-secondary col-10">
                     *ejemplo@ejemplo.es
                   </div>
                 ) : null}
               </label>
               <div>
-                {erroremail ==
+                {errorEmail ==
                 "The indicated email is already being used by another user or photographer" ? (
                   <p className="text-danger">
                     *El email indicado ya está siendo utilizado por otro usuario
@@ -188,16 +186,15 @@ export const PhotographerRegister = () => {
                 }}
               />
               <label htmlFor="password" className="row">
-                <div className="col-4">Contraseña </div>
-
-                {inputclickedpassword ? (
+                <div className="col-4">Contraseña</div>
+                {inputClickedPassword ? (
                   <div className="text-secondary col-8">
                     *Ejemplo: Superhero@1
                   </div>
                 ) : null}
               </label>
               <div>
-                {passworderror ==
+                {passwordError ==
                 "The entered password is different, please check the password" ? (
                   <>
                     <p className="text-danger">*Las contraseñas no coinciden</p>
@@ -216,17 +213,19 @@ export const PhotographerRegister = () => {
                 autoFocus
                 className=""
                 type="password"
-                value={confirmpassword}
+                value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                 }}
               />
               <label htmlFor="confirm_password" className="row">
-                <div className="col-12">Confirmar Contraseña </div>
+                <div className="col-12">Confirmar contraseña</div>
               </label>
               <div>
-                {passworderror == true ? (
-                  <p className="text-danger">*La contraseña debe coincidir</p>
+                {passwordError == true ? (
+                  <p className="text-danger">
+                    *Las contraseñas deben coincidir
+                  </p>
                 ) : null}
               </div>
             </div>
@@ -287,17 +286,16 @@ export const PhotographerRegister = () => {
                 }}
               />
               <label htmlFor="text" className="row">
-                <div className="col-12">Ciudad recurrente</div>
+                <div className="col-12">Lugar de trabajo</div>
               </label>
             </div>
             <div className="sizehomes center-align mb-3">
-              {" "}
               *Podrás subir fotos en tu perfil más adelante
             </div>
             <div className="sizehomes col-12 row mx-auto centrar mb-4">
-              <label className="checkbox-btn ">
-                <label className="" htmlFor="checkbox ">
-                  Acepto los términos y condiciones
+              <label className="checkbox-btn">
+                <label className="" htmlFor="checkbox">
+                  Acepto los términos y condiciones.
                 </label>
                 <input
                   id="checkbox"
@@ -306,10 +304,10 @@ export const PhotographerRegister = () => {
                   checked={termsAccepted}
                   onChange={handleCheckbox}
                 />
-                <span className="checkmark mt-1"></span>
+                <span className="checkmark"></span>
               </label>
             </div>
-            <div className=" center-align sizehomes">
+            <div className="center-align sizehomes">
               <button
                 className="botonaco px-4 py-1 text-white"
                 onClick={() => {
@@ -317,7 +315,7 @@ export const PhotographerRegister = () => {
                     alert("Por favor acepta los términos y condiciones.");
                     return;
                   }
-                  if (passworderror == false) {
+                  if (passwordError == false) {
                     sendPhotographerRegister();
                   }
                 }}
@@ -335,12 +333,12 @@ export const PhotographerRegister = () => {
                 <span style={{ "--i": 11 }}>e</span>
               </button>
             </div>
-            <div className=" my-2 center-align">
+            <div className="my-2 center-align">
               <Link className="link" to={"/login"}>
                 ¿Ya tienes una cuenta?
               </Link>
             </div>
-          </div>{" "}
+          </div>
         </div>
       </div>
     </div>

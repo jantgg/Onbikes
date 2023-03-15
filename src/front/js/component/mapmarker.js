@@ -1,28 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 
-function Map({ data }) {
-  Geocode.setApiKey("AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4");
-  Geocode.setLanguage("es");
-  Geocode.setRegion("es");
-  const [markers, setMarkers] = useState([]);
-  const [routesCities, setRoutesCities] = useState([]);
-  console.log(data);
+const mapContainerStyle = {
+  height: "400px",
+  width: "800px",
+};
 
-  useEffect(() => {
-    geocodeCities(data);
-    setCities();
-  }, [data]);
+const center = {
+  lat: 40.41584347263048,
+  lng: -3.707348573835935,
+};
 
-  const setCities = () => {
-    setRoutesCities(data);
-  };
+function Map({ photographersData }) {
+  const [locations, setLocations] = useState([]);
 
-  const getRandomOffset = () => {
-    const offset = Math.random() * 0.002;
-    return Math.random() > 0.5 ? offset : -offset;
-  };
 
   const geocodeCities = async (data) => {
     const results = [];
@@ -41,53 +33,23 @@ function Map({ data }) {
             lng: getRandomOffset(),
           },
         };
-        results.push(newMarker);
-      }
-      console.log(results);
-      setMarkers(results);
-      return results;
-    } catch (error) {
-      console.error(`Error geocoding ${city}: ${error}`);
-    }
-  };
-
-  const mapContainerStyle = {
-    height: "400px",
-    width: "100%",
-  };
-
-  const center = {
-    lat: 40.4168,
-    lng: -3.7038,
-  };
-
-  const options = {
-    streetViewControl: false,
-  };
+      });
+      const resolvedLocations = await Promise.all(promises);
+      setLocations(resolvedLocations);
+    };
+    getLocations();
+  }, [photographersData]);
 
   return (
-    <LoadScript googleMapsApiKey={"AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4"}>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={6}
-        options={options}
-      >
-        {markers.map((marker, index) => {
-          return (
-            <Marker
-              key={index}
-              position={{
-                lat: marker.position.lat + marker.offset.lat,
-                lng: marker.position.lng + marker.offset.lng,
-              }}
-              title={marker.name}
-              onClick={() => {
-                // Agrega aquí el código que deseas ejecutar cuando se haga clic en el marcador
-              }}
-            />
-          );
-        })}
+    <LoadScript googleMapsApiKey={process.env.MAPS_KEY}>
+      <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={5}>
+        {locations.map((location, index) => (
+          <Marker
+            key={index}
+            position={location.position}
+            title={location.title}
+          />
+        ))}
       </GoogleMap>
     </LoadScript>
   );
