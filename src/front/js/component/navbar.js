@@ -94,15 +94,27 @@ export const Navbar = () => {
               {store.userType == "User" || store.userType == "Photographer" ? (
                 <>
                   <div className="nav-item">
-                    <Link
-                      to="/user"
-                      className={`nav-link text-white mx-2 me-5 px-2 ${
-                        selected === 4 && "bordecitos"
-                      }`}
-                      onClick={() => setSelected(4)}
-                    >
-                      Mi Perfil
-                    </Link>
+                    {store.userType == "User" ? (
+                      <Link
+                        to="/user"
+                        className={`nav-link text-white mx-2 me-5 px-2 ${
+                          selected === 4 && "bordecitos"
+                        }`}
+                        onClick={() => setSelected(4)}
+                      >
+                        Mi Perfil
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/bestphotographerupload"
+                        className={`nav-link text-white mx-2 me-5 px-2 ${
+                          selected === 4 && "bordecitos"
+                        }`}
+                        onClick={() => setSelected(4)}
+                      >
+                        Mi Perfil
+                      </Link>
+                    )}
                   </div>
                   <div className="nav-item">
                     <Link

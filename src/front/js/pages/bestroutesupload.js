@@ -61,6 +61,7 @@ export const Bestroutesupload = () => {
       console.log(response.data);
       8;
       setRouteSend(true);
+      location.reload();
     } else {
       console.log(response);
     }

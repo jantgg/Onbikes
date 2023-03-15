@@ -87,7 +87,7 @@ export const PhotographerRegister = () => {
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn sizehomeb spartan">
           <Link to={"/userregister"} className="link">
             Registrate
-          </Link>{" "}
+          </Link>
           como usuario normal
         </div>
         <div className="login-box col-12 mx-auto mt-3 bordecitoall imagenn px-5">
@@ -295,8 +295,8 @@ export const PhotographerRegister = () => {
               *Podrás subir fotos en tu perfil más adelante
             </div>
             <div className="sizehomes col-12 row mx-auto centrar mb-4">
-              <label class="checkbox-btn ">
-                <label className="" for="checkbox ">
+              <label className="checkbox-btn ">
+                <label className="" htmlFor="checkbox ">
                   Acepto los términos y condiciones
                 </label>
                 <input
@@ -306,7 +306,7 @@ export const PhotographerRegister = () => {
                   checked={termsAccepted}
                   onChange={handleCheckbox}
                 />
-                <span class="checkmark mt-1"></span>
+                <span className="checkmark mt-1"></span>
               </label>
             </div>
             <div className=" center-align sizehomes">
@@ -318,7 +318,7 @@ export const PhotographerRegister = () => {
                     return;
                   }
                   if (passworderror == false) {
-                    sendUserRegister();
+                    sendPhotographerRegister();
                   }
                 }}
               >
