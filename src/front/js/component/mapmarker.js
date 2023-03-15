@@ -15,15 +15,23 @@ const center = {
 function Map({ photographersData }) {
   const [locations, setLocations] = useState([]);
 
-  useEffect(() => {
-    Geocode.setApiKey(process.env.MAPS_KEY);
-    const getLocations = async () => {
-      const promises = photographersData.map(async (photographer) => {
-        const response = await Geocode.fromAddress(photographer.find_me_text);
-        const location = response.results[0].geometry.location;
-        return {
-          position: { lat: location.lat, lng: location.lng },
-          title: photographer.find_me_text,
+
+  const geocodeCities = async (data) => {
+    const results = [];
+    try {
+      for (const route of data) {
+        const response = await Geocode.fromAddress(route.find_me_text);
+        const { lat, lng } = response.results[0].geometry.location;
+        const newMarker = {
+          name: route.name,
+          position: {
+            lat: lat + getRandomOffset(),
+            lng: lng + getRandomOffset(),
+          },
+          offset: {
+            lat: getRandomOffset(),
+            lng: getRandomOffset(),
+          },
         };
       });
       const resolvedLocations = await Promise.all(promises);

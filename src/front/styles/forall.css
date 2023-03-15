@@ -44,6 +44,11 @@ body {
   border-bottom: 2px solid white;
   padding-bottom: 0px;
 }
+.bordecitoc {
+  border-right: 1px solid white;
+  width: 1px;
+  height: 1vw;
+}
 .bordecitoup {
   border-top: 3px solid white;
   padding-bottom: 0px;
@@ -76,7 +81,7 @@ body {
 }
 
 /* FONT SIZE THRU MEDIA VIEWPORT */
-@media (min-width: 1024px) {
+@media (min-width: 1000px) {
   .sizehome {
     font-size: 6vw;
   }
@@ -100,7 +105,7 @@ body {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1000px) {
   .sizehome {
     font-size: 12vw;
   }

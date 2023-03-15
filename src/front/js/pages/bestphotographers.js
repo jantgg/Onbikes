@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { PhotographerSlider } from "../component/photographerslider";
-import Map from "../component/mapmarker";
+import Map from "../component/mapmarker.js";
 import "../../styles/forall.css";
 
 export const Bestphotographers = () => {
   const { store, actions } = useContext(Context);
   const [photographers, setPhotographers] = useState([]);
-  //const photographersLocation = photographers.map((obj) => obj.location_name);
   const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [singlePhotographer, setSinglePhotographer] = useState({});
@@ -61,7 +60,7 @@ export const Bestphotographers = () => {
   return (
     <div className="container">
       <h1 className="text-success">//Los mejores fotografos</h1>
-      <Map photographersData={photographersData} />
+      <Map data={photographers}></Map>
       {photographers.map((photographer) => {
         return (
           <div key={photographer.id}>

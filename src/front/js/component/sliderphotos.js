@@ -36,7 +36,7 @@ const SliderPhotos = ({ data, groupSize }) => {
   return (
     <>
       <div
-        className={`sliderbueno mx-auto row bordecitoall p-3 ${
+        className={`sliderbueno mx-auto row p-3 ${
           isVisible ? "show-slider" : "hide-slider"
         }`}
       >
@@ -57,7 +57,7 @@ const SliderPhotos = ({ data, groupSize }) => {
           {dataToRender.map((url) => (
             <img
               style={{ objectFit: "cover" }}
-              className="colpp"
+              className="colpp mx-auto"
               src={url}
               alt="Preview"
               key={url}
