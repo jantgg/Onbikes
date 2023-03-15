@@ -28,12 +28,10 @@ function Map({ data }) {
     const results = [];
     try {
       for (const route of data) {
-        const response = await Geocode.fromAddress(route.start_location_name);
+        const response = await Geocode.fromAddress(route.find_me_text);
         const { lat, lng } = response.results[0].geometry.location;
         const newMarker = {
           name: route.name,
-          description: route.interest_text,
-          photo: route.photos[0].path,
           position: {
             lat: lat + getRandomOffset(),
             lng: lng + getRandomOffset(),

@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CardRoutes } from "../component/cardroutes";
 import { PhotographerSlider } from "../component/photographerslider";
+import Map from "../component/mapmarker.js";
 import "../../styles/forall.css";
 
 export const Bestphotographers = () => {
   const { store, actions } = useContext(Context);
   const [photographers, setPhotographers] = useState([]);
+
   const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [singlePhotographer, setSinglePhotographer] = useState({});
@@ -55,6 +57,7 @@ export const Bestphotographers = () => {
   return (
     <div className="container">
       <h1 className="text-success">//Los mejores fotografos</h1>
+      <Map data={photographers}></Map>
       {photographers.map((photographer) => {
         return (
           <div key={photographer.id}>
@@ -67,7 +70,6 @@ export const Bestphotographers = () => {
             >
               <span>Ver detalles</span>
             </button>
-
           </div>
         );
       })}
