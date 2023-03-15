@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 61ec506d7c7f
+Revision ID: 57cc246e3fee
 Revises: 
-Create Date: 2023-03-10 14:13:35.780750
+Create Date: 2023-03-14 21:06:42.130131
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '61ec506d7c7f'
+revision = '57cc246e3fee'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -48,18 +48,15 @@ def upgrade():
     sa.Column('user_name', sa.String(length=20), nullable=False),
     sa.Column('password', sa.String(length=105), nullable=False),
     sa.Column('email', sa.String(length=30), nullable=False),
-    sa.Column('active', sa.Boolean(), nullable=True),
-    sa.Column('location_text', sa.String(length=50), nullable=True),
     sa.Column('instagram', sa.String(length=30), nullable=True),
-    sa.Column('services_text', sa.String(length=100), nullable=True),
-    sa.Column('find_me_text', sa.String(length=50), nullable=True),
+    sa.Column('active', sa.Boolean(), nullable=True),
     sa.Column('location_name', sa.String(length=50), nullable=True),
-    sa.Column('latitude', sa.String(length=20), nullable=True),
-    sa.Column('longitude', sa.String(length=20), nullable=True),
+    sa.Column('find_me_text', sa.String(length=50), nullable=True),
+    sa.Column('services', sa.String(length=150), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('instagram'),
-    sa.UniqueConstraint('services_text'),
+    sa.UniqueConstraint('services'),
     sa.UniqueConstraint('user_name')
     )
     op.create_table('question',
@@ -94,9 +91,10 @@ def upgrade():
     op.create_table('route',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('interest_text', sa.String(length=250), nullable=False),
     sa.Column('start_location_name', sa.String(length=50), nullable=False),
     sa.Column('end_location_name', sa.String(length=50), nullable=False),
+    sa.Column('description_text', sa.String(length=250), nullable=False),
+    sa.Column('interest_text', sa.String(length=250), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),

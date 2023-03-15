@@ -8,7 +8,6 @@ import Maps from "../component/maps";
 export const Bestroutes = () => {
   const { store, actions } = useContext(Context);
   const [routes, setRoutes] = useState([]);
-  const [photos, setPhotos] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [singleroute, setSingleRoute] = useState({});
   const [selectedRouteImages, setSelectedRouteImages] = useState([]);
@@ -80,7 +79,6 @@ export const Bestroutes = () => {
     formData.append("upload_type", "single_photo");
     formData.append("photo_type", "route");
     formData.append("route_id", singleroute.id);
-
     const response = await fetch(store.backendurl + "photos", {
       method: "POST",
       body: formData,
@@ -126,6 +124,7 @@ export const Bestroutes = () => {
               <ul>
                 <li>Punto de partida: {singleroute.start_location_name}</li>
                 <li>Fin de la ruta: {singleroute.end_location_name}</li>
+                <li>Descripción: {singleroute.description_text}</li>
                 <li>Puntos de interes: {singleroute.interest_text}</li>
               </ul>
               {store.userType == "User" || store.userType == "Photographer" ? (

@@ -17,8 +17,8 @@ export const PhotographerRegister = () => {
   const [errorusername, setErrorUsername] = useState(false);
   const [location, setLocation] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [sunday, setSunday] = useState("");
-  const [service, setService] = useState("");
+  const [findme, setFindMe] = useState("");
+  const [services, setServices] = useState("");
   const [credentialserror, setCredentialsError] = useState(false);
   const [erroruser, setErrorUser] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -47,8 +47,8 @@ export const PhotographerRegister = () => {
         confirmpassword: confirmpassword,
         location: location,
         instagram: instagram,
-        sunday: sunday,
-        service: service,
+        findme: findme,
+        services: services,
       }),
     });
     if (response.ok) {
@@ -303,9 +303,9 @@ export const PhotographerRegister = () => {
                         className="form-control form-control-lg"
                         placeholder="Servicios"
                         type="text"
-                        value={service}
+                        value={services}
                         onChange={(e) => {
-                          setService(e.target.value);
+                          setServices(e.target.value);
                         }}
                         required
                       />
@@ -323,9 +323,9 @@ export const PhotographerRegister = () => {
                         className="form-control form-control-lg"
                         placeholder="Lugar Favorito"
                         type="text"
-                        value={sunday}
+                        value={findme}
                         onChange={(e) => {
-                          setSunday(e.target.value);
+                          setFindMe(e.target.value);
                         }}
                         required
                       />

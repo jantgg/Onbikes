@@ -10,6 +10,7 @@ export const Bestroutesupload = () => {
   const [routeName, setRouteName] = useState([]);
   const [startName, setStartName] = useState([]);
   const [interest, setInterest] = useState([]);
+  const [description, setDescription] = useState([]);
   const [endName, setEndName] = useState([]);
   const [photos, setRoutePhoto] = useState([]);
   const [routeSend, setRouteSend] = useState(false);
@@ -36,9 +37,10 @@ export const Bestroutesupload = () => {
       "route_data",
       JSON.stringify({
         name: routeName,
-        interest_text: interest,
         start_location_name: startName,
         end_location_name: endName,
+        description_text: description,
+        interest_text: interest,
       })
     );
     const response = await fetch(store.backendurl + "photos", {
@@ -82,6 +84,12 @@ export const Bestroutesupload = () => {
                 setStartName(e.target.value);
               }}
             ></input>
+            <div className="text-white">Descripción de la ruta:</div>
+            <textarea
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            ></textarea>
             <div className="text-white">Puntos de interes</div>
             <input
               onChange={(e) => {
