@@ -55,6 +55,42 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ favorites: data.body });
         }
       },
+      deleteRoute: async (routeId) => {
+        const response = await fetch(
+          getStore().backendurl + "routes/" + routeId,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const updatedRoutes = getStore().routes.filter(
+            (route) => route.id !== routeId
+          );
+          setStore({ routes: updatedRoutes });
+        }
+      },
+      deletePhoto: async (photoId) => {
+        const response = await fetch(
+          getStore().backendurl + "photos/" + photoId,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const updatedPhotos = getStore().photos.filter(
+            (photo) => photo.id !== photoId
+          );
+          setStore({ photos: updatedPhotos });
+        }
+      },
       syncuser: async () => {
         const response = await fetch(getStore().backendurl + "sync", {
           method: "GET",

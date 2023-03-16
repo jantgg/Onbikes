@@ -33,8 +33,8 @@ function Maps(props) {
   useEffect(() => {
     setResponse(null);
     setDirectionsOptions({
-      origin: props.origin,
-      destination: props.destination,
+      origin: props.origin + ", Spain",
+      destination: props.destination + ", Spain",
       travelMode: "DRIVING",
     });
   }, [props.origin, props.destination]);

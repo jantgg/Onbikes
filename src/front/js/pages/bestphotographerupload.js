@@ -7,7 +7,7 @@ import "../../styles/forall.css";
 export const BestPhotographerUpload = () => {
   const { store, actions } = useContext(Context);
   const [photos, setPhotos] = useState([]);
-  const [photographerphotos, setPhotographerPhotos] = useState([]);
+  const [photographerPhotos, setPhotographerPhotos] = useState([]);
   const [photographerData, setPhotographerData] = useState([]);
   const [uploadedPhoto, setUploadedPhoto] = useState(false);
   const [newLocationName, setNewLocationName] = useState("");
@@ -101,7 +101,6 @@ export const BestPhotographerUpload = () => {
               </ul>
             </div>
           </div>
-
           <div className="row mb-3">
             <label
               htmlFor="password"
@@ -220,9 +219,17 @@ export const BestPhotographerUpload = () => {
         </div>
       )}
       <div>
-        {photographerphotos.map((photo) => (
+        {photographerPhotos.map((photo) => (
           <div key={photo.id}>
             <img src={photo.path} />
+            <br></br>
+            <button
+              onClick={() => {
+                actions.deletePhoto(photo.id);
+              }}
+            >
+              <span>Borrar foto</span>
+            </button>
           </div>
         ))}
       </div>

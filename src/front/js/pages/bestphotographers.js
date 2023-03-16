@@ -54,7 +54,7 @@ export const Bestphotographers = () => {
 
   const photographersData = photographers.map((obj) => ({
     user_name: obj.user_name,
-    location: obj.location_name + ", Spain",
+    location: obj.location_name,
     find_me_text: obj.find_me_text + ", Spain",
   }));
 

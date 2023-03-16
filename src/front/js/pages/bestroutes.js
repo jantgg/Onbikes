@@ -131,6 +131,14 @@ export const Bestroutes = () => {
               {store.userType == "User" || store.userType == "Photographer" ? (
                 <div>
                   <div className="text-white">
+                    <button
+                      onClick={() => {
+                        actions.deleteRoute(singleroute.id);
+                      }}
+                    >
+                      <span>Borrar ruta</span>
+                    </button>
+                    <br></br>
                     Quieres añadir mas fotos a esta ruta ?
                   </div>
                   <input

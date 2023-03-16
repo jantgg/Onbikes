@@ -26,7 +26,6 @@ export const Login = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(response);
       localStorage.setItem("token", data.token);
       localStorage.setItem("user_name", data.user_name);
       localStorage.setItem("email", email);

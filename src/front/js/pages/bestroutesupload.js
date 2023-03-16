@@ -229,7 +229,6 @@ export const Bestroutesupload = () => {
 
           {previewPhotos != null ? (
             <div className="row mt-3 mx-auto py-3">
-              {" "}
               <div className="mx-auto col-11 col-xxl-4 col-xl-4 col-lg-4 center-align sizehomet text-white mb-3">
                 Nuevas fotos
               </div>

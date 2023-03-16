@@ -126,7 +126,6 @@ def sync_user():
 
 
 
-
 #@@@------------------------------------------- ##### INITIALS GET ENDPOINTS ##### --------------------------------------------@@@>
 
 
@@ -144,6 +143,7 @@ def get_all_photographers():
     photographers = Photographer.query.all()
     photographers_serialized = [x.serialize() for x in photographers]
     return jsonify({"body": photographers_serialized}), 200
+
 
 # GET OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
 @api.route('/photographer', methods=['GET'])
@@ -176,6 +176,40 @@ def update_photographer():
     photographer.services = data.get('services', photographer.services)
     db.session.commit()
     return jsonify({"msg": "Photographer updated successfully"}), 200
+
+
+# DELETE OF USER ROUTE ----------------------------------------------------------------------------------------------------------->
+@api.route('/routes/<int:route_id>', methods=['DELETE'])
+@jwt_required()
+def delete_route(route_id):
+    route = Route.query.filter_by(id=route_id).first()
+    if not route:
+        return jsonify({'message': 'Route not found'}), 404
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    if user.id != route.user_id:
+        return jsonify({'message': 'You are not authorized to delete this route'}), 403
+    for photo in route.photos:
+        db.session.delete(photo)
+    db.session.delete(route)
+    db.session.commit()
+    return jsonify({'message': 'Route and associated photos deleted successfully'}), 200
+
+
+# DELETE OF PHOTOGRAPHER PHOTOS -------------------------------------------------------------------------------------------------->
+@api.route('/photos/<int:photo_id>', methods=['DELETE'])
+@jwt_required()
+def delete_photo(photo_id):
+    photo = Photo.query.filter_by(id=photo_id).first()
+    if not photo:
+        return jsonify({'message': 'Photo not found'}), 404
+    email = get_jwt_identity()
+    photographer = Photographer.query.filter_by(email=email).first()
+    if photographer.id != photo.photographer_id:
+        return jsonify({'message': 'You are not authorized to delete this photo'}), 403
+    db.session.delete(photo)
+    db.session.commit()
+    return jsonify({'message': 'Photo deleted successfully'}), 200
 
 
 # GET OF BIKES ------------------------------------------------------------------------------------------------------------------->
@@ -223,6 +257,8 @@ def get_all_routes():
         routes_serialized.append(route_serialized) 
     return jsonify({"body": routes_serialized}), 200
 
+
+# GET OF USER ROUTES ------------------------------------------------------------------------------------------------------------->
 @api.route('/userroutes', methods=['GET'])
 @jwt_required()
 def get_all_userroutes():
@@ -238,7 +274,6 @@ def get_all_userroutes():
         route_serialized['user_id'] = str(route.user_id)
         routes_serialized.append(route_serialized) 
     return jsonify({"body": routes_serialized}), 200
-
 
 
 # GET OF FAVORITES --------------------------------------------------------------------------------------------------------------->
@@ -299,11 +334,10 @@ def add_favorite():
         return jsonify({'error': 'Invalid favorite type'}), 400
     db.session.add(favorite_obj)
     db.session.commit()
-
     return jsonify({'message': f'{favorite_type.capitalize()} added to favorites'}), 201
 
-# DELETE DE FAVORITES -------------------------------------------------------------------------------------------------------->
 
+# DELETE DE FAVORITES -------------------------------------------------------------------------------------------------------->
 @api.route('/favorites', methods=['DELETE'])
 @jwt_required()
 def delete_favorite():
@@ -311,16 +345,13 @@ def delete_favorite():
     user = User.query.filter_by(email=user_email).first()
     if not user:
         return jsonify({'error': 'User not found'}), 404
-
     # Obtener los parámetros de la solicitud
     bike_id = request.json.get('bike_id')
     route_id = request.json.get('route_id')
     photographer_id = request.json.get('photographer_id')
-
     # Validar que al menos un parámetro esté presente
     if not bike_id and not route_id and not photographer_id:
         return jsonify({'error': 'At least one parameter like bike_id is required'}), 400
-
     # Eliminar los favoritos correspondientes al usuario y los parámetros de la solicitud
     favorites_query = Favorite.query.filter(Favorite.user_id == user.id)
     if bike_id:
@@ -330,11 +361,10 @@ def delete_favorite():
     if photographer_id:
         favorites_query = favorites_query.filter(Favorite.photographer_id == photographer_id)
     deleted_count = favorites_query.delete()
-
     db.session.commit()
-
     # Devolver el número de favoritos eliminados
     return jsonify({'message': f'{deleted_count} favorites deleted'}), 200
+
 
 # FILTER DE BIKES/ANSWERS -------------------------------------------------------------------------------------------------------->
 @api.route('/answers', methods=['POST'])

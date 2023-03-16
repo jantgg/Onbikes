@@ -23,7 +23,7 @@ function Map({ photographersData }) {
         const location = response.results[0].geometry.location;
         return {
           position: { lat: location.lat, lng: location.lng },
-          title: photographer.find_me_text,
+          title: photographer.user_name,
         };
       });
       const resolvedLocations = await Promise.all(promises);
