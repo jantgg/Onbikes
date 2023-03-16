@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "../../styles/sliderbueno.css";
+import "../../styles/modalimagen.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -12,6 +13,9 @@ const SliderPhotos = ({ data, groupSize }) => {
   const endIndex = startIndex + groupSize;
   const dataToRender = data.slice(startIndex, endIndex);
   const [isVisible, setIsVisible] = useState(true);
+
+  // MODAL FOTOS --------------------------------------------------------------------------------------------------------->
+  // const [mostrarModalFotos, setMostrarModalFotos] = useState(false);
 
   const handleNextClick = () => {
     setIsVisible(false);
@@ -55,13 +59,62 @@ const SliderPhotos = ({ data, groupSize }) => {
           }`}
         >
           {dataToRender.map((url) => (
-            <img
-              style={{ objectFit: "cover" }}
-              className="colpp mx-auto"
-              src={url}
-              alt="Preview"
-              key={url}
-            />
+            <>
+              {/* <div
+                key={url}
+                className="colpp mx-auto"
+                style={{
+                  backgroundImage: `url(${url})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  height: "20vw",
+                }}
+                alt="Preview"
+              >
+                <button
+                  onClick={(e) => {
+                    setMostrarModalFotos(true);
+                  }}
+                >
+                  {" "}
+                  aumentar
+                </button>
+              </div> */}
+              <img
+                style={{ objectFit: "cover" }}
+                className="colpp mx-auto"
+                src={url}
+                alt="Preview"
+                key={url}
+                // onClick={(e) => {
+                //   e.stopPropagation();
+                //   setMostrarModalFotos(true);
+                // }}
+              />
+              {/* {mostrarModalFotos && (
+                <div className="modalfotos">
+                  <div className="modal-contenidofotos">
+                    <div className="spartan sizehomet text-white ">
+                      <img
+                        style={{ objectFit: "cover" }}
+                        className="colpp mx-auto"
+                        src={url}
+                        alt="Preview"
+                        key={url}
+                      />
+                      <button
+                        className="botonaco"
+                        onClick={setMostrarModalFotos(false)}
+                      >
+                        {" "}
+                        <span>Cerrar</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )} */}
+            </>
           ))}
         </div>
 

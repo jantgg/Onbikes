@@ -29,8 +29,12 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="row fixedup mx-auto">
-      <nav className="col-11 navbar navbar-dark navbar-expand-lg bordecito mx-auto text-white sizehomet pt-2 spartan">
+    <div className="fixedup row">
+      <nav
+        className={`navbar navbar-dark navbar-expand-lg bordecito mx-auto text-white sizehomet pt-2 spartan ${
+          isDesktop ? " col-11" : " col-12"
+        }`}
+      >
         <div className="container-fluid ">
           <Link
             to="/"

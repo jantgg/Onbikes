@@ -103,7 +103,7 @@ const SilderRouteM = ({ data, groupSize }) => {
             }}
           >
             <div className="imagen">
-              <div className="free">
+              <div className="freeroute">
                 <div className="headcontent row bordecitoall bg-black">
                   <button
                     className={` sizehomet boton col-2 text-white${

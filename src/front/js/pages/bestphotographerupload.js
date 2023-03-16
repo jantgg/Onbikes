@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -8,6 +9,8 @@ import "../../styles/forall.css";
 import "../../styles/login.css";
 import "../../styles/inputcustom.css";
 import "../../styles/rolls.css";
+import "../../styles/loadingmodal.css";
+import "../../styles/spiner.css";
 
 export const BestPhotographerUpload = () => {
   const { store, actions } = useContext(Context);
@@ -88,6 +91,7 @@ export const BestPhotographerUpload = () => {
     });
     if (response.ok) {
       setUpdated(true);
+      location.reload();
     }
   };
 
@@ -102,10 +106,12 @@ export const BestPhotographerUpload = () => {
     setPreviewPhotos(urls);
     setVisible1(true);
   };
+  // MODAL LOADING --------------------------------------------------------------------------------------------------------->
+  const [mostrarModal, setMostrarModal] = useState(false);
 
   return (
     <>
-      <div className="row flex-column">
+      <div className=" flex-column">
         <div className="bordecitor col-8 mx-auto right-align sizehome text-white py-2 pe-2 spartan">
           {photographerData.user_name}
         </div>
@@ -139,10 +145,7 @@ export const BestPhotographerUpload = () => {
                 <div className="bordecitoc mx-auto "></div>
                 <div className=" col-8 mx-auto bordecitoall py-3">
                   {" "}
-                  <div className="mx-auto col-12 col-xxl-4 col-xl-4 col-lg-4 sizehomet text-white mb-3">
-                    Nuevas fotos
-                  </div>
-                  <div className="col-12 text-white center-align">
+                  <div className="col-12 text-white center-align py-5">
                     <input
                       onChange={inputPhotos}
                       type="file"
@@ -160,12 +163,38 @@ export const BestPhotographerUpload = () => {
                       className={` ${visible1 ? "showdown" : "hided"}`}
                     >
                       <div className="bordecitoc mx-auto"></div>
+                      <div className="bordecitot col-10 mx-auto"></div>
                       <SliderPhotos data={previewPhotos} groupSize={3} />
                     </div>
+                    {mostrarModal && (
+                      <div className="modal">
+                        <div className="modal-contenido">
+                          <div className="spartan sizehomet text-white ">
+                            Estamos subiendo tus fotos a la nube
+                            <br />
+                            <div className="lds-spinner mt-4">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     <button
                       className="botonaco px-3 py-1 sizehomet mt-4"
                       onClick={() => {
                         uploadPhoto();
+                        setMostrarModal(true);
                       }}
                     >
                       <span style={{ "--i": 1 }}>S</span>
@@ -186,6 +215,7 @@ export const BestPhotographerUpload = () => {
             </div>
           </>
         ) : (
+          // Versión movil ---------------------------------------------------------------------------------------->
           <>
             <div className="col-12 bordecitot bordecitob pb-4 center-align mx-auto imagenn">
               <div className="center-align col-11 sizehomemt mx-auto mt-4 mb-4 text-white spartan">
@@ -211,6 +241,77 @@ export const BestPhotographerUpload = () => {
                 <span style={{ "--i": 11 }}>o</span>
                 <span style={{ "--i": 12 }}>s</span>
               </button>
+              <div className={` ${wantAddPhotos ? "showdown" : "hided"}`}>
+                <div className="bordecitoc mx-auto "></div>
+                <div className=" col-12 mx-auto">
+                  {" "}
+                  <div className="col-12 text-white center-align">
+                    <input
+                      onChange={inputPhotos}
+                      type="file"
+                      accept="image/jpeg, image/png"
+                      multiple
+                      className="custom-file-input sizehomes"
+                    ></input>
+                  </div>
+                </div>
+                {previewPhotos != null ? (
+                  <>
+                    {" "}
+                    <div
+                      key="sliderupload"
+                      className={` ${visible1 ? "showdown" : "hided"}`}
+                    >
+                      <div className="bordecitoc mx-auto"></div>
+                      <div className="bordecitot col-10 mx-auto"></div>
+                      <SliderPhotosM data={previewPhotos} groupSize={1} />
+                    </div>
+                    {mostrarModal && (
+                      <div className="modalm">
+                        <div className="modal-contenido">
+                          <div className="spartan sizehomet text-white ">
+                            Estamos subiendo tus fotos a la nube
+                            <br />
+                            <div className="lds-spinner mt-4">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <button
+                      className="botonaco px-3 py-1 sizehomet mt-4"
+                      onClick={() => {
+                        uploadPhoto();
+                        setMostrarModal(true);
+                      }}
+                    >
+                      <span style={{ "--i": 1 }}>S</span>
+                      <span style={{ "--i": 2 }}>u</span>
+                      <span style={{ "--i": 3 }}>b</span>
+                      <span style={{ "--i": 4 }}>i</span>
+                      <span style={{ "--i": 5 }}>r</span>
+                      <span style={{ "--i": 6 }}>&nbsp;</span>
+                      <span style={{ "--i": 7 }}>f</span>
+                      <span style={{ "--i": 8 }}>o</span>
+                      <span style={{ "--i": 9 }}>t</span>
+                      <span style={{ "--i": 10 }}>o</span>
+                      <span style={{ "--i": 11 }}>s</span>
+                    </button>
+                  </>
+                ) : null}
+              </div>
             </div>
           </>
         )}
@@ -260,9 +361,7 @@ export const BestPhotographerUpload = () => {
             <span style={{ "--i": 17 }}>i</span>
             <span style={{ "--i": 18 }}>l</span>
           </button>
-          <div
-            className={` ${wantAddService ? "showdown active" : "showdown"}`}
-          >
+          <div className={` ${wantAddService ? "showdown" : "hided"}`}>
             <div className="bordecitoc mx-auto "></div>
             <div className="bordecitoc mx-auto "></div>
             <div

@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 
-const mapContainerStyle = {
-  height: "400px",
-  width: "800px",
-};
+const Map = ({ data }) => {
+  Geocode.setApiKey("AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4");
+  Geocode.setLanguage("es");
+  Geocode.setRegion("es");
+  const [markers, setMarkers] = useState([]);
+  const [routesCities, setRoutesCities] = useState([]);
 
-const center = {
-  lat: 40.41584347263048,
-  lng: -3.707348573835935,
-};
-
-function Map({ photographersData }) {
-  const [locations, setLocations] = useState([]);
-
+  useEffect(() => {
+    geocodeCities(data);
+    setCities();
+  }, [data]);
+  const setCities = () => {
+    setRoutesCities(data);
+  };
+  const getRandomOffset = () => {
+    const offset = Math.random() * 0.002;
+    return Math.random() > 0.5 ? offset : -offset;
+  };
 
   const geocodeCities = async (data) => {
     const results = [];
@@ -33,26 +38,74 @@ function Map({ photographersData }) {
             lng: getRandomOffset(),
           },
         };
-      });
-      const resolvedLocations = await Promise.all(promises);
-      setLocations(resolvedLocations);
-    };
-    getLocations();
-  }, [photographersData]);
+        results.push(newMarker);
+      }
+      console.log(results);
+      setMarkers(results);
+      return results;
+    } catch (error) {
+      console.error(`Error geocoding ${city}: ${error}`);
+    }
+  };
 
+  const mapContainerStyle = {
+    height: "400px",
+    width: "100%",
+  };
+
+  const center = {
+    lat: 40.4168,
+    lng: -3.7038,
+  };
+
+  const options = {
+    streetViewControl: false,
+  };
   return (
-    <LoadScript googleMapsApiKey={process.env.MAPS_KEY}>
-      <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={5}>
-        {locations.map((location, index) => (
-          <Marker
-            key={index}
-            position={location.position}
-            title={location.title}
-          />
-        ))}
+    <LoadScript googleMapsApiKey={"AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4"}>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={6}
+        options={options}
+      >
+        {markers.map((marker, index) => {
+          return (
+            <Marker
+              key={index}
+              position={{
+                lat: marker.position.lat + marker.offset.lat,
+                lng: marker.position.lng + marker.offset.lng,
+              }}
+              title={marker.name}
+              onClick={() => {
+                // Agrega aquí el código que deseas ejecutar cuando se haga clic en el marcador
+              }}
+            />
+          );
+        })}
       </GoogleMap>
     </LoadScript>
   );
-}
+};
 
 export default Map;
+
+<div className="">
+  Estamos subiendo tus fotos a la nube
+  <br />
+  <div className="lds-spinner mt-5">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>;

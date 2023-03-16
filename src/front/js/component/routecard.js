@@ -37,13 +37,13 @@ const Routecard = ({ route, index }) => {
       }}
     >
       <div className="imagen">
-        <div className="free">
+        <div className="freeroute">
           <div className="headcontent bordecitoall bg-black">
             <div className="sizehomet spartan text-center">{route.name}</div>
           </div>
         </div>
 
-        <div className="content bordecitot col-12 container d-flex flex-column justify-content-between">
+        <div className="contentroute bordecitot col-12 container d-flex flex-column justify-content-between">
           <div className="ms-3 sizehomes center-align">
             {route.interest_text}
           </div>
