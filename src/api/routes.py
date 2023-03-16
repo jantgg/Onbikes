@@ -136,12 +136,7 @@ def get_all_users():
     return jsonify({"body": users_serialized}), 200
 
 
-# GET OF PHOTOGRAPHERS ----------------------------------------------------------------------------------------------------------->
-@api.route('/photographers', methods=['GET'])
-def get_all_photographers():
-    photographers = Photographer.query.all()
-    photographers_serialized = [x.serialize() for x in photographers]
-    return jsonify({"body": photographers_serialized}), 200
+
 
 # GET OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
 @api.route('/photographer', methods=['GET'])
@@ -220,6 +215,18 @@ def get_all_routes():
         route_serialized['user_id'] = str(route.user_id)
         routes_serialized.append(route_serialized) 
     return jsonify({"body": routes_serialized}), 200
+
+# GET OF PHOTOGRAPHERS ----------------------------------------------------------------------------------------------------------->
+@api.route('/photographers', methods=['GET'])
+def get_all_photographers():
+    photographers = Photographer.query.all()
+    photographers_serialized = []
+    for photographer in photographers:
+        photographer_serialized = photographer.serialize()
+        photos = [photo.serialize() for photo in photographer.photos]
+        photographer_serialized['photos'] = photos
+        photographers_serialized.append(photographer_serialized) 
+    return jsonify({"body": photographers_serialized}), 200
 
 @api.route('/userroutes', methods=['GET'])
 @jwt_required()

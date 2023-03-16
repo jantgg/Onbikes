@@ -13,7 +13,8 @@ import "../../styles/login.css";
 export const Bestphotographers = () => {
   const { store, actions } = useContext(Context);
   const [photographers, setPhotographers] = useState([]);
-  const [photos, setPhotos] = useState([]);
+  const [photographerPhotos, setPhotographerPhotos] = useState([]);
+  const photos = photographerPhotos.map((obj) => obj.url);
   const [singlevision, setSinglevision] = useState(false);
   const [singlePhotographer, setSinglePhotographer] = useState({});
   const [visible1, setVisible1] = useState(false);
@@ -24,20 +25,31 @@ export const Bestphotographers = () => {
   }, []);
 
   useEffect(() => {
-    getPhotos();
+    getPhotos(singlePhotographer.id);
   }, [singlePhotographer]);
 
-  const getPhotographers = async () => {
-    await actions.getPhotographers();
-    setPhotographers(store.photographers);
+  const getPhotos = async (pid) => {
+    const selectedPhotographer = photographers.find(
+      (Photographer) => Photographer.id === pid
+    );
+    if (selectedPhotographer) {
+      setPhotographerPhotos(selectedPhotographer.photos);
+    }
   };
 
-  const getPhotos = async () => {
-    await actions.getPhotos();
-    setPhotos(
-      store.photos.filter((obj) => obj.name == singlePhotographer.email)
-    );
+  const getPhotographers = async () => {
+    const response = await fetch(store.backendurl + "photographers");
+    const data = await response.json();
+    const photographersWithPhotos = data.body.map((photographer) => ({
+      ...photographer,
+      photos: photographer.photos.map((photo) => ({
+        id: photo.id,
+        url: photo.path,
+      })),
+    }));
+    setPhotographers(photographersWithPhotos);
   };
+  //-------------------------------------------------------------------------------------->
 
   const AddFavoritePhotographer = async () => {
     const response = await fetch(store.backendurl + "favorite", {
@@ -47,7 +59,7 @@ export const Bestphotographers = () => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        favorite_id: singlephotographer.id,
+        favorite_id: singlePhotographer.id,
         favorite_type: "photographer",
       }),
     });
