@@ -25,6 +25,7 @@ export const Bestroutesupload = () => {
   useEffect(() => {
     getFavorites();
     getUserRoutes();
+    actions.setViewType();
   }, []);
 
   const getFavorites = async () => {

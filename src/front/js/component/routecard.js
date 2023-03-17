@@ -47,17 +47,42 @@ const Routecard = ({ route, index }) => {
           <div className="ms-3 sizehomes center-align">
             {route.interest_text}
           </div>
-          <div className="right-align mb-3 w100">
-            <button
-              key="button"
-              className="botonaco zup px-2 sizehomes center-align"
-              onClick={() => deleteFavoriteRoute()}
-            >
-              <span className="mx-auto center-align" style={{ "--i": 1 }}>
-                <i className="fa-solid fa-heart"></i>
-              </span>
-            </button>
-          </div>
+          {store.viewType == "delete" ? (
+            <div className="right-align mb-3 w100">
+              <button
+                key="button"
+                className="botonaco zup px-2 sizehomes center-align"
+                onClick={() => deleteFavoriteRoute()}
+              >
+                <span className="mx-auto center-align" style={{ "--i": 1 }}>
+                  <i className="fa-solid fa-heart"></i>
+                </span>
+              </button>
+            </div>
+          ) : store.userType === "User" &&
+            store.favorites.some((obj) => obj.name === singleroute.name) ? (
+            <div className="right-align mb-3 w100">
+              <button
+                className="botonaco zup px-2 sizehomes center-align"
+                onClick={() => {
+                  actions.deleteFavorite(null, singleroute.id, null);
+                }}
+              >
+                <span>DELETE</span>
+              </button>
+            </div>
+          ) : (
+            <div className="right-align mb-3 w100">
+              <button
+                className="botonaco zup px-2 sizehomes center-align"
+                onClick={() => {
+                  actions.addToFavorites(singleroute, "route");
+                }}
+              >
+                <span>♥</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

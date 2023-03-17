@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { object } from "prop-types";
 import { Context } from "../store/appContext";
 import SliderPhotos from "../component/sliderphotos.js";
 import "../../styles/forall.css";
@@ -9,6 +9,8 @@ export const Bestroutes = () => {
   const { store, actions } = useContext(Context);
   const [routes, setRoutes] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
+  const [currentFavorites, setCurrentFavorites] = useState([]);
+  const favorites = currentFavorites.map((obj) => obj.route);
   const [singleroute, setSingleRoute] = useState({});
   const [selectedRouteImages, setSelectedRouteImages] = useState([]);
   const routeImages = selectedRouteImages.map((obj) => obj.url);
@@ -20,7 +22,13 @@ export const Bestroutes = () => {
 
   useEffect(() => {
     getRoutes();
+    getFavs();
   }, []);
+
+  const getFavs = async () => {
+    const favoritesToSet = await actions.getFavorites();
+    setCurrentFavorites(store.favorites);
+  };
 
   useEffect(() => {
     getPhotos(singleroute.id);
@@ -53,24 +61,24 @@ export const Bestroutes = () => {
     setRoutes(routesWithPhotos);
   };
 
-  const addFavoriteRoute = async () => {
-    const response = await fetch(store.backendurl + "favorite", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        favorite_id: singleroute.id,
-        favorite_type: "route",
-      }),
-    });
-    if (response.ok) {
-      console.log("response ok");
-    } else {
-      console.log("response not ok");
-    }
-  };
+  // const addFavoriteRoute = async () => {
+  //   const response = await fetch(store.backendurl + "favorite", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("token"),
+  //     },
+  //     body: JSON.stringify({
+  //       favorite_id: singleroute.id,
+  //       favorite_type: "route",
+  //     }),
+  //   });
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setStore({ favorites: data.body });
+  //     actions.getFavorites();
+  //   }
+  // };
 
   const uploadSinglePhotos = async () => {
     const formData = new FormData();
@@ -165,11 +173,24 @@ export const Bestroutes = () => {
               <SliderPhotos data={routeImages} groupSize={3} />
             </div>
             <div>
-              {store.userType == "User" || store.userType == "Photographer" ? (
-                <button onClick={() => addFavoriteRoute()}>
+              {store.userType === "User" &&
+              favorites.some((obj) => obj.name === singleroute.name) ? (
+                <button
+                  onClick={() => {
+                    actions.deleteFavorite(null, singleroute.id, null);
+                  }}
+                >
+                  <span>DELETE</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    actions.addToFavorites(singleroute, "route");
+                  }}
+                >
                   <span>♥</span>
                 </button>
-              ) : null}
+              )}
             </div>
           </div>
         </>

@@ -341,8 +341,8 @@ def add_favorite():
 @api.route('/favorites', methods=['DELETE'])
 @jwt_required()
 def delete_favorite():
-    user_email = get_jwt_identity()
-    user = User.query.filter_by(email=user_email).first()
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
     if not user:
         return jsonify({'error': 'User not found'}), 404
     # Obtener los parámetros de la solicitud

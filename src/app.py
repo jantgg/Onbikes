@@ -14,6 +14,7 @@ from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
+from datetime import timedelta
 import cloudinary
 #from models import Person
 
@@ -21,6 +22,7 @@ ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_KEY")
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=1)
 jwt = JWTManager(app)
 app.url_map.strict_slashes = False
 

@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       userType: null,
+      viewType: null,
       backendurl:
         "https://3001-jantgg-proyectofinaljan-ja286yclfmv.ws-eu90.gitpod.io/api/",
       questions: [],
@@ -13,6 +14,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       favorites: [],
     },
     actions: {
+      setViewType: async () => {
+        setStore({ viewType: "delete" });
+      },
+      resetViewType: async () => {
+        setStore({ viewType: null });
+      },
       getQuestions: async () => {
         const response = await fetch(getStore().backendurl + "questions");
         const data = await response.json();
@@ -53,6 +60,41 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json();
           setStore({ favorites: data.body });
+        }
+      },
+      addToFavorites: async (obj, type) => {
+        const response = await fetch(getStore().backendurl + "favorite", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify({
+            favorite_id: obj.id,
+            favorite_type: type,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setStore({ favorites: data.body });
+        }
+      },
+      deleteFavorite: async (bike_id, route_id, photographer_id) => {
+        const response = await fetch(getStore().backendurl + "favorites", {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bike_id: bike_id,
+            route_id: route_id,
+            photographer_id: photographer_id,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setStore({ favorites: data.message });
         }
       },
       deleteRoute: async (routeId) => {
