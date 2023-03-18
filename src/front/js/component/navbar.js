@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import "../../styles/navbar.css";
 import "../../styles/forall.css";
 import { Context } from "../store/appContext";
 
@@ -29,13 +30,13 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="fixedup row">
+    <div className=" ">
       <nav
-        className={`navbar navbar-dark navbar-expand-lg bordecito mx-auto text-white sizehomet pt-2 spartan ${
-          isDesktop ? " col-11" : " col-12"
+        className={`navbar navbar-dark mynav mnav navbar-expand-lg  bordecito mx-auto text-white sizehomet spartan ${
+          isDesktop ? " col-12" : " col-12"
         }`}
       >
-        <div className="container-fluid ">
+        <div className="container-fluid col-11 ">
           <Link
             to="/"
             className={`${

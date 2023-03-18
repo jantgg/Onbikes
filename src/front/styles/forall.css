@@ -9,7 +9,17 @@
 
 /*FONTS*/
 body {
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679056094/fondolistopapele_ecsvnw.jpg");
+  background-size: 100% 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+body {
   font-family: "Roboto Mono", monospace;
+  background-color: none;
 }
 .archivo {
   font-family: "Archivo+Black", sans-serif;
@@ -112,6 +122,9 @@ body {
   .sizehomes {
     font-size: 1vw;
   }
+  .sizehome3 {
+    font-size: 3vw;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -135,6 +148,9 @@ body {
   }
   .sizehomes {
     font-size: 3vw;
+  }
+  .sizehome3 {
+    font-size: 4vw;
   }
 }
 

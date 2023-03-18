@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "../../styles/login.css";
 import "../../styles/forall.css";
+import "../../styles/forall.css";
 
 export const Footer = () => {
   const isDesktop = window.innerWidth >= 1000;
   return (
     <footer
-      className={`bordecitoup text-center mx-auto text-white mt-10${
-        isDesktop ? " col-11" : " col-12"
+      className={`bordecitot text-center myfoot mx-auto text-white mt-10${
+        isDesktop ? " col-12" : " col-12"
       }`}
-      style={{ backgroundColor: "#070707" }}
     >
       <div className="container p-4">
         <section className="mb-4">
