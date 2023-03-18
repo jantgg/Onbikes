@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { PhotographerSlider } from "../component/photographerslider";
-import SliderPhotos from "../component/sliderphotos.js";
-import SliderPhotosM from "../component/sliderphotom.js";
 import NewSlider from "../component/newslider.js";
-import Map from "../component/mapmarker.js";
 import "../../styles/forall.css";
 import "../../styles/login.css";
 
@@ -23,13 +18,10 @@ export const Bestphotographers = () => {
   const [showDivs, setShowDivs] = useState(false);
 
   useEffect(() => {
+    getPhotographers();
     setTimeout(() => {
       setShowDivs(true);
     }, 150);
-  }, []);
-
-  useEffect(() => {
-    getPhotographers();
   }, []);
 
   useEffect(() => {
@@ -78,11 +70,11 @@ export const Bestphotographers = () => {
     }
   };
 
-  const photographersData = photographers.map((obj) => ({
-    user_name: obj.user_name,
-    location: obj.location_name + ", Spain",
-    find_me_text: obj.find_me_text + ", Spain",
-  }));
+  // const photographersData = photographers.map((obj) => ({
+  //   user_name: obj.user_name,
+  //   location: obj.location_name + ", Spain",
+  //   find_me_text: obj.find_me_text + ", Spain",
+  // }));
 
   //Codigo de Maps ------------------------------------------------------------------------------------------------------------------>
   Geocode.setApiKey("AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4");
@@ -133,7 +125,7 @@ export const Bestphotographers = () => {
   };
 
   const mapContainerStyle = {
-    height: "12vw",
+    height: isDesktop ? "12vw" : "40vw",
     width: "100%",
   };
 
@@ -233,31 +225,31 @@ export const Bestphotographers = () => {
         ) : (
           // Versión movil ---------------------------------------------------------------------------------------->
           <>
-            <div className="col-12 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall p-5 center-align imagenn">
-              <div className="col-12 bordecitot bordecitob pb-4 center-align mx-auto imagenn">
-                <div className="center-align col-11 sizehomemt mx-auto mt-4 mb-4 text-white spartan">
-                  Fotos del Fotógrafo
-                </div>{" "}
-                <SliderPhotosM data={photos} groupSize={1} />
-              </div>
+            <div className="freehome"></div>
+            <div className="col-11 row mx-auto imagenn ">
               <div
-                className="center-align col-9 bordecitoall mx-auto my-3 p-3 text-white"
+                className="col-12 px-0 center-align"
                 style={{ backgroundColor: "black" }}
               >
-                <div className="center-align  sizehomet mx-auto bordecitob text-white spartan">
-                  Información de {singlePhotographer.user_name}
+                <NewSlider data={photos} groupSize={1} />
+              </div>
+              <div className=" col-12 bordecitoe bordecitol bordecitob mx-auto px-4 text-white">
+                <div className="float-right sizehomeq text-white spartan ps-3 py-2">
+                  {singlePhotographer.user_name}
                 </div>
-                <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
-                  Provincia: {singlePhotographer.location_name}
+                <div className="sizehomes mx-auto mb-4 text-white">
+                  Descripción: {singlePhotographer.services}
                 </div>
-                <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
-                  Instagram: {singlePhotographer.instagram}
+
+                <div className="sizehomes mx-auto mb-2 text-white">
+                  <i class="fa-brands fa-instagram"></i>&nbsp;{" "}
+                  {singlePhotographer.instagram}
                 </div>
-                <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
-                  Servicio: {singlePhotographer.services}
-                </div>
-                <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
-                  Lugar de trabajo: {singlePhotographer.find_me_text}
+
+                <div className="sizehomes mx-auto text-white">
+                  <i class="fa-solid fa-location-dot"></i> &nbsp;
+                  {singlePhotographer.find_me_text},&nbsp;{" "}
+                  {singlePhotographer.location_name}
                 </div>
               </div>
               {store.userType == "User" || store.userType == "Photographer" ? (

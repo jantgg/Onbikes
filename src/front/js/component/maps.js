@@ -13,12 +13,11 @@ function Maps(props) {
     destination: props.destination,
     travelMode: "DRIVING",
   });
-
+  const isDesktop = window.innerWidth >= 1000;
   const containerStyle = {
-    width: "800px",
-    height: "400px",
+    height: isDesktop ? "12vw" : "40vw",
+    width: "100%",
   };
-
   const center = {
     lat: 40.41584347263048,
     lng: -3.707348573835935,

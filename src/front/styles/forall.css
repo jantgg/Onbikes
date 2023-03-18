@@ -40,7 +40,9 @@ body {
 body {
   background-color: #070707;
 }
-
+.z-1 {
+  z-index: -1;
+}
 /*Predefined Heights*/
 .heightborder {
   height: 7vw;
@@ -107,6 +109,11 @@ body {
   opacity: 0;
   visibility: hidden;
 }
+.movidas {
+  display: flex; /* Establece el div padre como un contenedor flexbox */
+  flex-direction: column; /* Establece la dirección de los elementos como columnas (eje vertical) */
+  justify-content: space-between;
+}
 
 /* FONT SIZE THRU MEDIA VIEWPORT */
 @media (min-width: 1000px) {
@@ -165,7 +172,7 @@ body {
     font-size: 4vw;
   }
   .sizehomed {
-    font-size: 1.6vw;
+    font-size: 6vw;
   }
 }
 
@@ -338,4 +345,24 @@ body {
 
 .w100 {
   width: 100%;
+}
+
+.imagenasfalto {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172345/muyoscuro_fd8osa.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.imagenmalla {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172963/mallanueva_m2e13d.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
