@@ -12,9 +12,6 @@
   position: relative;
 }
 
-.mt-10 {
-  margin-top: 10rem !important;
-}
 .login-box .user-box input {
   width: 100%;
   padding: 10px 0;

@@ -8,6 +8,12 @@
 } */
 
 /*FONTS*/
+.minheight {
+  min-height: 120vh;
+}
+.mt-10 {
+  margin-top: 10rem !important;
+}
 body {
   background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679056094/fondolistopapele_ecsvnw.jpg");
   background-size: 100% 100%;
@@ -93,6 +99,9 @@ body {
 .bordecitot {
   border-top: 1px solid white;
 }
+.bordecitoe {
+  border-right: 1px solid white;
+}
 /*TRANSITIONS*/
 .revealUp {
   opacity: 0;
@@ -125,6 +134,9 @@ body {
   .sizehome3 {
     font-size: 3vw;
   }
+  .sizehomed {
+    font-size: 1.6vw;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -151,6 +163,9 @@ body {
   }
   .sizehome3 {
     font-size: 4vw;
+  }
+  .sizehomed {
+    font-size: 1.6vw;
   }
 }
 
@@ -305,7 +320,9 @@ body {
 .glow {
   position: relative;
 }
-
+.freehome {
+  height: 3vw;
+}
 .glow::after {
   content: "";
   position: absolute;

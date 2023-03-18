@@ -3,37 +3,6 @@
   margin-bottom: 10vh;
 }
 
-.slide-in {
-  animation: slide-in 0.5s ease-out;
-  position: relative;
-  transition: transform 0.5s;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateY(-400%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-.slide-left {
-  transform: translateX(100%);
-}
-
-.hidden {
-  opacity: 0;
-}
-.borderhome {
-  margin-top: -100vw;
-  height: 108vw;
-  z-index: -1;
-}
-.freehome {
-  height: 3vw;
-}
-
 .imagen1 {
   position: relative;
   overflow: hidden;
@@ -45,7 +14,8 @@
 
 .imagen1:hover {
   box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
-  transform: scale(1.2) perspective(1000px) rotatey(3deg) rotateX(-3deg);
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(3deg)
+    rotateX(-3deg);
 }
 
 .imagen1::before {
@@ -83,7 +53,8 @@
 
 .imagen2:hover {
   box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
-  transform: scale(1.2) perspective(1000px) rotatey(-3deg) rotateX(1deg);
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(-3deg)
+    rotateX(0.5deg);
 }
 .imagen2::before {
   content: "";
@@ -122,7 +93,8 @@
 
 .imagen3:hover {
   box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
-  transform: scale(1.2) perspective(1000px) rotatey(3deg) rotateX(3deg);
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(3deg)
+    rotateX(3deg);
 }
 
 .imagen3::before {

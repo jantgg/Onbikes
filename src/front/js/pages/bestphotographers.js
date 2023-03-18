@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 import { PhotographerSlider } from "../component/photographerslider";
 import SliderPhotos from "../component/sliderphotos.js";
 import SliderPhotosM from "../component/sliderphotom.js";
+import NewSlider from "../component/newslider.js";
 import Map from "../component/mapmarker.js";
 import "../../styles/forall.css";
 import "../../styles/login.css";
@@ -19,6 +20,13 @@ export const Bestphotographers = () => {
   const [singlePhotographer, setSinglePhotographer] = useState({});
   const [visible1, setVisible1] = useState(false);
   const isDesktop = window.innerWidth >= 1000;
+  const [showDivs, setShowDivs] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowDivs(true);
+    }, 150);
+  }, []);
 
   useEffect(() => {
     getPhotographers();
@@ -125,12 +133,12 @@ export const Bestphotographers = () => {
   };
 
   const mapContainerStyle = {
-    height: "25vw",
+    height: "12vw",
     width: "100%",
   };
 
   const center = {
-    lat: 40.4168,
+    lat: 40.0168,
     lng: -3.7038,
   };
 
@@ -140,94 +148,126 @@ export const Bestphotographers = () => {
   //Codigo de Maps --------------------------------------------------------------------------------------------------------------->
 
   return (
-    <div className="flex-column">
-      <div className="bordecitol col-9 mx-auto  sizehomeq text-white py-3 ps-3 spartan">
-        Los mejores Fotógrafos de nuestro pais
-      </div>
-
-      <div className="col-10 mx-auto bordecitoall imagenn center-align p-2  ">
-        <LoadScript
-          googleMapsApiKey={"AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4"}
-        >
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={center}
-            zoom={6}
-            options={options}
-          >
-            {markers.map((marker, index) => {
-              return (
-                <Marker
-                  key={index}
-                  position={{
-                    lat: marker.position.lat + marker.offset.lat,
-                    lng: marker.position.lng + marker.offset.lng,
-                  }}
-                  title={marker.name}
-                  onClick={() => {
-                    setSinglevision(true);
-                    setSinglePhotographer(photographers[index]);
-                    setVisible1(true);
-                  }}
-                />
-              );
-            })}
-          </GoogleMap>
-        </LoadScript>
-      </div>
-      <div className={`${visible1 ? "showdown" : "hided"}`}>
-        {" "}
-        <div className="bordecitor col-6 mx-auto right-align sizehome text-white py-2 pe-2 spartan">
-          {singlePhotographer.user_name}
+    <div className="d-flex flex-column minheight">
+      <div
+        className={`col-8 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall mt-10 imagenn center-align  ${
+          showDivs ? "slide-in" : "hidden"
+        }`}
+      >
+        <div className="col-12 mx-auto bordecitob sizehomet text-white py-3 ps-3 spartan">
+          Los mejores Fotógrafos de nuestro pais
         </div>
+        <div className="col-12 mx-auto ">
+          {" "}
+          <LoadScript
+            googleMapsApiKey={"AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4"}
+          >
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={center}
+              zoom={5.3}
+              options={options}
+            >
+              {markers.map((marker, index) => {
+                return (
+                  <Marker
+                    key={index}
+                    position={{
+                      lat: marker.position.lat + marker.offset.lat,
+                      lng: marker.position.lng + marker.offset.lng,
+                    }}
+                    title={marker.name}
+                    onClick={() => {
+                      setSinglevision(false);
+                      setVisible1(false);
+                      setTimeout(() => {
+                        setSinglevision(true);
+                        setSinglePhotographer(photographers[index]);
+                        setVisible1(true);
+                      }, 0);
+                    }}
+                  />
+                );
+              })}
+            </GoogleMap>
+          </LoadScript>
+        </div>
+      </div>
+      <div className={`${visible1 ? "slide-in-elliptic-top-fwd" : "hidden"}`}>
         {isDesktop ? (
           <>
-            <div className="col-9 mx-auto bordecitoall center-align pb-4 imagenn">
-              <div className="center-align col-12 col-xxl-5 col-xl-6 col-lg-7 sizehomet mx-auto mb-3 text-white spartan">
-                Fotos del Fotógrafo
-              </div>{" "}
-              <SliderPhotos data={photos} groupSize={3} />
+            <div className="freehome"></div>
+            <div className="col-10 col-xxl-6 col-xl-7 col-lg-8 row mx-auto imagenn tarjeta">
+              <div
+                className="col-6 px-0 center-align"
+                style={{ backgroundColor: "black" }}
+              >
+                <NewSlider data={photos} groupSize={1} />
+              </div>
+              <div className=" col-6 bordecitoe bordecitot bordecitob mx-auto px-4 text-white">
+                <div className="float-right sizehomeq text-white spartan ps-3 py-2">
+                  {singlePhotographer.user_name}
+                </div>
+                <div className="sizehomes mx-auto mb-4 text-white">
+                  Descripción: {singlePhotographer.services}
+                </div>
+
+                <div className="sizehomes mx-auto mb-2 text-white">
+                  <i class="fa-brands fa-instagram"></i>&nbsp;{" "}
+                  {singlePhotographer.instagram}
+                </div>
+
+                <div className="sizehomes mx-auto text-white">
+                  <i class="fa-solid fa-location-dot"></i> &nbsp;
+                  {singlePhotographer.find_me_text},&nbsp;{" "}
+                  {singlePhotographer.location_name}
+                </div>
+              </div>
+              {store.userType == "User" || store.userType == "Photographer" ? (
+                <button onClick={() => AddFavoritePhotographer()}>
+                  <span>♥</span>
+                </button>
+              ) : null}
             </div>
           </>
         ) : (
           // Versión movil ---------------------------------------------------------------------------------------->
           <>
-            <div className="col-12 bordecitot bordecitob pb-4 center-align mx-auto imagenn">
-              <div className="center-align col-11 sizehomemt mx-auto mt-4 mb-4 text-white spartan">
-                Fotos del Fotógrafo
-              </div>{" "}
-              <SliderPhotosM data={photos} groupSize={1} />
+            <div className="col-12 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall p-5 center-align imagenn">
+              <div className="col-12 bordecitot bordecitob pb-4 center-align mx-auto imagenn">
+                <div className="center-align col-11 sizehomemt mx-auto mt-4 mb-4 text-white spartan">
+                  Fotos del Fotógrafo
+                </div>{" "}
+                <SliderPhotosM data={photos} groupSize={1} />
+              </div>
+              <div
+                className="center-align col-9 bordecitoall mx-auto my-3 p-3 text-white"
+                style={{ backgroundColor: "black" }}
+              >
+                <div className="center-align  sizehomet mx-auto bordecitob text-white spartan">
+                  Información de {singlePhotographer.user_name}
+                </div>
+                <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
+                  Provincia: {singlePhotographer.location_name}
+                </div>
+                <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
+                  Instagram: {singlePhotographer.instagram}
+                </div>
+                <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
+                  Servicio: {singlePhotographer.services}
+                </div>
+                <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
+                  Lugar de trabajo: {singlePhotographer.find_me_text}
+                </div>
+              </div>
+              {store.userType == "User" || store.userType == "Photographer" ? (
+                <button onClick={() => AddFavoritePhotographer()}>
+                  <span>♥</span>
+                </button>
+              ) : null}
             </div>
           </>
         )}
-        <div className="bordecitol heightborders col-9 col-xxl-4 col-xl-4 col-lg-5  mx-auto  "></div>
-        <div className="col-12 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall p-5 center-align imagenn">
-          <div
-            className="center-align col-9 bordecitoall mx-auto my-3 p-3 text-white"
-            style={{ backgroundColor: "black" }}
-          >
-            <div className="center-align  sizehomet mx-auto bordecitob text-white spartan">
-              Información de {singlePhotographer.user_name}
-            </div>
-            <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
-              Provincia: {singlePhotographer.location_name}
-            </div>
-            <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
-              Instagram: {singlePhotographer.instagram}
-            </div>
-            <div className="center-align sizehomes mx-auto mt-4 mb-4 text-white">
-              Servicio: {singlePhotographer.services}
-            </div>
-            <div className="center-align  sizehomes mx-auto mt-4 mb-4 text-white">
-              Lugar de trabajo: {singlePhotographer.find_me_text}
-            </div>
-          </div>
-          {store.userType == "User" || store.userType == "Photographer" ? (
-            <button onClick={() => AddFavoritePhotographer()}>
-              <span>♥</span>
-            </button>
-          ) : null}
-        </div>
       </div>
     </div>
   );

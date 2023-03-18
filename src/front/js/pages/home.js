@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import "../../styles/forall.css";
+import "../../styles/animations.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
@@ -16,12 +17,6 @@ export const Home = () => {
   const [showDivs2, setShowDivs2] = useState(false);
   const [showDivs3, setShowDivs3] = useState(false);
   const [moveOut, setMoveOut] = useState(false);
-
-  const showOff = () => {
-    setShowDivs(false);
-    setShowDivs(false);
-    setShowDivs(false);
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -68,7 +63,7 @@ export const Home = () => {
         <div className="d-flex flex-column homeheight">
           {/* <div className="freehome"></div> */}
           <div
-            className={`col-12 row mt-10  ${
+            className={`col-12 row mt-10 ${moveOut ? "slide-left " : ""} ${
               showDivs3 ? "slide-in " : "hidden"
             }`}
           >
@@ -89,8 +84,10 @@ export const Home = () => {
                       isDesktop ? "" : "w100"
                     }`}
                     onClick={() => {
-                      Navigate("/test");
-                      showOff();
+                      setMoveOut(true);
+                      setTimeout(() => {
+                        Navigate("/test");
+                      }, 500);
                     }}
                   >
                     {" "}
@@ -114,7 +111,11 @@ export const Home = () => {
             <div className="col-5"></div>
           </div>
           <div className="freehome"></div>
-          <div className={`col-12 row ${showDivs2 ? "slide-in" : " hidden"}`}>
+          <div
+            className={`col-12 row ${moveOut ? "slide-right " : ""} ${
+              showDivs2 ? "slide-in" : " hidden"
+            }`}
+          >
             <div className="col-6"></div>
             <div className="col-5 imagen2 mx-auto bordecitoall ">
               <div className="col-12  text-white sizehome3 mx-auto text-center mt-3 spartan">
@@ -127,11 +128,14 @@ export const Home = () => {
 
               <div className="mx-auto center-align">
                 <button
-                  className={`botonaco mx-auto py-2 px-3 mt-2 mb-5 sizehomes ${
+                  className={`botonaco mx-auto py-2 px-3 mt-2 mb-5 sizehomes  ${
                     isDesktop ? "" : "w100"
                   }`}
                   onClick={() => {
-                    Navigate("/bestroutes");
+                    setMoveOut(true);
+                    setTimeout(() => {
+                      Navigate("/bestroutes");
+                    }, 500);
                   }}
                 >
                   <span style={{ "--i": 1 }}>V</span>
@@ -153,7 +157,11 @@ export const Home = () => {
             <div className="col-1"></div>
           </div>
           <div className="freehome"></div>
-          <div className={`col-12 row ${showDivs ? "slide-in " : "hidden"}`}>
+          <div
+            className={`col-12 row ${moveOut ? "slide-left " : ""} ${
+              showDivs ? "slide-in " : "hidden"
+            }`}
+          >
             <div className="col-2"></div>
             <div className="col-6 imagen3 mx-auto pb-2 bordecitoall ">
               <div className="col-12 text-white sizehome3 mx-auto text-center mt-3 spartan">
@@ -171,7 +179,10 @@ export const Home = () => {
                     isDesktop ? "" : "w100"
                   }`}
                   onClick={() => {
-                    Navigate("/bestphotographers");
+                    setMoveOut(true);
+                    setTimeout(() => {
+                      Navigate("/bestphotographers");
+                    }, 500);
                   }}
                 >
                   <span style={{ "--i": 1 }}>V</span>
