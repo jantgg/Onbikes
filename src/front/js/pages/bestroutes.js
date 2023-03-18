@@ -10,7 +10,6 @@ export const Bestroutes = () => {
   const [routes, setRoutes] = useState([]);
   const [singlevision, setSinglevision] = useState(false);
   const [currentFavorites, setCurrentFavorites] = useState([]);
-  const favorites = currentFavorites.map((obj) => obj.route);
   const [singleroute, setSingleRoute] = useState({});
   const [selectedRouteImages, setSelectedRouteImages] = useState([]);
   const routeImages = selectedRouteImages.map((obj) => obj.url);
@@ -23,6 +22,8 @@ export const Bestroutes = () => {
   useEffect(() => {
     getRoutes();
     getFavs();
+    //actions.setViewType();
+    actions.resetViewType();
   }, []);
 
   const getFavs = async () => {
@@ -176,19 +177,32 @@ export const Bestroutes = () => {
               <SliderPhotos data={routeImages} groupSize={3} />
             </div>
             <div>
-              {store.userType === "User" &&
-              favorites.some((obj) => obj.name === singleroute.name) ? (
+              {store.viewType == true ? (
                 <button
                   onClick={() => {
-                    actions.deleteFavorite(null, singleroute.id, null);
+                    actions.deleteRoute(singleroute.id);
                   }}
                 >
-                  <span>DELETE</span>
+                  <span>DELETE ROUTE</span>
                 </button>
+              ) : currentFavorites.some(
+                  (obj) => obj.route.name === singleroute.name
+                ) ? (
+                <div>
+                  <button
+                    onClick={async () => {
+                      await actions.deleteFavorite(null, singleroute.id, null);
+                      await getFavs();
+                    }}
+                  >
+                    <span>DELETE FAVORITE</span>
+                  </button>
+                </div>
               ) : (
                 <button
-                  onClick={() => {
-                    actions.addToFavorites(singleroute, "route");
+                  onClick={async () => {
+                    await actions.addToFavorites(singleroute, "route");
+                    await getFavs();
                   }}
                 >
                   <span>♥</span>

@@ -11,7 +11,6 @@ def setup_admin(app):
 
     class MyModel(ModelView):
         column_display_pk = True
-  
 
     class MyQuestionModel(MyModel):
         form_columns = ('id', 'question', 'notes', 'answers')

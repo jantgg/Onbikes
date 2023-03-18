@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       userType: null,
-      viewType: null,
+      viewType: false,
       backendurl:
         "https://3001-jantgg-proyectofinaljan-ja286yclfmv.ws-eu90.gitpod.io/api/",
       questions: [],
@@ -15,10 +15,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       setViewType: async () => {
-        setStore({ viewType: "delete" });
+        setStore({ viewType: true });
       },
       resetViewType: async () => {
-        setStore({ viewType: null });
+        setStore({ viewType: false });
       },
       getQuestions: async () => {
         const response = await fetch(getStore().backendurl + "questions");
