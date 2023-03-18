@@ -8,6 +8,21 @@
   letter-spacing: 1px;
 }
 
+.margin-login {
+  transform: translateX(-15%);
+  background-color: #070707;
+  z-index: 1;
+}
+
+.video-login {
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* .video-position {
+  transform: translateY(-40%), translateX(-10%);
+} */
+
 .login-box .user-box {
   position: relative;
 }
