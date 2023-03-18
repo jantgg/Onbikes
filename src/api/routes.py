@@ -401,7 +401,7 @@ def upload_photo():
             upload_result = cloudinary.uploader.upload(photo, secure=True)
             new_photos.append(Photo(
                 name=secure_filename(photo.filename),
-                path=upload_result['url'],
+                path=upload_result['secure_url'],
                 route_id=single_photo_route_id,
                 photo_type=photo_type))
             for photo in new_photos:
@@ -425,7 +425,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     route_id=route_id,
                     photo_type=photo_type))
         elif photo_type == 'photographer':
@@ -433,7 +433,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     photographer_id=photographer.id,
                     photo_type=photo_type,))
         elif photo_type == 'bike':
@@ -441,7 +441,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     bike_id=type_id,
                     photo_type=photo_type))
         else:

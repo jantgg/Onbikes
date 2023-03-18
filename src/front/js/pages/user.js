@@ -32,9 +32,11 @@ export const User = () => {
 
   const getPhotos = async () => {
     await actions.getPhotos();
-    setPPhoto(
-      store.photos.filter((obj) => obj.name == currentPhotographer.email)
-    );
+    if (currentPhotographer) {
+      setPPhoto(
+        store.photos.filter((obj) => obj.name == currentPhotographer.email)
+      );
+    }
   };
 
   const getCurrentPhotographer = async () => {

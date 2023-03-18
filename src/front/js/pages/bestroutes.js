@@ -90,6 +90,9 @@ export const Bestroutes = () => {
     formData.append("route_id", singleroute.id);
     const response = await fetch(store.backendurl + "photos", {
       method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
       body: formData,
     });
     if (response.ok) {
