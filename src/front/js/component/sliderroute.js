@@ -41,7 +41,7 @@ const SliderRoute = ({ data, groupSize }) => {
       }`}
     >
       <button
-        className={` sizehomet sliderbtn text-white${
+        className={` sizehomet sliderbuenob sliderbtn text-white${
           startIndex === 0 ? " opa0" : " opa1"
         }`}
         onClick={handlePrevClick}
@@ -60,7 +60,7 @@ const SliderRoute = ({ data, groupSize }) => {
       </div>
 
       <button
-        className={` sizehomet sliderbtn text-white${
+        className={` sizehomet sliderbuenob sliderbtn text-white${
           endIndex >= data.length ? " opa0" : " opa1"
         }`}
         onClick={handleNextClick}

@@ -146,7 +146,7 @@ export const Bestphotographers = () => {
           showDivs ? "slide-in" : "hidden"
         }`}
       >
-        <div className="col-12 mx-auto bordecitob sizehomet text-white py-3 ps-3 spartan">
+        <div className="col-12 mx-auto bordecitob sizehomet text-white py-3 ps-3 spartan imagenmalla">
           Los mejores Fotógrafos de nuestro pais
         </div>
         <div className="col-12 mx-auto ">
@@ -215,11 +215,6 @@ export const Bestphotographers = () => {
                   {singlePhotographer.location_name}
                 </div>
               </div>
-              {store.userType == "User" || store.userType == "Photographer" ? (
-                <button onClick={() => AddFavoritePhotographer()}>
-                  <span>♥</span>
-                </button>
-              ) : null}
             </div>
           </>
         ) : (

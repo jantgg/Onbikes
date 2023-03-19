@@ -6,21 +6,20 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-function Maps(data) {
+function MapsDany(props) {
   const [response, setResponse] = useState(null);
-  const route = data.route;
+  const isDesktop = window.innerWidth >= 1000;
   const [directionsOptions, setDirectionsOptions] = useState({
-    origin: route.start_location_name,
-    destination: route.end_location_name,
+    origin: props.origin,
+    destination: props.destination,
     travelMode: "DRIVING",
   });
-  console.log(route);
 
-  const isDesktop = window.innerWidth >= 1000;
   const containerStyle = {
-    height: "100%",
+    height: isDesktop ? "12vw" : "40vw",
     width: "100%",
   };
+
   const center = {
     lat: 40.41584347263048,
     lng: -3.707348573835935,
@@ -31,16 +30,15 @@ function Maps(data) {
       setResponse(res);
     }
   };
-  console.log(route);
 
   useEffect(() => {
     setResponse(null);
     setDirectionsOptions({
-      origin: route.start_location_name + ", Spain",
-      destination: route.end_location_name + ", Spain",
+      origin: props.origin + ", Spain",
+      destination: props.destination + ", Spain",
       travelMode: "DRIVING",
     });
-  }, [route]);
+  }, [props.origin, props.destination]);
 
   return (
     <LoadScript googleMapsApiKey={process.env.MAPS_KEY}>
@@ -61,4 +59,4 @@ function Maps(data) {
   );
 }
 
-export default Maps;
+export default MapsDany;

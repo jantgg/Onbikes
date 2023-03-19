@@ -11,8 +11,30 @@ const getState = ({ getStore, getActions, setStore }) => {
       photos: [],
       bikes: [],
       favorites: [],
+      singleViewRoute: null,
+      singleViewRoutePhotos: null,
+      visibleRoute: false,
+      singleViewPhotog: null,
+      singleViewPhotogPhotos: null,
+      visiblePhotog: false,
     },
     actions: {
+      setSingleViewRoute: (route) => {
+        setStore({ singleViewRoute: route });
+        const photos = route.photos.map((obj) => obj.path);
+        setStore({ singleViewRoutePhotos: photos });
+      },
+      setVisibleRoute: (v) => {
+        setStore({ visibleRoute: v });
+      },
+      setSingleViewPhotog: (photog) => {
+        setStore({ singleViewPhotog: photog });
+        const photos = photog.photos.map((obj) => obj.path);
+        setStore({ singleViewPhotogPhotos: photos });
+      },
+      setVisiblePhotog: (v) => {
+        setStore({ visiblePhotog: v });
+      },
       getQuestions: async () => {
         const response = await fetch(getStore().backendurl + "questions");
         const data = await response.json();
@@ -53,6 +75,59 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           const data = await response.json();
           setStore({ favorites: data.body });
+        }
+      },
+      addToFavorites: async (obj, type) => {
+        const response = await fetch(getStore().backendurl + "favorite", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify({
+            favorite_id: obj.id,
+            favorite_type: type,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setStore({ favorites: data.body });
+        }
+      },
+      deleteFavorite: async (bike_id, route_id, photographer_id) => {
+        const response = await fetch(getStore().backendurl + "favorites", {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bike_id: bike_id,
+            route_id: route_id,
+            photographer_id: photographer_id,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setStore({ favorites: data.message });
+        }
+      },
+      deleteRoute: async (routeId) => {
+        const response = await fetch(
+          getStore().backendurl + "routes/" + routeId,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const updatedRoutes = getStore().routes.filter(
+            (route) => route.id !== routeId
+          );
+          setStore({ routes: updatedRoutes });
         }
       },
       syncuser: async () => {

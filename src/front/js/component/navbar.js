@@ -32,8 +32,8 @@ export const Navbar = () => {
   return (
     <div className=" ">
       <nav
-        className={`navbar navbar-dark mynav mnav navbar-expand-lg  bordecito mx-auto text-white sizehomet spartan ${
-          isDesktop ? " col-12" : " col-12"
+        className={`navbar navbar-dark  mnav navbar-expand-lg  bordecito mx-auto text-white sizehomet spartan ${
+          isDesktop ? "mynav col-12" : "mynavm col-12"
         }`}
       >
         <div className="container-fluid  col-11 ">

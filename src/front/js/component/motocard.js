@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import "../../styles/sliderbueno.css";
+import "../../styles/animatedcard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -26,37 +27,34 @@ const Motocard = ({ bike, index }) => {
   };
 
   return (
-    <div
-      key={index}
-      className=" motocard colp text-white bordecitoall mx-auto"
-      style={{
-        backgroundImage: `url(${bike.bike_photo})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="imagen">
-        <div className="free">
-          <div className="headcontent bordecitoall bg-black">
-            <div className="sizehomet spartan text-center">{bike.model}</div>
-          </div>
-        </div>
-
-        <div className="content bordecitot col-12 container d-flex flex-column justify-content-between">
-          <div className="ms-3 sizehomes center-align">
-            Hola esto es el texto emergente
-          </div>
-          <div className="right-align mb-3 w100">
-            <button
-              key="button"
-              className="botonaco px-2 sizehomes center-align"
-              onClick={() => deleteFavoriteBike()}
-            >
-              <span className="mx-auto center-align" style={{ "--i": 1 }}>
-                <i class="fa-solid fa-heart"></i>
-              </span>
-            </button>
+    <div className="colp bordecitoall redondeo newmotocard">
+      {" "}
+      <div className="bg-black bordecitob  sizehomet center-align spartan">
+        {" "}
+        {bike.model}
+      </div>
+      <div className="motocard text-white mx-auto">
+        <div
+          className="hovereffect"
+          style={{
+            backgroundImage: `url(${bike.bike_photo})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        >
+          <img className="img-responsive" alt="" />
+          <div className="overlay d-flex flex-column justify-content-between">
+            <h2 className=" sizehomes">
+              <div>{bike.ask_6_price}€</div>
+              <div>Texto descripción</div>
+            </h2>
+            <p className="right-align pb-3 pe-4">
+              {" "}
+              <button className="botonaco p-3">
+                <span> Hola </span>
+              </button>
+            </p>
           </div>
         </div>
       </div>

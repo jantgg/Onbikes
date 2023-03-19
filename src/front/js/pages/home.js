@@ -61,7 +61,6 @@ export const Home = () => {
     <>
       {isDesktop ? (
         <div className="d-flex flex-column homeheight">
-          {/* <div className="freehome"></div> */}
           <div
             className={`col-12 row mt-10 ${moveOut ? "slide-left " : ""} ${
               showDivs3 ? "slide-in " : "hidden"

@@ -37,6 +37,7 @@
 .slide-left {
   transform: translateX(-100%);
 }
+
 .slide-right {
   transform: translateX(100%);
 }

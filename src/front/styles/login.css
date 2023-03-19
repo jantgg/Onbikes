@@ -1,17 +1,40 @@
 .margin-login {
-  transform: translateX(-15%);
+  left: -30%;
   background-color: #070707;
   z-index: 1;
+  transition: transform 0.7s;
+}
+.divpadre {
+  transition: transform 0.5s;
+}
+.slide-right-login {
+  transform: translateX(60%);
+}
+.slide-left-video {
+  transform: translateX(-80%), scale(1);
+  opacity: 1;
+}
+.opacity-video {
+  opacity: 0;
+  transition: opacity 2.5s;
+  transform: scale(0.6);
+}
+.slide-right-padre {
+  transform: translateX(140%);
 }
 
 .video-login {
+  left: 10%;
   z-index: -1;
   overflow: hidden;
 }
+.margintoplogin {
+  margin-top: 25vh;
+}
 
-/* .video-position {
+.video-position {
   transform: translateY(-40%), translateX(-10%);
-} */
+}
 
 .login-box p:first-child {
   margin: 0 0 30px;

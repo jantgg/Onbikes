@@ -129,7 +129,7 @@ const SilderBikeM = ({ data, groupSize }) => {
                 </div>
               </div>
 
-              <div className=" opa07 bordecitot col-12 container d-flex flex-column justify-content-between align-items-center">
+              <div className=" opa07 py-3 col-12 container mt-5 d-flex flex-column justify-content-between align-items-center">
                 <div className="ms-3 sizehomes">
                   Hola esto es el texto emergente
                 </div>

@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import "../../styles/sliderbueno.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import Motocard from "./motocard.js";
+import Photogcard from "./photogcard.js";
 
 //<Sliderbueno data={bikesResults} groupSize={4} />
 
-const SilderBike = ({ data, groupSize }) => {
+const SliderPhotog = ({ data, groupSize }) => {
   const Navigate = useNavigate();
   const { store, actions } = useContext(Context);
   const [startIndex, setStartIndex] = useState(0);
@@ -54,13 +54,13 @@ const SilderBike = ({ data, groupSize }) => {
           isVisible ? " show-slider" : " hide-slider"
         }`}
       >
-        {dataToRender.map((bike, index) => (
-          <Motocard bike={bike} index={index} />
+        {dataToRender.map((photog, index) => (
+          <Photogcard photog={photog} index={index} />
         ))}
       </div>
 
       <button
-        className={`sliderbuenob sizehomet sliderbtn text-white${
+        className={` sizehomet sliderbuenob sliderbtn text-white${
           endIndex >= data.length ? " opa0" : " opa1"
         }`}
         onClick={handleNextClick}
@@ -72,4 +72,4 @@ const SilderBike = ({ data, groupSize }) => {
   );
 };
 
-export default SilderBike;
+export default SliderPhotog;

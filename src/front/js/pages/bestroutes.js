@@ -8,6 +8,7 @@ import SliderPhotos from "../component/sliderphotos.js";
 import "../../styles/forall.css";
 import "../../styles/login.css";
 import Maps from "../component/maps";
+import MapsDany from "../component/mapsdany.js";
 
 export const Bestroutes = () => {
   const { store, actions } = useContext(Context);
@@ -24,6 +25,7 @@ export const Bestroutes = () => {
     origin: "",
     destination: "",
   });
+
   useEffect(() => {
     getRoutes();
     setTimeout(() => {
@@ -161,7 +163,7 @@ export const Bestroutes = () => {
   const options = {
     streetViewControl: false,
   };
-  //Codigo de Maps --------------------------------------------------------------------------------------------------------------->
+  //Codigo de Maps ---------------------------------------------------------------------------------------------------------------->
 
   return (
     <div className="d-flex flex-column minheight">
@@ -176,7 +178,7 @@ export const Bestroutes = () => {
               {singleroute.name}
             </div>
             <div className="col-12 mx-auto ">
-              <Maps
+              <MapsDany
                 origin={mapProps.origin}
                 destination={mapProps.destination}
               />

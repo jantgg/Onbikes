@@ -1,65 +1,48 @@
 import React, { useState, useContext } from "react";
 import "../../styles/sliderbueno.css";
 import "../../styles/animatedcard.css";
-
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-const Routecard = ({ route, index }) => {
+const Photogcard = ({ photog, index }) => {
   const { store, actions } = useContext(Context);
-
-  const deleteFavoriteRoute = async () => {
-    const response = await fetch(store.backendurl + "favorites", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        bike_id: route.id,
-        favorite_type: "route",
-      }),
-    });
-    if (response.ok) {
-      console.log("response ok");
-    } else {
-      console.log("response not ok");
-    }
-  };
-
+  console.log(photog);
   return (
     <div className="colp bordecitoall redondeo newmotocard">
       {" "}
       <div className="bg-black bordecitob  sizehomet center-align spartan">
         {" "}
-        {route.name}
+        {photog.user_name}
       </div>
       <div className="motocard text-white mx-auto">
         <div
           className="hovereffect"
           style={{
-            backgroundImage: `url(${route.photos[0].path})`,
+            backgroundImage: photog.photos[0]
+              ? `url(${photog.photos[0].path})`
+              : "none",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
+            backgroundColor: photog.photos[0] ? "transparent" : "black",
           }}
         >
           <img className="img-responsive" alt="" />
           <div className="overlay d-flex flex-column justify-content-between">
             <h2 className=" sizehomes">
-              <div>{route.interest_text}</div>
+              <div>{photog.services}</div>
             </h2>
             <p className="justify-content-between d-flex">
               {" "}
               <div className="ms-4">
                 {" "}
-                {store.singleViewRoute == null ? (
+                {store.singleViewPhotog == null ? (
                   <button
                     className="botonaco px-2 py-1"
                     onClick={() => {
-                      actions.setSingleViewRoute(route);
+                      actions.setSingleViewPhotog(photog);
                       setTimeout(() => {
-                        actions.setVisibleRoute(true);
+                        actions.setVisiblePhotog(true);
                       }, 50);
                     }}
                   >
@@ -115,5 +98,4 @@ const Routecard = ({ route, index }) => {
     // </div>
   );
 };
-
-export default Routecard;
+export default Photogcard;
