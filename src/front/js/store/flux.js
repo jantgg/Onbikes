@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       userType: null,
+      viewType: false,
       backendurl:
         "https://3001-jantgg-proyectofinaljan-gtyi5j1i6er.ws-eu90.gitpod.io/api/",
       questions: [],
@@ -19,6 +20,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       visiblePhotog: false,
     },
     actions: {
+      setViewType: async () => {
+        setStore({ viewType: true });
+      },
+      resetViewType: async () => {
+        setStore({ viewType: false });
+      },
+
       setSingleViewRoute: (route) => {
         setStore({ singleViewRoute: route });
         const photos = route.photos.map((obj) => obj.path);
@@ -130,6 +138,26 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ routes: updatedRoutes });
         }
       },
+
+      deletePhoto: async (photoId) => {
+        const response = await fetch(
+          getStore().backendurl + "photos/" + photoId,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const updatedPhotos = getStore().photos.filter(
+            (photo) => photo.id !== photoId
+          );
+          setStore({ photos: updatedPhotos });
+        }
+      },
+
       syncuser: async () => {
         const response = await fetch(getStore().backendurl + "sync", {
           method: "GET",

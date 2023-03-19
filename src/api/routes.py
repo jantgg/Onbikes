@@ -152,6 +152,38 @@ def get_photographer():
     return jsonify({"body": photographer_serialized}), 200
 
 
+@api.route('/routes/<int:route_id>', methods=['DELETE'])
+@jwt_required()
+def delete_route(route_id):
+    route = Route.query.filter_by(id=route_id).first()
+    if not route:
+        return jsonify({'message': 'Route not found'}), 404
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    if user.id != route.user_id:
+        return jsonify({'message': 'You are not authorized to delete this route'}), 403
+    for photo in route.photos:
+        db.session.delete(photo)
+    db.session.delete(route)
+    db.session.commit()
+    return jsonify({'message': 'Route and associated photos deleted successfully'}), 200
+
+
+# DELETE OF PHOTOGRAPHER PHOTOS -------------------------------------------------------------------------------------------------->
+@api.route('/photos/<int:photo_id>', methods=['DELETE'])
+@jwt_required()
+def delete_photo(photo_id):
+    photo = Photo.query.filter_by(id=photo_id).first()
+    if not photo:
+        return jsonify({'message': 'Photo not found'}), 404
+    email = get_jwt_identity()
+    photographer = Photographer.query.filter_by(email=email).first()
+    if photographer.id != photo.photographer_id:
+        return jsonify({'message': 'You are not authorized to delete this photo'}), 403
+    db.session.delete(photo)
+    db.session.commit()
+    return jsonify({'message': 'Photo deleted successfully'}), 200
+
 # PUT OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
 @api.route('/photographer', methods=['PUT'])
 @jwt_required()
@@ -308,8 +340,9 @@ def add_favorite():
 
     return jsonify({'message': f'{favorite_type.capitalize()} added to favorites'}), 201
 
-# DELETE DE FAVORITES -------------------------------------------------------------------------------------------------------->
 
+
+# DELETE DE FAVORITES -------------------------------------------------------------------------------------------------------->
 @api.route('/favorites', methods=['DELETE'])
 @jwt_required()
 def delete_favorite():
@@ -317,16 +350,13 @@ def delete_favorite():
     user = User.query.filter_by(email=user_email).first()
     if not user:
         return jsonify({'error': 'User not found'}), 404
-
     # Obtener los parámetros de la solicitud
     bike_id = request.json.get('bike_id')
     route_id = request.json.get('route_id')
     photographer_id = request.json.get('photographer_id')
-
     # Validar que al menos un parámetro esté presente
     if not bike_id and not route_id and not photographer_id:
         return jsonify({'error': 'At least one parameter like bike_id is required'}), 400
-
     # Eliminar los favoritos correspondientes al usuario y los parámetros de la solicitud
     favorites_query = Favorite.query.filter(Favorite.user_id == user.id)
     if bike_id:
@@ -336,9 +366,7 @@ def delete_favorite():
     if photographer_id:
         favorites_query = favorites_query.filter(Favorite.photographer_id == photographer_id)
     deleted_count = favorites_query.delete()
-
     db.session.commit()
-
     # Devolver el número de favoritos eliminados
     return jsonify({'message': f'{deleted_count} favorites deleted'}), 200
 
@@ -377,7 +405,7 @@ def upload_photo():
             upload_result = cloudinary.uploader.upload(photo, secure=True)
             new_photos.append(Photo(
                 name=secure_filename(photo.filename),
-                path=upload_result['url'],
+                path=upload_result['secure_url'],
                 route_id=single_photo_route_id,
                 photo_type=photo_type))
             for photo in new_photos:
@@ -401,7 +429,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     route_id=route_id,
                     photo_type=photo_type))
         elif photo_type == 'photographer':
@@ -409,7 +437,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     photographer_id=photographer.id,
                     photo_type=photo_type,))
         elif photo_type == 'bike':
@@ -417,7 +445,7 @@ def upload_photo():
                 upload_result = cloudinary.uploader.upload(photo, secure=True)
                 new_photos.append(Photo(
                     name=secure_filename(photo.filename),
-                    path=upload_result['url'],
+                    path=upload_result['secure_url'],
                     bike_id=type_id,
                     photo_type=photo_type))
         else:

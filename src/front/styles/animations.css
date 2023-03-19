@@ -35,11 +35,11 @@
 }
 
 .slide-left {
-  transform: translateX(-100%);
+  transform: translateX(-130%);
 }
 
 .slide-right {
-  transform: translateX(100%);
+  transform: translateX(130%);
 }
 
 .hidden {

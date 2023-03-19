@@ -23,10 +23,25 @@ export const Bestroutesupload = () => {
   const [routeSend, setRouteSend] = useState(false);
   const [previewPhotos, setPreviewPhotos] = useState(null);
   const isDesktop = window.innerWidth >= 1000;
+  const [showDivs, setShowDivs] = useState(false);
+  const [showDivs2, setShowDivs2] = useState(false);
+  const [showDivs3, setShowDivs3] = useState(false);
+  const [moveOut, setMoveOut] = useState(false);
 
   useEffect(() => {
     getFavorites();
     getUserRoutes();
+  }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowDivs(true);
+      setTimeout(() => {
+        setShowDivs2(true);
+        setTimeout(() => {
+          setShowDivs3(true);
+        }, 400);
+      }, 500);
+    }, 150);
   }, []);
 
   const getFavorites = async () => {
@@ -103,10 +118,13 @@ export const Bestroutesupload = () => {
 
   return (
     <div className="row">
-      <div className="bordecitol heightborder col-8 mx-auto"></div>
       {isDesktop ? (
         <>
-          <div className="col-10 mx-auto bordecitoall pb-4 row imagenn">
+          <div
+            className={`col-10 mx-auto bordecitoall pb-4 row mt-10 imagenn ${
+              moveOut ? "slide-left " : ""
+            } ${showDivs3 ? "slide-in " : "hidden"}`}
+          >
             <div className="center-align col-12 col-xxl-5 col-xl-6 col-lg-7 sizehomet bordecitob mx-auto mb-4 text-white">
               Mis rutas subidas
             </div>
@@ -123,11 +141,13 @@ export const Bestroutesupload = () => {
           </div>
         </>
       )}
-      <div className="bordecitor heightborder col-6 mx-auto"></div>
+      <div className="freehome"></div>
       {routeSend == false ? (
         <div
           className={`mx-auto col-11 bordecitoall imagenn ${
             isDesktop ? " col-11" : " col-12"
+          } ${moveOut ? "slide-left " : ""} ${
+            showDivs3 ? "slide-in " : "hidden"
           }`}
         >
           <p
