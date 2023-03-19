@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/forall.css";
 import "../../styles/login.css";
+import "../../styles/animations.css";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -11,6 +12,26 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [credentialserror, setCredentialsError] = useState(false);
+  const [showDivs, setShowDivs] = useState(false);
+  const [showDivs2, setShowDivs2] = useState(false);
+  const [moveRight, setMoveRight] = useState(false);
+  const [moveLeft, setMoveLeft] = useState(false);
+  const [moveOut, setMoveOut] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowDivs(true);
+      setTimeout(() => {
+        setShowDivs2(true);
+        setTimeout(() => {
+          setMoveRight(true);
+          setTimeout(() => {
+            setMoveLeft(true);
+          }, 60);
+        }, 500);
+      }, 500);
+    }, 150);
+  }, []);
 
   const sendLogin = async () => {
     event.preventDefault();
@@ -30,29 +51,61 @@ export const Login = () => {
       localStorage.setItem("user_name", data.user_name);
       localStorage.setItem("email", email);
       await actions.syncuser();
-      navigate("/");
+      setTimeout(() => {
+        setMoveOut(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 400);
+      }, 40);
     } else {
       setCredentialsError(true);
     }
   };
 
   return (
-    <div className="d-flex flex-column">
-      <div className="row col-11 col-xxl-8 col-xl-9 col-lg-10 mx-auto mt-5">
-        <div className="row col-6 video-login imagenn">
+
+    <div className="d-flex flex-column  minheight">
+      <div
+        className={` row col-11 col-xxl-8 col-xl-9 col-lg-10 mx-auto margintoplogin divpadre ${
+          moveOut ? "slide-right-padre" : ""
+        }`}
+      >
+        <div
+          className={`"row col-6 video-login imagenn bordecitoall ${
+            moveLeft ? "slide-left-video " : "opacity-video"
+          } ${showDivs2 ? " slide-in " : " hidden"}`}
+          style={{
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/qAu4wDftpwE?controls=0&amp;start=246&autoplay=1&mute=1&loop=1&playsinline=1"
+            src="https://www.youtube.com/embed/qAu4wDftpwE?controls=0&start=246&autoplay=1&mute=1&loop=1&playsinline=1"
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            style={{
+              pointerEvents: "none",
+              position: "relative",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
           ></iframe>
         </div>
-        <div className="bordecitoall col-6 row mx-auto my-5 imagenn margin-login">
+        <div
+          className={`bordecitoall col-4 row mx-auto my-5 imagenn margin-login ${
+            moveRight ? "slide-right-login " : ""
+          } ${showDivs ? " slide-in " : " hidden"}`}
+        >
           <div className="login-box col-11 mx-auto mt-3">
-            <p className="bordecito col-4 mx-auto sizehomet">OnBikes</p>
+            <p className="col-12 mx-auto sizehomet">OnBikes</p>
+
             <form
               onSubmit={() => {
                 e.prevent.default();

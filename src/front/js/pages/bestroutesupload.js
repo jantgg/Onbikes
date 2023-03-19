@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/forall.css";
 import "../../styles/login.css";
+import "../../styles/loadingmodal.css";
+import "../../styles/spiner.css";
 import SliderRoute from "../component/sliderroute.js";
 import SliderRouteM from "../component/sliderroutem.js";
 import SliderPhotos from "../component/sliderphotos.js";
@@ -30,7 +32,7 @@ export const Bestroutesupload = () => {
 
   const getFavorites = async () => {
     await actions.getFavorites();
-    setUserFavoriteRoutes(store.favorites.filter((obj) => obj.route != null));
+    // setUserFavoriteRoutes(store.favorites.filter((obj) => obj.route != null));
   };
 
   const uploadPhoto = async () => {
@@ -97,6 +99,8 @@ export const Bestroutesupload = () => {
       console.log("response not ok");
     }
   };
+  // MODAL LOADING --------------------------------------------------------------------------------------------------------->
+  const [mostrarModal, setMostrarModal] = useState(false);
 
   return (
     <div className="row">
@@ -122,8 +126,16 @@ export const Bestroutesupload = () => {
       )}
       <div className="bordecitor heightborder col-6 mx-auto"></div>
       {routeSend == false ? (
-        <div className="mx-auto col-11 bordecitoall imagenn">
-          <p className="bordecito col-12 col-xxl-5 col-xl-6 col-lg-7 mx-auto sizehomet mt-3 mb-2 text-white center-align">
+        <div
+          className={`mx-auto col-11 bordecitoall imagenn ${
+            isDesktop ? " col-11" : " col-12"
+          }`}
+        >
+          <p
+            className={`spartan mx-auto sizehomet mt-3 mb-2 text-white center-align ${
+              isDesktop ? " col-12 col-xxl-5 col-xl-6 col-lg-7" : " col-11"
+            }`}
+          >
             Datos sobre la nueva ruta
           </p>
           <div
@@ -210,6 +222,7 @@ export const Bestroutesupload = () => {
               className="botonaco mb-5 sizehomes px-3"
               onClick={() => {
                 uploadPhoto();
+                setMostrarModal(true);
               }}
             >
               <span style={{ "--i": 1 }}>P</span>
@@ -227,11 +240,36 @@ export const Bestroutesupload = () => {
               <span style={{ "--i": 13 }}>a</span>
             </button>
           </div>
+          {mostrarModal && (
+            <div className="modal">
+              <div className="modal-contenido">
+                <div className="spartan sizehomet text-white center-align ">
+                  Estamos subiendo tu Ruta a la nube
+                  <br />
+                  <div className="lds-spinner mt-4">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {previewPhotos != null ? (
             <div className="row mt-3 mx-auto py-3">
-              <div className="mx-auto col-11 col-xxl-4 col-xl-4 col-lg-4 center-align sizehomet text-white mb-3">
-                Nuevas fotos
+              {" "}
+              <div className="mx-auto col-11 col-xxl-4 col-xl-4 col-lg-4 center-align bordecitob sizehomet text-white mb-3">
+                Fotos de la nueva Ruta
               </div>
               {isDesktop ? (
                 <SliderPhotos data={previewPhotos} groupSize={3} />

@@ -1,12 +1,17 @@
 .sliderbueno {
   position: relative;
 }
-.sliderbueno button {
+.sliderbuenob {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   flex: 0 0 auto;
   text-align: center;
+  transition: transform 0.5s;
 }
+.sliderbuenob:hover {
+  transform: scale(1.3) translateZ(20px);
+}
+
 .sliderbtn {
   width: 5%;
   max-width: 5%;
@@ -46,7 +51,6 @@
 .colpp {
   flex: 0 0 auto;
   width: 32%;
-  max-width: 32%;
   filter: none;
   border: 1px white;
 }

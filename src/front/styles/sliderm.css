@@ -9,7 +9,6 @@
 .boton-i {
   background-color: rgba(0, 0, 0, 0);
   border: none;
-  width: 100px;
   z-index: 1;
 }
 .head-tranlucid {
@@ -26,8 +25,7 @@
   opacity: 0;
 }
 .opa07 {
-  background-color: rgba(0, 0, 0, 0.486);
-  height: 60%;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .opa1 {
   opacity: 1;

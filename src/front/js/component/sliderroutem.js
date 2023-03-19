@@ -103,7 +103,7 @@ const SilderRouteM = ({ data, groupSize }) => {
             }}
           >
             <div className="imagen">
-              <div className="free">
+              <div className="freeroute">
                 <div className="headcontent row bordecitoall bg-black">
                   <button
                     className={` sizehomet boton col-2 text-white${
@@ -129,7 +129,7 @@ const SilderRouteM = ({ data, groupSize }) => {
                 </div>
               </div>
 
-              <div className="opa07 bordecitot col-12 container d-flex flex-column justify-content-between align-items-center">
+              <div className="opa07 py-3 col-12 container d-flex flex-column justify-content-between align-items-center">
                 <div className="ms-3 sizehomes">{route.interest_text}</div>
                 <div className="right-align mb-3 w100">
                   <button

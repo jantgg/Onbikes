@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import "../../styles/navbar.css";
 import "../../styles/forall.css";
 import { Context } from "../store/appContext";
 
@@ -29,19 +30,23 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="row fixedup mx-auto">
-      <nav className="col-11 navbar navbar-dark navbar-expand-lg bordecito mx-auto text-white sizehomet pt-2 spartan">
-        <div className="container-fluid ">
+    <div className=" ">
+      <nav
+        className={`navbar navbar-dark  mnav navbar-expand-lg  bordecito mx-auto text-white sizehomet spartan ${
+          isDesktop ? "mynav col-12" : "mynavm col-12"
+        }`}
+      >
+        <div className="container-fluid  col-11 ">
           <Link
             to="/"
             className={`${
               isDesktop ? " ms-5" : " ms-2"
-            } navbar-brand text-white sizehomet px-2 mx-5 me-5 ${
+            } navbar-brand  text-white sizehomet px-2 mx-5 me-5 ${
               selected === 3 && "bordecitos"
             }`}
             onClick={() => setSelected(3)}
           >
-            Home
+            Inicio
           </Link>
           <button
             className="navbar-toggler text-white"
@@ -56,7 +61,7 @@ export const Navbar = () => {
           </button>
           <div className=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <div className="nav-item">
+              <div className="nav-item ">
                 <Link
                   to="/test"
                   className={`nav-link text-white mx-2 me-5 px-2 ${
@@ -81,7 +86,7 @@ export const Navbar = () => {
               <div className="nav-item">
                 <Link
                   to="/bestphotographers"
-                  className={`nav-link text-white mx-2 me-5 px-2 ${
+                  className={`nav-link  text-white mx-2 me-5 px-2 ${
                     selected === 2 && "bordecitos"
                   }`}
                   onClick={() => setSelected(2)}
@@ -107,7 +112,7 @@ export const Navbar = () => {
                     ) : (
                       <Link
                         to="/bestphotographerupload"
-                        className={`nav-link text-white mx-2 me-5 px-2 ${
+                        className={`nav-link  text-white mx-2 me-5 px-2 ${
                           selected === 4 && "bordecitos"
                         }`}
                         onClick={() => setSelected(4)}
@@ -133,12 +138,12 @@ export const Navbar = () => {
                   <div className="nav-item me-4">
                     <Link
                       to="/login"
-                      className={`nav-link text-white mx-2 px-2 ${
+                      className={`nav-link  text-white mx-2 px-2 ${
                         selected === 5 && "bordecitos"
                       }`}
                       onClick={() => setSelected(5)}
                     >
-                      Log in
+                      Iniciar Sesión
                     </Link>
                   </div>
                 </>

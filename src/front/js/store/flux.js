@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userType: null,
       viewType: false,
       backendurl:
-        "https://3001-jantgg-proyectofinaljan-ja286yclfmv.ws-eu90.gitpod.io/api/",
+        "https://3001-jantgg-proyectofinaljan-gtyi5j1i6er.ws-eu90.gitpod.io/api/",
       questions: [],
       answers: [],
       routes: [],
@@ -12,6 +12,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       photos: [],
       bikes: [],
       favorites: [],
+      singleViewRoute: null,
+      singleViewRoutePhotos: null,
+      visibleRoute: false,
+      singleViewPhotog: null,
+      singleViewPhotogPhotos: null,
+      visiblePhotog: false,
     },
     actions: {
       setViewType: async () => {
@@ -19,6 +25,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       resetViewType: async () => {
         setStore({ viewType: false });
+      setSingleViewRoute: (route) => {
+        setStore({ singleViewRoute: route });
+        const photos = route.photos.map((obj) => obj.path);
+        setStore({ singleViewRoutePhotos: photos });
+      },
+      setVisibleRoute: (v) => {
+        setStore({ visibleRoute: v });
+      },
+      setSingleViewPhotog: (photog) => {
+        setStore({ singleViewPhotog: photog });
+        const photos = photog.photos.map((obj) => obj.path);
+        setStore({ singleViewPhotogPhotos: photos });
+      },
+      setVisiblePhotog: (v) => {
+        setStore({ visiblePhotog: v });
       },
       getQuestions: async () => {
         const response = await fetch(getStore().backendurl + "questions");
@@ -115,6 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ routes: updatedRoutes });
         }
       },
+
       deletePhoto: async (photoId) => {
         const response = await fetch(
           getStore().backendurl + "photos/" + photoId,
@@ -133,6 +155,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ photos: updatedPhotos });
         }
       },
+
       syncuser: async () => {
         const response = await fetch(getStore().backendurl + "sync", {
           method: "GET",

@@ -1,6 +1,35 @@
+/* .row {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0 !important;
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+} */
+
 /*FONTS*/
+.minheight {
+  min-height: 120vh;
+}
+.pabajo {
+  position: absolute;
+  bottom: 0;
+}
+.mt-10 {
+  margin-top: 10rem !important;
+}
+body {
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679056094/fondolistopapele_ecsvnw.jpg");
+  background-size: 100% 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
 body {
   font-family: "Roboto Mono", monospace;
+  background-color: none;
 }
 .archivo {
   font-family: "Archivo+Black", sans-serif;
@@ -15,7 +44,9 @@ body {
 body {
   background-color: #070707;
 }
-
+.z-1 {
+  z-index: -1;
+}
 /*Predefined Heights*/
 .heightborder {
   height: 7vw;
@@ -44,6 +75,11 @@ body {
   border-bottom: 2px solid white;
   padding-bottom: 0px;
 }
+.bordecitoc {
+  border-right: 1px solid white;
+  width: 1px;
+  height: 1vw;
+}
 .bordecitoup {
   border-top: 3px solid white;
   padding-bottom: 0px;
@@ -63,20 +99,34 @@ body {
 .bordecitoall {
   border: 1px solid white;
 }
+.bordecitoallg {
+  border: 1px solid rgb(94, 94, 94);
+}
 .bordecitob {
   border-bottom: 1px solid white;
 }
 .bordecitot {
   border-top: 1px solid white;
 }
+.bordecitoe {
+  border-right: 1px solid white;
+}
 /*TRANSITIONS*/
 .revealUp {
   opacity: 0;
   visibility: hidden;
 }
+.movidas {
+  display: flex; /* Establece el div padre como un contenedor flexbox */
+  flex-direction: column; /* Establece la dirección de los elementos como columnas (eje vertical) */
+  justify-content: space-between;
+}
+.redondeo {
+  border-radius: 3px;
+}
 
 /* FONT SIZE THRU MEDIA VIEWPORT */
-@media (min-width: 1024px) {
+@media (min-width: 1000px) {
   .sizehome {
     font-size: 6vw;
   }
@@ -98,9 +148,15 @@ body {
   .sizehomes {
     font-size: 1vw;
   }
+  .sizehome3 {
+    font-size: 3vw;
+  }
+  .sizehomed {
+    font-size: 1.6vw;
+  }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1000px) {
   .sizehome {
     font-size: 12vw;
   }
@@ -121,6 +177,12 @@ body {
   }
   .sizehomes {
     font-size: 3vw;
+  }
+  .sizehome3 {
+    font-size: 4vw;
+  }
+  .sizehomed {
+    font-size: 6vw;
   }
 }
 
@@ -170,6 +232,17 @@ body {
     transform: rotateY(0deg);
   }
 }
+@keyframes box {
+  0% {
+    box-shadow: #27272c;
+  }
+  50% {
+    box-shadow: 0 0 25px #f7f8f2;
+  }
+  100% {
+    box-shadow: #27272c;
+  }
+}
 
 .botonaco2 {
   position: relative;
@@ -208,7 +281,7 @@ body {
   animation: flip 4s infinite;
   animation-delay: calc(0.09s * var(--i));
 }
-
+/* ALL THE CSS CODE IS DEVELOP BY @JANTGG */
 .botonaco3 {
   position: relative;
   background: rgba(0, 0, 0, 0.5);
@@ -260,22 +333,12 @@ body {
   z-index: 1;
 }
 
-@keyframes box {
-  0% {
-    box-shadow: #27272c;
-  }
-  50% {
-    box-shadow: 0 0 25px #f7f8f2;
-  }
-  100% {
-    box-shadow: #27272c;
-  }
-}
-
 .glow {
   position: relative;
 }
-
+.freehome {
+  height: 2vw;
+}
 .glow::after {
   content: "";
   position: absolute;
@@ -291,4 +354,28 @@ body {
 
 .w100 {
   width: 100%;
+}
+
+.imagenasfalto {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172345/muyoscuro_fd8osa.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.imagenmalla {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172963/mallanueva_m2e13d.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }

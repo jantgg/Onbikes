@@ -119,11 +119,8 @@ def sync_user():
     photographer = Photographer.query.filter_by(email=email).first()
     if not user and not photographer:
         return jsonify ({"type": None}), 401
-
     if user: return jsonify({"type": "User"}), 200
     if photographer: return jsonify({"type": "Photographer"}), 200
-
-
 
 
 #@@@------------------------------------------- ##### INITIALS GET ENDPOINTS ##### --------------------------------------------@@@>
@@ -137,12 +134,7 @@ def get_all_users():
     return jsonify({"body": users_serialized}), 200
 
 
-# GET OF PHOTOGRAPHERS ----------------------------------------------------------------------------------------------------------->
-@api.route('/photographers', methods=['GET'])
-def get_all_photographers():
-    photographers = Photographer.query.all()
-    photographers_serialized = [x.serialize() for x in photographers]
-    return jsonify({"body": photographers_serialized}), 200
+
 
 
 # GET OF PHOTOGRAPHER WITH PHOTOS ------------------------------------------------------------------------------------------------>
@@ -258,7 +250,18 @@ def get_all_routes():
     return jsonify({"body": routes_serialized}), 200
 
 
-# GET OF USER ROUTES ------------------------------------------------------------------------------------------------------------->
+# GET OF PHOTOGRAPHERS ----------------------------------------------------------------------------------------------------------->
+@api.route('/photographers', methods=['GET'])
+def get_all_photographers():
+    photographers = Photographer.query.all()
+    photographers_serialized = []
+    for photographer in photographers:
+        photographer_serialized = photographer.serialize()
+        photos = [photo.serialize() for photo in photographer.photos]
+        photographer_serialized['photos'] = photos
+        photographers_serialized.append(photographer_serialized) 
+    return jsonify({"body": photographers_serialized}), 200
+
 @api.route('/userroutes', methods=['GET'])
 @jwt_required()
 def get_all_userroutes():
@@ -282,8 +285,7 @@ def get_all_userroutes():
 def get_favorites():
     email = get_jwt_identity()
     user = User.query.filter_by(email=email).first()
-    photographer = Photographer.query.filter_by(email=email).first()
-    if not user and not photographer:
+    if not user:
         return jsonify({'error': 'User not found'}), 404
     favorites = Favorite.query.filter(Favorite.user_id == user.id).all()
     favorites_data = []
@@ -297,7 +299,10 @@ def get_favorites():
             route_data['photos'] = route_photos
             favorite_data['route'] = route_data
         if favorite.photographer is not None:
-            favorite_data['photographer'] = favorite.photographer.serialize()
+            photographer_data = favorite.photographer.serialize()
+            photographer_photos = [photo.serialize() for photo in favorite.photographer.photos]
+            photographer_data['photos'] = photographer_photos
+            favorite_data['photographer'] = photographer_data
         favorites_data.append(favorite_data)
     return jsonify({'body': favorites_data}), 200
 
