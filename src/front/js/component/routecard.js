@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/sliderbueno.css";
 import "../../styles/animatedcard.css";
 
@@ -7,6 +7,17 @@ import { Context } from "../store/appContext";
 
 const Routecard = ({ route, index }) => {
   const { store, actions } = useContext(Context);
+
+  const [currentFavorites, setCurrentFavorites] = useState([]);
+
+  useEffect(() => {
+    getFavs();
+  }, []);
+
+  const getFavs = async () => {
+    const favoritesToSet = await actions.getFavorites();
+    setCurrentFavorites(store.favorites);
+  };
 
   const deleteFavoriteRoute = async () => {
     const response = await fetch(store.backendurl + "favorites", {
@@ -69,9 +80,42 @@ const Routecard = ({ route, index }) => {
               </div>
               <div className="me-4">
                 {" "}
-                <button className="botonaco p-2 px-3">
-                  <span> Hola </span>
-                </button>
+                {localStorage.getItem("token") != null ? (
+                  <div>
+                    {store.viewType == true ? (
+                      <button
+                        onClick={async () => {
+                          await actions.deleteRoute(route.id);
+                          location.reload();
+                        }}
+                      >
+                        <span>DELETE ROUTE</span>
+                      </button>
+                    ) : currentFavorites.some(
+                        (obj) => obj.route.id === route.id
+                      ) ? (
+                      <div>
+                        <button
+                          onClick={async () => {
+                            await actions.deleteFavorite(null, route.id, null);
+                            await getFavs();
+                          }}
+                        >
+                          <span>DELETE FAVORITE</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={async () => {
+                          await actions.addToFavorites(route, "route");
+                          await getFavs();
+                        }}
+                      >
+                        <span>♥</span>
+                      </button>
+                    )}
+                  </div>
+                ) : null}
               </div>
             </p>
           </div>

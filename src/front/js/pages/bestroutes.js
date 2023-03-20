@@ -25,8 +25,10 @@ export const Bestroutes = () => {
     origin: "",
     destination: "",
   });
+  const [currentFavorites, setCurrentFavorites] = useState([]);
 
   useEffect(() => {
+    getFavs();
     actions.resetViewType();
     getRoutes();
     setTimeout(() => {
@@ -44,6 +46,11 @@ export const Bestroutes = () => {
       destination: singleroute.end_location_name,
     });
   }, [singleroute.start_location_name, singleroute.end_location_name]);
+
+  const getFavs = async () => {
+    const favoritesToSet = await actions.getFavorites();
+    setCurrentFavorites(store.favorites);
+  };
 
   const getPhotos = async (routeId) => {
     const selectedRoute = routes.find((route) => route.id === routeId);
@@ -271,6 +278,50 @@ export const Bestroutes = () => {
                       <i class="fa-solid fa-rotate-left"></i>
                     </span>
                   </button>
+                  {/* {singlevision != false ? (
+                    <div>
+                      {store.viewType == true ? (
+                        <button
+                          onClick={async () => {
+                            await actions.deleteRoute(route.id);
+                            location.reload();
+                          }}
+                        >
+                          <span>DELETE ROUTE</span>
+                        </button>
+                      ) : currentFavorites.some((obj) => obj.route) ? (
+                        currentFavorites.some(
+                          (obj) =>
+                            obj.route.start_location_name ==
+                            singleroute.start_location_name
+                        ) ? (
+                          <div>
+                            <button
+                              onClick={async () => {
+                                await actions.deleteFavorite(
+                                  null,
+                                  singleroute.id,
+                                  null
+                                );
+                                await getFavs();
+                              }}
+                            >
+                              <span>DELETE FAVORITE</span>
+                            </button>
+                          </div>
+                        ) : null
+                      ) : (
+                        <button
+                          onClick={async () => {
+                            await actions.addToFavorites(singleroute, "route");
+                            await getFavs();
+                          }}
+                        >
+                          <span>♥</span>
+                        </button>
+                      )}
+                    </div>
+                  ) : null} */}
                 </div>
               </div>
             </div>

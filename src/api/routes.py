@@ -370,7 +370,7 @@ def delete_favorite():
     # Devolver el número de favoritos eliminados
     return jsonify({'message': f'{deleted_count} favorites deleted'}), 200
 
-# FILTER DE BIKES/ANSWERS -------------------------------------------------------------------------------------------------------->
+# FILTRO DE BIKES/ANSWERS -------------------------------------------------------------------------------------------------------->
 @api.route('/answers', methods=['POST'])
 def create_suggestion():
     answers = request.get_json()
@@ -378,13 +378,15 @@ def create_suggestion():
     for answer in answers:
         if answer["current_question_id"] == "q1":
             queries.append(Bike.ask_1_license == answer["id"])
-        elif answer["current_question_id"] == "q2":
-            queries.append(Bike.ask_2_wheels == answer["id"])
+        elif answer["current_question_id"] == "q1.1":
+            queries.append(Bike.ask_11_limitable == answer["id"])
         elif answer["current_question_id"] == "q3":
             queries.append(Bike.ask_3_surface == answer["id"])
         elif answer["current_question_id"] == "q4":
             queries.append(Bike.ask_4_comodity == answer["id"])
     suggestion = Bike.query.filter(*queries).all()
+    print(suggestion)
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     return jsonify({"result": [x.serialize() for x in suggestion]}), 201
 
 

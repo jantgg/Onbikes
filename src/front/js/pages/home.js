@@ -68,8 +68,8 @@ export const Home = () => {
               showDivs3 ? "slide-in " : "hidden"
             }`}
           >
-            <div className="col-1"></div>
-            <div className="col-5 imagen1 mx-auto bordecitoall px-1">
+            <div className="col-0 col-lg-1 col-xl-1 col-xxl-1"></div>
+            <div className="col-8 col-lg-5 col-xl-5 col-xxl-5 imagen1 mx-auto bordecitoall px-1">
               <div className="card-content">
                 {" "}
                 <div className="col-12  text-white sizehome3 mx-auto text-center mt-3 spartan">
@@ -109,16 +109,17 @@ export const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-5"></div>
+            <div className="col-0 col-lg-5 col-xl-5 col-xxl-5"></div>
           </div>
           <div className="freehome"></div>
+          {/* DIV 2 ----------------------------------------------------------------------------------------------------------------------------------------------- */}
           <div
             className={`col-12 row ${moveOut ? "slide-right " : ""} ${
               showDivs2 ? "slide-in" : " hidden"
             }`}
           >
-            <div className="col-6"></div>
-            <div className="col-5 imagen2 mx-auto bordecitoall ">
+            <div className=" col-0 col-lg-6 col-xl-6 col-xxl-6"></div>
+            <div className=" col-8 col-lg-5 col-xl-5 col-xxl-5 imagen2 mx-auto bordecitoall ">
               <div className="col-12  text-white sizehome3 mx-auto text-center mt-3 spartan">
                 <b>Visita lugares increíbles</b>
               </div>
@@ -155,7 +156,7 @@ export const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="col-1"></div>
+            <div className=" col-0 col-lg-1 col-xl-1 col-xxl-1"></div>
           </div>
           <div className="freehome"></div>
           <div
@@ -163,8 +164,8 @@ export const Home = () => {
               showDivs ? "slide-in " : "hidden"
             }`}
           >
-            <div className="col-2"></div>
-            <div className="col-6 imagen3 mx-auto pb-2 bordecitoall ">
+            <div className="col-0 col-lg-2 col-xl-2 col-xxl-2"></div>
+            <div className="col-8 col-lg-6 col-xl-6 col-xxl-6 imagen3 mx-auto pb-2 bordecitoall ">
               <div className="col-12 text-white sizehome3 mx-auto text-center mt-3 spartan">
                 <b>Inmortaliza momentos únicos</b>
               </div>
@@ -206,7 +207,7 @@ export const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="col-4"></div>
+            <div className="col-0 col-lg-4 col-xl-4 col-xxl-4"></div>
           </div>
         </div>
       ) : null}

@@ -25,7 +25,6 @@ export const Test = () => {
     getAnswers();
     setIsVisible(true);
     actions.resetViewType();
-
     gsap.registerPlugin(ScrollTrigger);
     gsap.utils.toArray(".revealUp").forEach(function (elem) {
       ScrollTrigger.create({

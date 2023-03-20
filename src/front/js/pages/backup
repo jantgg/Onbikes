@@ -228,3 +228,38 @@
         <span className="visually-hidden">Next</span>
       </button>
     </div> -->
+<!-- Boton de favoritos -----------------------------------------------------------------------------------------
+      <div>
+        {store.viewType == true ? (
+          <button
+            onClick={() => {
+              actions.deleteRoute(singleroute.id);
+            }}
+          >
+            <span>DELETE ROUTE</span>
+          </button>
+        ) : currentFavorites.some(
+            (obj) => obj.route.name === singleroute.name
+          ) ? (
+          <div>
+            <button
+              onClick={async () => {
+                await actions.deleteFavorite(null, singleroute.id, null);
+                await getFavs();
+                 }}
+             >
+              <span>DELETE FAVORITE</span>
+            </button>
+          </div>
+        ) : (
+              <button
+              onClick={async () => {
+              await actions.addToFavorites(singleroute, "route");
+              await getFavs();
+            }}
+          >
+            <span>♥</span>
+          </button>
+        )}
+
+        </div> -->

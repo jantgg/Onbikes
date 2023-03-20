@@ -16,8 +16,17 @@ export const Bestphotographers = () => {
   const [visible1, setVisible1] = useState(false);
   const isDesktop = window.innerWidth >= 1000;
   const [showDivs, setShowDivs] = useState(false);
+  const [currentFavorites, setCurrentFavorites] = useState([]);
+
+  const getFavs = async () => {
+    const favoritesToSet = await actions.getFavorites();
+    setCurrentFavorites(store.favorites);
+    console.log(store.favorites);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  };
 
   useEffect(() => {
+    getFavs();
     actions.resetViewType();
     getPhotographers();
     setTimeout(() => {
@@ -206,15 +215,57 @@ export const Bestphotographers = () => {
                 </div>
 
                 <div className="sizehomes mx-auto mb-2 text-white">
-                  <i class="fa-brands fa-instagram"></i>&nbsp;{" "}
+                  <i className="fa-brands fa-instagram"></i>&nbsp;{" "}
                   {singlePhotographer.instagram}
                 </div>
 
                 <div className="sizehomes mx-auto text-white">
-                  <i class="fa-solid fa-location-dot"></i> &nbsp;
+                  <i className="fa-solid fa-location-dot"></i> &nbsp;
                   {singlePhotographer.find_me_text},&nbsp;{" "}
                   {singlePhotographer.location_name}
                 </div>
+                {/* {store.viewType == true ? (
+                  <button
+                    onClick={async () => {
+                      await actions.deleteRoute(route.id);
+                      location.reload();
+                    }}
+                  >
+                    <span>DELETE ROUTE</span>
+                  </button>
+                ) : currentFavorites.some((obj) => obj.photographer) ? (
+                  currentFavorites.some(
+                    (obj) =>
+                      obj.photographer.user_name == singlePhotographer.user_name
+                  ) ? (
+                    <div>
+                      <button
+                        onClick={async () => {
+                          await actions.deleteFavorite(
+                            null,
+                            null,
+                            singlePhotographer.id
+                          );
+                          await getFavs();
+                        }}
+                      >
+                        <span>DELETE FAVORITE</span>
+                      </button>
+                    </div>
+                  ) : null
+                ) : (
+                  <button
+                    onClick={async () => {
+                      await actions.addToFavorites(
+                        singlePhotographer,
+                        "photographer"
+                      );
+                      await getFavs();
+                    }}
+                  >
+                    <span>♥</span>
+                  </button>
+                )} */}
               </div>
             </div>
           </>
@@ -238,20 +289,25 @@ export const Bestphotographers = () => {
                 </div>
 
                 <div className="sizehomes mx-auto mb-2 text-white">
-                  <i class="fa-brands fa-instagram"></i>&nbsp;{" "}
+                  <i className="fa-brands fa-instagram"></i>&nbsp;{" "}
                   {singlePhotographer.instagram}
                 </div>
 
                 <div className="sizehomes mx-auto text-white">
-                  <i class="fa-solid fa-location-dot"></i> &nbsp;
+                  <i className="fa-solid fa-location-dot"></i> &nbsp;
                   {singlePhotographer.find_me_text},&nbsp;{" "}
                   {singlePhotographer.location_name}
                 </div>
               </div>
-              {store.userType == "User" || store.userType == "Photographer" ? (
-                <button onClick={() => AddFavoritePhotographer()}>
-                  <span>♥</span>
-                </button>
+              {singlevision != false ? (
+                <div>
+                  {store.userType == "User" ||
+                  store.userType == "Photographer" ? (
+                    <button onClick={() => AddFavoritePhotographer()}>
+                      <span>♥</span>
+                    </button>
+                  ) : null}{" "}
+                </div>
               ) : null}
             </div>
           </>
