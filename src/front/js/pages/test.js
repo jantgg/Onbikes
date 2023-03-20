@@ -154,7 +154,7 @@ export const Test = () => {
               {store.userType != "User" && store.userType != "Photographer" ? (
                 <>
                   <div className="bordecitor col-8 mx-auto heightborders "></div>
-                  <div className="col-9 mx-auto text-center  sizehome2 py-5 bordecitoall border-danger spartan imagenw">
+                  <div className="col-9 mx-auto bg-black text-center  sizehome2 py-5 bordecitoall border-danger spartan imagenw">
                     Recuerda logearte antes de comenzar el test para poder
                     guardar los resultados
                   </div>
@@ -163,7 +163,7 @@ export const Test = () => {
               <div className="bordecitol col-7 mx-auto heightborder"></div>
             </div>
 
-            <div className="col-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-5 px-3 text-wrap spartan imagen4 text-white minH">
+            <div className="col-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-5 px-3 bg-black text-wrap spartan imagen4 text-white minH">
               <div className={`tohide ${isMovingOut ? "salida" : "reveal"}`}>
                 <b>{question.question}</b>
               </div>

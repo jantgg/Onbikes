@@ -159,7 +159,7 @@ export const Bestroutes = () => {
   };
 
   const mapContainerStyle = {
-    height: isDesktop ? "12vw" : "40vw",
+    height: isDesktop ? "20vw" : "40vw",
     width: "100%",
   };
 
@@ -176,7 +176,7 @@ export const Bestroutes = () => {
   return (
     <div className="d-flex flex-column minheight">
       <div
-        className={`col-11 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall mt-10 imagenn center-align  ${
+        className={`col-11 col-xxl-6 col-xl-7 col-lg-8 mx-auto bordecitoall mt-10 imagenn center-align  ${
           showDivs ? "slide-in" : "hidden"
         }`}
       >
@@ -242,7 +242,7 @@ export const Bestroutes = () => {
       <div className={`${visible1 ? "swing-in-top-fwd" : "hidden"}`}>
         {isDesktop ? (
           <>
-            <div className="col-8 col-xxl-5 col-xl-6 col-lg-7 row mx-auto imagenasfalto">
+            <div className="col-11 col-xxl-6 col-xl-7 col-lg-8 row mx-auto imagenasfalto">
               <div
                 className="col-6 px-0 center-align"
                 style={{ backgroundColor: "black" }}
@@ -278,7 +278,7 @@ export const Bestroutes = () => {
                       <i class="fa-solid fa-rotate-left"></i>
                     </span>
                   </button>
-                  {/* {singlevision != false ? (
+                  {/* {singlevision ? (
                     <div>
                       {store.viewType == true ? (
                         <button

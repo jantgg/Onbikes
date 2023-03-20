@@ -82,8 +82,8 @@ export const PhotographerRegister = () => {
   };
 
   return (
-    <div className="row">
-      <div className="col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white">
+    <div className="d-flex flex-column">
+      <div className="col-11 col-xxl-4 col-xl-5 col-lg-6 row mx-auto mb-5 text-white mt-10">
         <div className="center-align mx-auto sizehomet bordecitoall py-2 mt-3 imagenn sizehomeb spartan">
           <Link to={"/userregister"} className="link">
             Registrate como usuario

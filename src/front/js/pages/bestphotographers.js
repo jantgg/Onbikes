@@ -135,7 +135,7 @@ export const Bestphotographers = () => {
   };
 
   const mapContainerStyle = {
-    height: isDesktop ? "12vw" : "40vw",
+    height: isDesktop ? "20vw" : "40vw",
     width: "100%",
   };
 

@@ -15,6 +15,10 @@
   position: absolute;
   bottom: 0;
 }
+.height-map {
+  min-height: 20vw;
+}
+
 .mt-10 {
   margin-top: 10rem !important;
 }

@@ -61,7 +61,7 @@ const Motocard = ({ bike, index }) => {
             </h2>
             <p className="right-align pb-3 pe-4">
               {" "}
-              {localStorage.getItem("token") != null ? (
+              {/* {localStorage.getItem("token") != null ? (
                 <div>
                   {store.viewType == true ? (
                     <button
@@ -95,7 +95,7 @@ const Motocard = ({ bike, index }) => {
                     </button>
                   )}
                 </div>
-              ) : null}
+              ) : null} */}
             </p>
           </div>
         </div>

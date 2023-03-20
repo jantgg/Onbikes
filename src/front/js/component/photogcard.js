@@ -62,7 +62,7 @@ const Photogcard = ({ photog, index }) => {
               </div>
               <div className="me-4">
                 {" "}
-                {localStorage.getItem("token") != null ? (
+                {/* {localStorage.getItem("token") != null ? (
                   <div>
                     {store.viewType == true ? (
                       <button
@@ -96,7 +96,7 @@ const Photogcard = ({ photog, index }) => {
                       </button>
                     )}
                   </div>
-                ) : null}
+                ) : null} */}
               </div>
             </p>
           </div>
