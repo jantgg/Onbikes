@@ -11,6 +11,26 @@
   position: relative;
   transition: transform 0.5s;
 }
+.uploadposition {
+  position: relative;
+  left: 25%;
+  transition: transform 0.5s;
+}
+.slide-upload {
+  transform: translateX(-50%);
+}
+
+.slide-img-upload {
+  transform: translateX(-80%), scale(1);
+  opacity: 1;
+}
+.before-img {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.image-upload {
+  transition: opacity 0.5s, trasform 0.5s;
+}
 
 @keyframes slide-in-bck-center {
   0% {

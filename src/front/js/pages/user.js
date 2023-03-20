@@ -33,7 +33,9 @@ export const User = () => {
 
   useEffect(() => {
     getFavorites();
+    actions.resetViewType();
   }, []);
+
   useEffect(() => {
     setTimeout(() => {
       setShowDivs(true);
@@ -94,11 +96,11 @@ export const User = () => {
                 } ${showDivs2 ? "slide-in " : "hidden"}`}
               >
                 <div className="center-align mb-5 row col-12 sizehomet mx-auto  py-3 spartan imagenmalla bordecitoallg">
-                  <div className="col-3"></div>
-                  <div className="col-6 center-align sizehomet">
+                  <div className="col-4"></div>
+                  <div className="col-4 center-align sizehomet">
                     Mis rutas favoritas
                   </div>
-                  <div className="col-3 center-align sizehomet scale11">
+                  <div className="col-4 center-align sizehomet scale11">
                     {" "}
                     <button
                       className="botonaco mx-auto px-4"
@@ -114,14 +116,20 @@ export const User = () => {
                       <span style={{ "--i": 3 }}>b</span>
                       <span style={{ "--i": 4 }}>i</span>
                       <span style={{ "--i": 5 }}>r</span>
-                      <span style={{ "--i": 6 }}>&nbsp;</span>
-                      <span style={{ "--i": 7 }}>m</span>
-                      <span style={{ "--i": 8 }}>i</span>
-                      <span style={{ "--i": 9 }}>&nbsp;</span>
-                      <span style={{ "--i": 10 }}>r</span>
-                      <span style={{ "--i": 11 }}>u</span>
-                      <span style={{ "--i": 12 }}>t</span>
-                      <span style={{ "--i": 13 }}>a</span>
+                      <span style={{ "--i": 6 }}>/</span>
+                      <span style={{ "--i": 7 }}>V</span>
+                      <span style={{ "--i": 8 }}>e</span>
+                      <span style={{ "--i": 9 }}>r</span>
+                      <span style={{ "--i": 10 }}>&nbsp;</span>
+                      <span style={{ "--i": 11 }}>m</span>
+                      <span style={{ "--i": 12 }}>i</span>
+                      <span style={{ "--i": 13 }}>s</span>
+                      <span style={{ "--i": 14 }}>&nbsp;</span>
+                      <span style={{ "--i": 15 }}>r</span>
+                      <span style={{ "--i": 16 }}>u</span>
+                      <span style={{ "--i": 17 }}>t</span>
+                      <span style={{ "--i": 18 }}>a</span>
+                      <span style={{ "--i": 19 }}>s</span>
                     </button>
                   </div>
                 </div>{" "}

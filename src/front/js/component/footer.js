@@ -88,7 +88,7 @@ export const Footer = () => {
         <section className="mb-4 sizehomes">
           <p>
             Muchas gracias por visitar nuestra web, en OnBikes trabajamos a
-            diario apra ofrecer la mejor experiencia posible al usuario, si
+            diario para ofrecer la mejor experiencia posible al usuario, si
             tienes alguna sugerencia o petición escribenos a:{" "}
             <u>onbikes@contact.es</u>
           </p>

@@ -18,6 +18,7 @@ export const Bestphotographers = () => {
   const [showDivs, setShowDivs] = useState(false);
 
   useEffect(() => {
+    actions.resetViewType();
     getPhotographers();
     setTimeout(() => {
       setShowDivs(true);

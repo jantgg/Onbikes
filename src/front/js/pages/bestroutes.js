@@ -27,6 +27,7 @@ export const Bestroutes = () => {
   });
 
   useEffect(() => {
+    actions.resetViewType();
     getRoutes();
     setTimeout(() => {
       setShowDivs(true);

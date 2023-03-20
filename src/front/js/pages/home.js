@@ -12,6 +12,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 export const Home = () => {
   const Navigate = useNavigate();
+  const { store, actions } = useContext(Context);
   const isDesktop = window.innerWidth >= 1000;
   const [showDivs, setShowDivs] = useState(false);
   const [showDivs2, setShowDivs2] = useState(false);
@@ -19,6 +20,7 @@ export const Home = () => {
   const [moveOut, setMoveOut] = useState(false);
 
   useEffect(() => {
+    actions.resetViewType();
     setTimeout(() => {
       setShowDivs(true);
       setTimeout(() => {

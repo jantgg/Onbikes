@@ -53,6 +53,7 @@ export const BestPhotographerUpload = () => {
 
   useEffect(() => {
     getPhotographer();
+    actions.resetViewType();
   }, []);
 
   const uploadPhoto = async () => {
