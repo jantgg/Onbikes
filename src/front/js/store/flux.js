@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userType: null,
       viewType: false,
       backendurl:
-        "https://3001-jantgg-proyectofinaljan-gtyi5j1i6er.ws-eu90.gitpod.io/api/",
+        "https://3001-jantgg-proyectofinaljan-gtyi5j1i6er.ws-eu92.gitpod.io/api/",
       questions: [],
       answers: [],
       routes: [],
@@ -99,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.ok) {
           const data = await response.json();
-          setStore({ favorites: data.body });
+          getActions().getFavorites();
         }
       },
       deleteFavorite: async (bike_id, route_id, photographer_id) => {
@@ -117,7 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.ok) {
           const data = await response.json();
-          setStore({ favorites: data.message });
+          getActions().getFavorites();
         }
       },
       deleteRoute: async (routeId) => {

@@ -97,7 +97,7 @@ export const Test = () => {
     if (response.ok) {
       const data = await response.json();
       await new Promise((resolve) => {
-        localStorage.setItem("Results", data.result);
+        localStorage.setItem("Results", JSON.stringify(data.result));
         resolve();
       });
       console.log(data.result);

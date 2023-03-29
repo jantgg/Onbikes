@@ -6,35 +6,6 @@ import { Context } from "../store/appContext";
 
 const Motocard = ({ bike, index }) => {
   const { store, actions } = useContext(Context);
-  const [currentFavorites, setCurrentFavorites] = useState([]);
-
-  useEffect(() => {
-    getFavs();
-  }, []);
-
-  const getFavs = async () => {
-    const favoritesToSet = await actions.getFavorites();
-    setCurrentFavorites(store.favorites);
-  };
-
-  const deleteFavoriteBike = async () => {
-    const response = await fetch(store.backendurl + "favorites", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        bike_id: bike.id,
-        favorite_type: "bike",
-      }),
-    });
-    if (response.ok) {
-      console.log("response ok");
-    } else {
-      console.log("response not ok");
-    }
-  };
 
   return (
     <div className="colp bordecitoall redondeo newmotocard text-white">
@@ -61,7 +32,7 @@ const Motocard = ({ bike, index }) => {
             </h2>
             <p className="right-align pb-3 pe-4">
               {" "}
-              {/* {localStorage.getItem("token") != null ? (
+              {localStorage.getItem("token") != null ? (
                 <div>
                   {store.viewType == true ? (
                     <button
@@ -71,14 +42,17 @@ const Motocard = ({ bike, index }) => {
                     >
                       <span>DELETE ROUTE</span>
                     </button>
-                  ) : currentFavorites.some(
-                      (obj) => obj.bike.model === bike.model
-                    ) ? (
+                  ) : store.favorites
+                      .map((obj) => {
+                        if (obj.bike) {
+                          return obj.bike.id;
+                        }
+                      })
+                      .includes(bike.id) ? (
                     <div>
                       <button
                         onClick={async () => {
                           await actions.deleteFavorite(bike.id, null, null);
-                          await getFavs();
                         }}
                       >
                         <span>DELETE FAVORITE</span>
@@ -88,14 +62,13 @@ const Motocard = ({ bike, index }) => {
                     <button
                       onClick={async () => {
                         await actions.addToFavorites(bike, "bike");
-                        await getFavs();
                       }}
                     >
                       <span>♥</span>
                     </button>
                   )}
                 </div>
-              ) : null} */}
+              ) : null}
             </p>
           </div>
         </div>

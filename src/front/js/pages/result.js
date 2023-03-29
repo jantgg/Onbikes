@@ -41,20 +41,20 @@ export const Result = () => {
       });
     });
   }, []);
-  //   GetBikes que agarra los resultados del localStorage
-  //    const getBikes = async () => {
-  //    const bikes = JSON.parse(localStorage.getItem("Results"));
-  //    setBikesResults(bikes);
-  //    };
+  // GetBikes que agarra los resultados del localStorage
+  const getBikes = async () => {
+    const bikes = JSON.parse(localStorage.getItem("Results"));
+    setBikesResults(bikes);
+  };
 
   const removeResult = () => {
     localStorage.removeItem("Results");
   };
 
-  const getBikes = async () => {
-    await actions.getBikes();
-    setBikesResults(store.bikes);
-  };
+  // const getBikes = async () => {
+  //   await actions.getBikes();
+  //   setBikesResults(store.bikes);
+  // };
 
   const addFavoriteBike = async () => {
     const response = await fetch(store.backendurl + "favorite", {
