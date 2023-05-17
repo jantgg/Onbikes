@@ -60,43 +60,48 @@ const Photogcard = ({ photog, index }) => {
                   </button>
                 ) : null}
               </div>
-              <div className="me-4">
+              <div className="right-align pb-3 pe-4">
                 {" "}
-                {/* {localStorage.getItem("token") != null ? (
+                {localStorage.getItem("token") != null ? (
                   <div>
                     {store.viewType == true ? (
                       <button
+                        className="botonaco"
                         onClick={() => {
-                          actions.deleteRoute(singleroute.id);
+                          actions.deleteRoute(route.id);
                         }}
                       >
-                        <span>DELETE ROUTE</span>
+                        <span>Borrar</span>
                       </button>
-                    ) : currentFavorites.some(
-                        (obj) => obj.photog.id === photog.id
-                      ) ? (
+                    ) : store.favorites
+                        .map((obj) => {
+                          if (obj.photographer) {
+                            return obj.photographer.id;
+                          }
+                        })
+                        .includes(photog.id) ? (
                       <div>
                         <button
+                          className="botonaco"
                           onClick={async () => {
                             await actions.deleteFavorite(null, null, photog.id);
-                            await getFavs();
                           }}
                         >
-                          <span>DELETE FAVORITE</span>
+                          <span>Borrar</span>
                         </button>
                       </div>
                     ) : (
                       <button
+                        className="botonaco"
                         onClick={async () => {
                           await actions.addToFavorites(photog, "photographer");
-                          await getFavs();
                         }}
                       >
-                        <span>♥</span>
+                        <span>Añadir a favoritos</span>
                       </button>
                     )}
                   </div>
-                ) : null} */}
+                ) : null}
               </div>
             </p>
           </div>

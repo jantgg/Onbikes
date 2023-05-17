@@ -378,12 +378,14 @@ def create_suggestion():
     for answer in answers:
         if answer["current_question_id"] == "q1":
             queries.append(Bike.ask_1_license == answer["id"])
-        elif answer["current_question_id"] == "q1.1":
-            queries.append(Bike.ask_11_limitable == answer["id"])
+        elif answer["current_question_id"] == "q2":
+            queries.append(Bike.ask_32_custom == answer["id"])
+        elif answer["current_question_id"] == "q2.1":
+            queries.append(Bike.ask_321_refrigeration == answer["id"])
         elif answer["current_question_id"] == "q3":
-            queries.append(Bike.ask_3_surface == answer["id"])
-        elif answer["current_question_id"] == "q4":
             queries.append(Bike.ask_4_comodity == answer["id"])
+        elif answer["current_question_id"] == "q4":
+            queries.append(Bike.ask_8_response == answer["id"])
     suggestion = Bike.query.filter(*queries).all()
     print(suggestion)
     print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")

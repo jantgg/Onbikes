@@ -119,7 +119,7 @@ export const Test = () => {
   return (
     <div
       key="elmismotest @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-      className="row ms-0 revealUp"
+      className="d-flex flex-column ms-0 revealUp"
     >
       {currentQuestion === "end" ? (
         <div className="revealUp">
@@ -153,17 +153,16 @@ export const Test = () => {
             <div className="col-12 mx-auto text-white">
               {store.userType != "User" && store.userType != "Photographer" ? (
                 <>
-                  <div className="bordecitor col-8 mx-auto heightborders "></div>
+                  <div className="mt-10 col-8 mx-auto heightborders "></div>
                   <div className="col-9 mx-auto bg-black text-center  sizehome2 py-5 bordecitoall border-danger spartan imagenw">
                     Recuerda logearte antes de comenzar el test para poder
                     guardar los resultados
                   </div>
                 </>
               ) : null}
-              <div className="bordecitol col-7 mx-auto heightborder"></div>
             </div>
 
-            <div className="col-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-5 px-3 bg-black text-wrap spartan imagen4 text-white minH">
+            <div className="col-10 mt-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-5 px-3 bg-black text-wrap spartan imagen4 text-white minH">
               <div className={`tohide ${isMovingOut ? "salida" : "reveal"}`}>
                 <b>{question.question}</b>
               </div>
@@ -171,7 +170,7 @@ export const Test = () => {
               {currentQuestion == "q1" ? null : (
                 <div className="row mt-3 text-white">
                   <button
-                    className="botonaco sizehomes px-2 py-3 mx-auto"
+                    className="botonaco sizehomes px-2 py-3 col-6 mx-auto"
                     onClick={() => {
                       setCurrentQuestion(
                         userAnswers[userAnswers.length - 1].current_question_id

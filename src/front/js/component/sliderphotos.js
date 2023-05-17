@@ -119,7 +119,7 @@ const SliderPhotos = ({ data, groupSize }) => {
         </div>
 
         <button
-          className={` sizehomet sliderbtn text-white${
+          className={` sizehomet sliderbtn text-white ${
             endIndex >= data.length ? " opa0" : " opa1"
           }`}
           onClick={handleNextClick}

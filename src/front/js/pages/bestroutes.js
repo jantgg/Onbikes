@@ -278,6 +278,56 @@ export const Bestroutes = () => {
                       <i class="fa-solid fa-rotate-left"></i>
                     </span>
                   </button>
+                  <div className="right-align pb-3 pe-4">
+                    {" "}
+                    {localStorage.getItem("token") != null ? (
+                      <div>
+                        {store.viewType == true ? (
+                          <button
+                            className="botonaco"
+                            onClick={() => {
+                              actions.deleteRoute(singleroute.id);
+                            }}
+                          >
+                            <span>Borrar</span>
+                          </button>
+                        ) : store.favorites
+                            .map((obj) => {
+                              if (obj.route) {
+                                return obj.route.id;
+                              }
+                            })
+                            .includes(singleroute.id) ? (
+                          <div>
+                            <button
+                              className="botonaco"
+                              onClick={async () => {
+                                await actions.deleteFavorite(
+                                  null,
+                                  singleroute.id,
+                                  null
+                                );
+                              }}
+                            >
+                              <span>Borrar</span>
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="botonaco"
+                            onClick={async () => {
+                              await actions.addToFavorites(
+                                singleroute,
+                                "route"
+                              );
+                            }}
+                          >
+                            <span>Añadir a favoritos</span>
+                          </button>
+                        )}
+                      </div>
+                    ) : null}
+                  </div>
                   {/* {singlevision ? (
                     <div>
                       {store.viewType == true ? (

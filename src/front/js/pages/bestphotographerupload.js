@@ -11,6 +11,7 @@ import "../../styles/inputcustom.css";
 import "../../styles/rolls.css";
 import "../../styles/loadingmodal.css";
 import "../../styles/spiner.css";
+import "../../styles/animations.css";
 
 export const BestPhotographerUpload = () => {
   const { store, actions } = useContext(Context);
@@ -46,7 +47,6 @@ export const BestPhotographerUpload = () => {
           photo.photo_type === "photographer"
       );
     };
-
     const currentPictures = filterPhotos(photographerData.id);
     setPhotographerPhotos(currentPictures);
   };
@@ -112,36 +112,38 @@ export const BestPhotographerUpload = () => {
 
   return (
     <>
-      <div className=" flex-column">
-        <div className="bordecitor col-8 mx-auto right-align sizehome text-white py-2 pe-2 spartan">
-          {photographerData.user_name}
-        </div>
+      <div className="d-flex flex-column text-white minheight">
         {isDesktop ? (
           <>
-            <div className="col-10 mx-auto bordecitoall center-align pb-4 imagenn">
-              <div className="center-align col-12 col-xxl-5 col-xl-6 col-lg-7 sizehomet bordecitob mx-auto mb-4 text-white spartan">
-                Mis Fotos subidas
+            <div className={`col-10  pb-4 row mx-auto  mt-10 gradient-text`}>
+              <div className="center-align mb-5 row col-12 sizehomet mx-auto  py-3 spartan imagenmalla bordecitoallg">
+                <div className="col-10 center-align sizehomet mx-auto">
+                  {" "}
+                  Las fotos de {photographerData.user_name}
+                </div>
               </div>{" "}
               <SliderPhotos data={uploadedPhotos} groupSize={3} />
-              <button
-                className="botonaco px-3 py-1 sizehomes mt-4"
-                onClick={() => {
-                  setWantAddPhotos(!wantAddPhotos);
-                }}
-              >
-                <span style={{ "--i": 1 }}>A</span>
-                <span style={{ "--i": 2 }}>ñ</span>
-                <span style={{ "--i": 3 }}>a</span>
-                <span style={{ "--i": 4 }}>d</span>
-                <span style={{ "--i": 5 }}>i</span>
-                <span style={{ "--i": 6 }}>r</span>
-                <span style={{ "--i": 7 }}>&nbsp;</span>
-                <span style={{ "--i": 8 }}>f</span>
-                <span style={{ "--i": 9 }}>o</span>
-                <span style={{ "--i": 10 }}>t</span>
-                <span style={{ "--i": 11 }}>o</span>
-                <span style={{ "--i": 12 }}>s</span>
-              </button>
+              <div className="col-6 mx-auto center-align">
+                <button
+                  className="botonaco px-3 py-1 sizehomes mt-4"
+                  onClick={() => {
+                    setWantAddPhotos(!wantAddPhotos);
+                  }}
+                >
+                  <span style={{ "--i": 1 }}>A</span>
+                  <span style={{ "--i": 2 }}>ñ</span>
+                  <span style={{ "--i": 3 }}>a</span>
+                  <span style={{ "--i": 4 }}>d</span>
+                  <span style={{ "--i": 5 }}>i</span>
+                  <span style={{ "--i": 6 }}>r</span>
+                  <span style={{ "--i": 7 }}>&nbsp;</span>
+                  <span style={{ "--i": 8 }}>f</span>
+                  <span style={{ "--i": 9 }}>o</span>
+                  <span style={{ "--i": 10 }}>t</span>
+                  <span style={{ "--i": 11 }}>o</span>
+                  <span style={{ "--i": 12 }}>s</span>
+                </button>
+              </div>
               <div className={` ${wantAddPhotos ? "showdown" : "hided"}`}>
                 <div className="bordecitoc mx-auto "></div>
                 <div className=" col-8 mx-auto bordecitoall py-3">
@@ -316,7 +318,7 @@ export const BestPhotographerUpload = () => {
             </div>
           </>
         )}
-        <div className="bordecitol heightborder col-9 col-xxl-4 col-xl-4 col-lg-5  mx-auto  "></div>
+        <div className=" heightborder col-9 col-xxl-4 col-xl-4 col-lg-5  mx-auto  "></div>
         <div className="col-12 col-xxl-5 col-xl-6 col-lg-7 mx-auto bordecitoall p-5 center-align imagenn">
           <div
             className="center-align col-9 bordecitoall mx-auto my-3 p-3 text-white"

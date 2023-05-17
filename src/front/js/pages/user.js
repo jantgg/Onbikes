@@ -216,7 +216,7 @@ export const User = () => {
             >
               <div className="col-10  pb-4 row mx-auto  mt-10 gradient-text">
                 <div className="center-align mb-5 row col-12 sizehomet mx-auto  py-3 spartan imagenmalla bordecitoallg">
-                  <div className="col-10 center-align sizehomet">
+                  <div className="col-10 center-align sizehomet mx-auto">
                     Mis Fotógrafos favoritos
                   </div>
                 </div>{" "}

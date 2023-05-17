@@ -30,17 +30,18 @@ const Motocard = ({ bike, index }) => {
               <div>{bike.ask_6_price}€</div>
               <div>Texto descripción</div>
             </h2>
-            <p className="right-align pb-3 pe-4">
+            <div className="right-align pb-3 pe-4">
               {" "}
               {localStorage.getItem("token") != null ? (
                 <div>
                   {store.viewType == true ? (
                     <button
+                      className="botonaco"
                       onClick={() => {
                         actions.deleteRoute(singleroute.id);
                       }}
                     >
-                      <span>DELETE ROUTE</span>
+                      <span>Borrar</span>
                     </button>
                   ) : store.favorites
                       .map((obj) => {
@@ -51,25 +52,27 @@ const Motocard = ({ bike, index }) => {
                       .includes(bike.id) ? (
                     <div>
                       <button
+                        className="botonaco"
                         onClick={async () => {
                           await actions.deleteFavorite(bike.id, null, null);
                         }}
                       >
-                        <span>DELETE FAVORITE</span>
+                        <span>Borrar</span>
                       </button>
                     </div>
                   ) : (
                     <button
+                      className="botonaco"
                       onClick={async () => {
                         await actions.addToFavorites(bike, "bike");
                       }}
                     >
-                      <span>♥</span>
+                      <span>Añadir a favoritos</span>
                     </button>
                   )}
                 </div>
               ) : null}
-            </p>
+            </div>
           </div>
         </div>
       </div>

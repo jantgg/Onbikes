@@ -224,48 +224,56 @@ export const Bestphotographers = () => {
                   {singlePhotographer.find_me_text},&nbsp;{" "}
                   {singlePhotographer.location_name}
                 </div>
-                {/* {store.viewType == true ? (
-                  <button
-                    onClick={async () => {
-                      await actions.deleteRoute(route.id);
-                      location.reload();
-                    }}
-                  >
-                    <span>DELETE ROUTE</span>
-                  </button>
-                ) : currentFavorites.some((obj) => obj.photographer) ? (
-                  currentFavorites.some(
-                    (obj) =>
-                      obj.photographer.user_name == singlePhotographer.user_name
-                  ) ? (
+                <div className="right-align pb-3 mt-auto pe-4">
+                  {" "}
+                  {localStorage.getItem("token") != null ? (
                     <div>
-                      <button
-                        onClick={async () => {
-                          await actions.deleteFavorite(
-                            null,
-                            null,
-                            singlePhotographer.id
-                          );
-                          await getFavs();
-                        }}
-                      >
-                        <span>DELETE FAVORITE</span>
-                      </button>
+                      {store.viewType == true ? (
+                        <button
+                          className="botonaco"
+                          onClick={() => {
+                            actions.deleteRoute(singleroute.id);
+                          }}
+                        >
+                          <span>Borrar</span>
+                        </button>
+                      ) : store.favorites
+                          .map((obj) => {
+                            if (obj.photographer) {
+                              return obj.photographer.id;
+                            }
+                          })
+                          .includes(singlePhotographer.id) ? (
+                        <div>
+                          <button
+                            className="botonaco"
+                            onClick={async () => {
+                              await actions.deleteFavorite(
+                                null,
+                                null,
+                                singlePhotographer.id
+                              );
+                            }}
+                          >
+                            <span>Borrar</span>
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="botonaco"
+                          onClick={async () => {
+                            await actions.addToFavorites(
+                              singlePhotographer,
+                              "photographer"
+                            );
+                          }}
+                        >
+                          <span>Añadir a favoritos</span>
+                        </button>
+                      )}
                     </div>
-                  ) : null
-                ) : (
-                  <button
-                    onClick={async () => {
-                      await actions.addToFavorites(
-                        singlePhotographer,
-                        "photographer"
-                      );
-                      await getFavs();
-                    }}
-                  >
-                    <span>♥</span>
-                  </button>
-                )} */}
+                  ) : null}
+                </div>
               </div>
             </div>
           </>

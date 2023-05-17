@@ -78,44 +78,48 @@ const Routecard = ({ route, index }) => {
                   </button>
                 ) : null}
               </div>
-              <div className="me-4">
+              <div className="right-align pb-3 pe-4">
                 {" "}
-                {/* {localStorage.getItem("token") != null ? (
+                {localStorage.getItem("token") != null ? (
                   <div>
                     {store.viewType == true ? (
                       <button
-                        onClick={async () => {
-                          await actions.deleteRoute(route.id);
-                          location.reload();
+                        className="botonaco"
+                        onClick={() => {
+                          actions.deleteRoute(route.id);
                         }}
                       >
-                        <span>DELETE ROUTE</span>
+                        <span>Borrar</span>
                       </button>
-                    ) : currentFavorites.some(
-                        (obj) => obj.route.id === route.id
-                      ) ? (
+                    ) : store.favorites
+                        .map((obj) => {
+                          if (obj.route) {
+                            return obj.route.id;
+                          }
+                        })
+                        .includes(route.id) ? (
                       <div>
                         <button
+                          className="botonaco"
                           onClick={async () => {
                             await actions.deleteFavorite(null, route.id, null);
-                            await getFavs();
                           }}
                         >
-                          <span>DELETE FAVORITE</span>
+                          <span>Borrar</span>
                         </button>
                       </div>
                     ) : (
                       <button
+                        className="botonaco"
                         onClick={async () => {
                           await actions.addToFavorites(route, "route");
-                          await getFavs();
                         }}
                       >
-                        <span>♥</span>
+                        <span>Añadir a favoritos</span>
                       </button>
                     )}
                   </div>
-                ) : null} */}
+                ) : null}
               </div>
             </p>
           </div>

@@ -90,8 +90,7 @@ export const Result = () => {
   return (
     <div className="row revealUp">
       <div className="col-12 mx-auto  text-white">
-        <div className="bordecitol col-7 mx-auto heightborders"></div>
-        <div className="col-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-1 px-3 text-wrap spartan imagen4 text-white">
+        <div className="col-10 bg-black mt-10 mx-auto text-center mt-0 bordecitoall sizehomeq py-1 px-3 text-wrap spartan imagen4 text-white">
           <div className="reveal py-1">
             Estas son las mejores motos que hemos encontrado especialmente para
             ti
@@ -101,18 +100,18 @@ export const Result = () => {
 
       {isDesktop ? (
         <>
-          <div className="freespace"></div>
+          <div className="heightborder"></div>
           <div className="col-12 mx-auto">
             {" "}
             <SliderBikeBueno data={bikesResults} groupSize={3} />
           </div>
-          <div className="freespace"></div>
+          <div className="heightborder"></div>
         </>
       ) : (
         <div className="col-12 row mx-auto">
-          <div className="freespace bordecitor col-7 mx-auto"></div>{" "}
+          <div className="heightborder  col-7 mx-auto"></div>{" "}
           <SliderBikeM data={bikesResults} groupSize={1} />
-          <div className="freespace bordecitol col-7 mx-auto"></div>
+          <div className="heightborder  col-7 mx-auto"></div>
         </div>
       )}
 
@@ -125,7 +124,7 @@ export const Result = () => {
         </div>
         <div className="">
           <button
-            className="botonaco mx-auto py-3 px-1 mt-3 mb-5 sizehomet"
+            className="botonaco mx-auto py-3 px-1 mt-3 mb-5 sizehomet px-3"
             onClick={() => {
               removeResult();
               Navigate("/test");
