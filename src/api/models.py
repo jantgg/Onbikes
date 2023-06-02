@@ -11,6 +11,7 @@ class User(db.Model):
     email = db.Column(db.String(30), nullable=False, unique=True)
     active = db.Column(db.Boolean, default=True)
     routes = db.relationship('Route', backref='user')
+    events = db.relationship('Event', backref='user')
 
     def __repr__(self):
         return f'{self.user_name}'
@@ -239,3 +240,42 @@ class Favorite(db.Model):
 
     def __repr__(self):
         return f'User favorites {self.user}: Motorbikes: {self.bike}, Routes: {self.route}, Photographers: {self.photographer}'
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
+    start = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.String(250), nullable=False)
+    hour = db.Column(db.String(250), nullable=False)
+    description_text = db.Column(db.String(250), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+
+    def __repr__(self):
+        return f'{self.name}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "start": self.start,
+            "date": self.date,
+            "description_text": self.description_text,
+            "hour": self.hour,
+            "creator": self.user_id,
+        }
+
+class Evrelation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    event = db.relationship('Event')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref='Evrelation')
+    route_id = db.Column(db.Integer, db.ForeignKey('route.id'))
+    route = db.relationship('Route') 
+    photographer_id = db.Column(db.Integer, db.ForeignKey('photographer.id'))
+    photographer = db.relationship('Photographer')
+
+    def __repr__(self):
+        return f'Users participating {self.user}: Event: {self.event}, Routes: {self.route}, Photographers: {self.photographer}'

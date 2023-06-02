@@ -14,6 +14,7 @@ import { User } from "./pages/user";
 import { Userphoto } from "./pages/userphoto";
 import { Userregister } from "./pages/userregister";
 import { Login } from "./pages/login";
+import { Events } from "./pages/events";
 
 import injectContext from "./store/appContext";
 
@@ -51,6 +52,7 @@ const Layout = () => {
             <Route element={<User />} path="/user" />
             <Route element={<Userphoto />} path="/userphoto" />
             <Route element={<Userregister />} path="/userregister" />
+            <Route element={<Events />} path="/events" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
