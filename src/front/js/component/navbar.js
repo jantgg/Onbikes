@@ -24,6 +24,8 @@ export const Navbar = () => {
       setSelected(4);
     } else if (currentPath === "/login") {
       setSelected(5);
+    } else if (currentPath === "/events") {
+      setSelected(6);
     } else {
       setSelected(null);
     }
@@ -92,6 +94,17 @@ export const Navbar = () => {
                   onClick={() => setSelected(2)}
                 >
                   Fotógrafos
+                </Link>
+              </div>
+              <div className="nav-item">
+                <Link
+                  to="/events"
+                  className={`nav-link  text-white mx-2 me-5 px-2 ${
+                    selected === 6 && "bordecitos"
+                  }`}
+                  onClick={() => setSelected(6)}
+                >
+                  Eventos
                 </Link>
               </div>
             </ul>

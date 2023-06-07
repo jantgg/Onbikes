@@ -1,27 +1,15 @@
-import React from "react";
-import { Calendar } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 
-const App = () => {
-  // Ejemplo de datos de eventos
-  const events = [
-    {
-      start: new Date(),
-      end: new Date(),
-      title: "Mi evento",
-    },
-  ];
+import "react-datepicker/dist/react-datepicker.css";
 
+// CSS Modules, react-datepicker-cssmodules.css
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
+const Calendar = () => {
+  const [startDate, setStartDate] = useState(new Date());
   return (
-    <div>
-      <Calendar
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        defaultDate={new Date()}
-      />
-    </div>
+    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
   );
 };
-
-export default App;
+export default Calendar;

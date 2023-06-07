@@ -87,7 +87,7 @@ export const Bestphotographers = () => {
   // }));
 
   //Codigo de Maps ------------------------------------------------------------------------------------------------------------------>
-  Geocode.setApiKey("AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4");
+  Geocode.setApiKey(process.env.MAPS_KEY);
   Geocode.setLanguage("es");
   Geocode.setRegion("es");
   const [markers, setMarkers] = useState([]);
@@ -161,9 +161,7 @@ export const Bestphotographers = () => {
         </div>
         <div className="col-12 mx-auto ">
           {" "}
-          <LoadScript
-            googleMapsApiKey={"AIzaSyDDVjWyt1R7eDz4VFdY1tBUyylUzucI5z4"}
-          >
+          <LoadScript googleMapsApiKey={process.env.MAPS_KEY}>
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={center}

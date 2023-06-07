@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       userType: null,
       viewType: false,
       backendurl:
-        "https://3001-jantgg-proyectofinaljan-6gm5zg6f25f.ws-eu97.gitpod.io/api/",
+        "https://3001-jantgg-proyectofinaljan-ud8tt0m7gxq.ws-eu98.gitpod.io/api/",
       questions: [],
       answers: [],
       routes: [],
