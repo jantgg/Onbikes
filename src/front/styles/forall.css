@@ -1,0 +1,385 @@
+/* .row {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0 !important;
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+} */
+
+/*FONTS*/
+.minheight {
+  min-height: 120vh;
+}
+.pabajo {
+  position: absolute;
+  bottom: 0;
+}
+.height-map {
+  min-height: 20vw;
+}
+
+.mt-10 {
+  margin-top: 10rem !important;
+}
+body {
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679317260/fondolistopapele_zlrpuj.jpg");
+  background-size: 100% 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+}
+
+body {
+  font-family: "Roboto Mono", monospace;
+  background-color: none;
+}
+.archivo {
+  font-family: "Archivo+Black", sans-serif;
+}
+.josefin {
+  font-family: "Josefin Sans", sans-serif;
+}
+.spartan {
+  font-family: "League Spartan", sans-serif;
+}
+
+body {
+  background-color: #070707;
+}
+.z-1 {
+  z-index: -1;
+}
+/*Predefined Heights*/
+.heightborder {
+  height: 7vw;
+}
+.heightborder2 {
+  height: 400px;
+}
+.heightborder3 {
+  height: 250px;
+}
+.heightborders {
+  height: 100px;
+}
+.right-align {
+  text-align: right;
+}
+.left-align {
+  text-align: left;
+}
+.center-align {
+  text-align: center;
+}
+
+/*BORDERS*/
+.bordecito {
+  border-bottom: 2px solid white;
+  padding-bottom: 0px;
+}
+.bordecitoc {
+  border-right: 1px solid white;
+  width: 1px;
+  height: 1vw;
+}
+.bordecitoup {
+  border-top: 3px solid white;
+  padding-bottom: 0px;
+}
+.bordecitor {
+  border-right: 2px solid white;
+  padding-bottom: 0px;
+}
+.bordecitol {
+  border-left: 2px solid white;
+  padding-bottom: 0px;
+}
+.bordecitos {
+  font-weight: bold;
+}
+
+.bordecitoall {
+  border: 1px solid white;
+}
+.bordecitoallg {
+  border: 1px solid rgb(94, 94, 94);
+}
+.bordecitob {
+  border-bottom: 1px solid white;
+}
+.bordecitot {
+  border-top: 1px solid white;
+}
+.bordecitoe {
+  border-right: 1px solid white;
+}
+/*TRANSITIONS*/
+.revealUp {
+  opacity: 0;
+  visibility: hidden;
+}
+.movidas {
+  display: flex; /* Establece el div padre como un contenedor flexbox */
+  flex-direction: column; /* Establece la dirección de los elementos como columnas (eje vertical) */
+  justify-content: space-between;
+}
+.redondeo {
+  border-radius: 3px;
+}
+
+/* FONT SIZE THRU MEDIA VIEWPORT */
+@media (min-width: 1000px) {
+  .sizehome {
+    font-size: 6vw;
+  }
+  .sizehomemb {
+    font-size: 6vw;
+  }
+  .sizehomeq {
+    font-size: 4vw;
+  }
+  .sizehome2 {
+    font-size: 2vw;
+  }
+  .sizehomet {
+    font-size: 2vw;
+  }
+  .sizehomeb {
+    font-size: 1vw;
+  }
+  .sizehomes {
+    font-size: 1vw;
+  }
+  .sizehome3 {
+    font-size: 3vw;
+  }
+  .sizehomed {
+    font-size: 1.6vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sizehome {
+    font-size: 12vw;
+  }
+  .sizehomemb {
+    font-size: 7vw;
+  }
+  .sizehomeq {
+    font-size: 5vw;
+  }
+  .sizehome2 {
+    font-size: 5vw;
+  }
+  .sizehomet {
+    font-size: 5vw;
+  }
+  .sizehomeb {
+    font-size: 5vw;
+  }
+  .sizehomes {
+    font-size: 3vw;
+  }
+  .sizehome3 {
+    font-size: 4vw;
+  }
+  .sizehomed {
+    font-size: 6vw;
+  }
+}
+
+/* BUTTONs */
+
+.botonaco {
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.1rem;
+}
+
+.botonaco:hover {
+  background: #f7f8f2;
+  color: #f7f8f2;
+  animation: box 4s infinite;
+}
+
+.botonaco::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #070707;
+}
+
+.botonaco span {
+  position: relative;
+  z-index: 1;
+}
+
+.botonaco:hover span {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  animation: flip 4s infinite;
+  animation-delay: calc(0.09s * var(--i));
+}
+
+@keyframes flip {
+  0%,
+  10% {
+    transform: rotateY(360deg);
+  }
+  40% {
+    transform: rotateY(0deg);
+  }
+}
+@keyframes box {
+  0% {
+    box-shadow: #27272c;
+  }
+  50% {
+    box-shadow: 0 0 25px #f7f8f2;
+  }
+  100% {
+    box-shadow: #27272c;
+  }
+}
+
+.botonaco2 {
+  position: relative;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.1rem;
+  width: 600px;
+  transition: 0.2s;
+}
+
+.botonaco2:hover {
+  background: #f7f8f2;
+  color: #f7f8f2;
+  animation: box 4s infinite;
+  animation-delay: 2s;
+}
+
+.botonaco2::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #070707;
+}
+
+.botonaco2 span {
+  position: relative;
+  z-index: 1;
+}
+
+.botonaco2:hover span {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  animation: flip 4s infinite;
+  animation-delay: calc(0.09s * var(--i));
+}
+/* ALL THE CSS CODE IS DEVELOP BY @JANTGG */
+.botonaco3 {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.1rem;
+  width: 400px;
+  transition: 0.2s;
+}
+.botonaco3:hover {
+  animation: box 3s infinite;
+}
+
+.botonaco3::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #070707;
+}
+.botonaco3 span {
+  position: relative;
+  z-index: 1;
+}
+
+.botonaco4 {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid white;
+  letter-spacing: 0.1rem;
+
+  width: 250px;
+  transition: 0.2s;
+}
+.botonaco4:hover {
+  animation: box 3s infinite;
+}
+
+.botonaco4::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #070707;
+}
+.botonaco4 span {
+  position: relative;
+  z-index: 1;
+}
+
+.glow {
+  position: relative;
+}
+.freehome {
+  height: 2vw;
+}
+.glow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ff,
+    0 0 80px #0ff, 0 0 90px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.imagenasfalto {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172345/muyoscuro_fd8osa.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.imagenmalla {
+  top: 0;
+  left: 0;
+  background-color: black;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1679172963/mallanueva_m2e13d.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}

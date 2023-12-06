@@ -1,7 +1,123 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.ma {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.imagen1 {
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  filter: grayscale(100%);
+  transition: box-shadow 0.5s, transform 0.5s;
+  border-radius: 5px;
+}
+
+.imagen1:hover {
+  box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(3deg)
+    rotateX(-3deg);
+}
+
+.imagen1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.pinimg.com/originals/eb/77/77/eb7777c6015016e3964a78a4b858edb2.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  filter: brightness(30%);
+  opacity: 1;
+  z-index: -1;
+  transition: transform 0.5s, opacity 0.5s, filter 0.5s;
+}
+
+.imagen1:hover::before {
+  transform: scale(1.2);
+  filter: brightness(50%);
+}
+
+.imagen2 {
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  filter: grayscale(100%);
+  transition: box-shadow 0.5s, transform 0.5s;
+  border-radius: 5px;
+}
+
+.imagen2:hover {
+  box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(-3deg)
+    rotateX(0.5deg);
+}
+.imagen2::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://i.pinimg.com/originals/da/12/1b/da121b15a09d406b4af36ce68eb654f2.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+
+  filter: brightness(30%);
+  opacity: 1;
+  z-index: -1;
+  transition: transform 0.5s, opacity 0.5s, filter 0.5s;
+}
+
+.imagen2:hover::before {
+  transform: scale(1.2);
+  filter: brightness(50%);
+}
+
+.imagen3 {
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  filter: grayscale(100%);
+  box-shadow: 0 0 0px #fff;
+  transition: box-shadow 0.5s, transform 0.5s;
+  border-radius: 5px;
+}
+
+.imagen3:hover {
+  box-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 11px #fff;
+  transform: scale(1.2) translateZ(10px) perspective(1000px) rotatey(3deg)
+    rotateX(3deg);
+}
+
+.imagen3::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://res.cloudinary.com/dsbp8pqdb/image/upload/v1684323030/foto3_w49bod.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+
+  filter: brightness(30%);
+  opacity: 1;
+  z-index: -1;
+  transition: transform 0.5s, opacity 0.5s, filter 0.5s;
+}
+
+.imagen3:hover::before {
+  transform: scale(1.2);
+  filter: brightness(50%);
+}
